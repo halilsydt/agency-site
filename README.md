@@ -84,3 +84,7 @@ npm run dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+## Deployment
+
+Deployed on [Vercel](https://vercel.com). Automatic deploys trigger on push to `main`.
