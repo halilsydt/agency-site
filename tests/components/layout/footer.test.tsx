@@ -1,6 +1,11 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { Footer } from "@/components/layout/footer";
+
+// Mock ConvertKit API for EmailSignupForm
+vi.mock("@/lib/api/convertkit", () => ({
+  subscribeToNewsletter: vi.fn(),
+}));
 
 describe("Footer", () => {
   it("renders the logo with correct text", () => {
@@ -88,7 +93,7 @@ describe("Footer", () => {
     );
   });
 
-  it("renders email signup input and button", () => {
+  it("renders email signup form", () => {
     render(<Footer />);
     expect(
       screen.getByRole("textbox", { name: /email address/i })
@@ -98,10 +103,9 @@ describe("Footer", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders email signup button as disabled (placeholder)", () => {
+  it("renders email signup form with consent text", () => {
     render(<Footer />);
-    const subscribeButton = screen.getByRole("button", { name: /subscribe/i });
-    expect(subscribeButton).toBeDisabled();
+    expect(screen.getByText(/we respect your privacy/i)).toBeInTheDocument();
   });
 
   it("renders Privacy Policy link with correct href", () => {

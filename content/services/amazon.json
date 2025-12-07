@@ -1,0 +1,67 @@
+[
+  {
+    "id": "account-setup",
+    "platform": "amazon",
+    "title": "Account Opening & Setup",
+    "description": "Get your Amazon seller account configured correctly from day one. We handle account verification, initial settings, and tax setup so you can start selling with confidence.",
+    "icon": "user-plus",
+    "features": [
+      "Account verification assistance",
+      "Initial settings configuration",
+      "Tax and business info setup",
+      "Brand Registry guidance"
+    ]
+  },
+  {
+    "id": "listing-optimization",
+    "platform": "amazon",
+    "title": "Product Listing Optimization",
+    "description": "Maximize visibility and conversions with expertly crafted product listings. We optimize titles, bullet points, descriptions, and backend keywords for search ranking.",
+    "icon": "file-text",
+    "features": [
+      "Keyword research and strategy",
+      "Title and bullet point optimization",
+      "A+ Content creation",
+      "Backend search term optimization"
+    ]
+  },
+  {
+    "id": "ppc-advertising",
+    "platform": "amazon",
+    "title": "Amazon Advertising (PPC)",
+    "description": "Drive targeted traffic and increase sales with data-driven advertising campaigns. We manage Sponsored Products, Brands, and Display ads for maximum ROI.",
+    "icon": "trending-up",
+    "features": [
+      "Campaign strategy and setup",
+      "Sponsored Products management",
+      "Sponsored Brands optimization",
+      "Performance reporting and optimization"
+    ]
+  },
+  {
+    "id": "store-optimization",
+    "platform": "amazon",
+    "title": "Store Optimization",
+    "description": "Create a compelling brand presence with a professionally designed Amazon Brand Store. Showcase your full product line and tell your brand story.",
+    "icon": "store",
+    "features": [
+      "Brand Store design and setup",
+      "Custom page layouts",
+      "Product showcasing strategy",
+      "Traffic and conversion optimization"
+    ]
+  },
+  {
+    "id": "troubleshooting",
+    "platform": "amazon",
+    "title": "Troubleshooting & Account Health",
+    "description": "Navigate complex Amazon issues with expert guidance. We help resolve account suspensions, listing suppressions, and maintain healthy performance metrics.",
+    "icon": "shield-check",
+    "features": [
+      "Account reinstatement support",
+      "Listing suppression resolution",
+      "Policy violation appeals",
+      "Account health monitoring"
+    ]
+  }
+]

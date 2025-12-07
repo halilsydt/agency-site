@@ -1,0 +1,17 @@
+{
+  "hero": {
+    "headline": "Get in Touch",
+    "subheadline": "Have questions about our services? We'd love to hear from you. Send us a message and we'll respond as soon as possible."
+  },
+  "contactInfo": {
+    "email": "admin@scalenty.net"
+  },
+  "booking": {
+    "headline": "Book Your Free Consultation",
+    "subheadline": "Schedule a 30-minute call to discuss your marketplace goals. No obligation, just helpful advice."
+  },
+  "newsletter": {
+    "headline": "Stay Updated",
+    "subheadline": "Get marketplace tips and insights delivered to your inbox. No spam, just helpful content."
+  }
+}

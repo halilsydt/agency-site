@@ -7,39 +7,43 @@ describe("Homepage", () => {
     render(<Home />);
     const heading = screen.getByRole("heading", { level: 1 });
     expect(heading).toBeInTheDocument();
-    expect(heading).toHaveTextContent("Agency Site");
+    expect(heading).toHaveTextContent(
+      "Grow Your Amazon & Etsy Business with Honest Expertise"
+    );
   });
 
-  it("renders the tagline about e-commerce consulting", () => {
+  it("renders the subheadline about results-driven consulting", () => {
     render(<Home />);
     expect(
-      screen.getByText(/e-commerce consulting for amazon/i)
+      screen.getByText(/results-driven consulting/i)
     ).toBeInTheDocument();
   });
 
-  it("renders a CTA button", () => {
+  it("renders primary CTA button linking to contact", () => {
     render(<Home />);
-    const button = screen.getByRole("button", { name: /coming soon/i });
-    expect(button).toBeInTheDocument();
+    const link = screen.getByRole("link", { name: /book free consultation/i });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute("href", "/contact");
   });
 
-  it("renders the CTA button as disabled", () => {
+  it("renders secondary CTA button linking to pricing", () => {
     render(<Home />);
-    const button = screen.getByRole("button", { name: /coming soon/i });
-    expect(button).toBeDisabled();
+    const link = screen.getByRole("link", { name: /view pricing/i });
+    expect(link).toBeInTheDocument();
+    expect(link).toHaveAttribute("href", "/pricing");
   });
 
-  it("renders content centered within a section", () => {
+  it("renders content within a section with responsive padding", () => {
     render(<Home />);
     const section = document.querySelector("section");
     expect(section).toBeInTheDocument();
-    expect(section).toHaveClass("py-16", "md:py-24");
+    expect(section).toHaveClass("py-16", "md:py-24", "lg:py-32");
   });
 
-  it("renders hero content with proper text-center alignment", () => {
+  it("renders hero with text-center alignment on mobile", () => {
     render(<Home />);
-    const centeredDiv = document.querySelector(".text-center");
-    expect(centeredDiv).toBeInTheDocument();
-    expect(centeredDiv).toHaveClass("max-w-3xl", "mx-auto");
+    const textDiv = document.querySelector(".text-center");
+    expect(textDiv).toBeInTheDocument();
+    expect(textDiv).toHaveClass("lg:text-left");
   });
 });

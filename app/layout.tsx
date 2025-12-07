@@ -1,18 +1,16 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
+import { PlausibleProvider } from "@/components/analytics/plausible-provider";
+import { CookieConsentProvider } from "@/components/analytics/cookie-consent-provider";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const nunito = Nunito({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-nunito",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -33,6 +31,37 @@ export const metadata: Metadata = {
   },
 };
 
+/**
+ * JSON-LD structured data for Organization schema.
+ * Provides search engines with information about the business.
+ */
+const organizationSchema = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Agency Site",
+  url: "https://agency-site.vercel.app",
+  description:
+    "Honest, results-driven consulting to help Amazon and Etsy sellers grow their businesses. Transparent pricing, real expertise.",
+  contactPoint: {
+    "@type": "ContactPoint",
+    contactType: "customer service",
+    url: "https://agency-site.vercel.app/contact",
+  },
+};
+
+/**
+ * JSON-LD structured data for WebSite schema.
+ * Provides search engines with information about the website structure.
+ */
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Agency Site",
+  url: "https://agency-site.vercel.app",
+  description:
+    "E-commerce consulting services for Amazon and Etsy sellers.",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -40,12 +69,30 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(organizationSchema),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(websiteSchema),
+          }}
+        />
+      </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen flex flex-col`}
+        className={`${nunito.variable} antialiased min-h-screen flex flex-col`}
       >
-        <Header />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <CookieConsentProvider>
+          <PlausibleProvider>
+            <Header />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </PlausibleProvider>
+        </CookieConsentProvider>
       </body>
     </html>
   );

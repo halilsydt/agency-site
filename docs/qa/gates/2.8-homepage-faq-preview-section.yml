@@ -1,0 +1,46 @@
+# Quality Gate: Story 2.8 - Homepage FAQ Preview Section
+schema: 1
+story: "2.8"
+story_title: "Homepage FAQ Preview Section"
+gate: PASS
+status_reason: "All 5 acceptance criteria met. Clean implementation with excellent test coverage (10 tests), proper TypeScript typing, JSDoc documentation, and accessibility via Radix UI Accordion. No issues identified."
+reviewer: "Quinn (Test Architect)"
+updated: "2025-12-05T21:10:00Z"
+
+waiver: { active: false }
+
+top_issues: []
+
+quality_score: 100
+expires: "2025-12-19T00:00:00Z"
+
+evidence:
+  tests_reviewed: 10
+  risks_identified: 0
+  trace:
+    ac_covered: [1, 2, 3, 4, 5]
+    ac_gaps: []
+
+nfr_validation:
+  security:
+    status: PASS
+    notes: "Presentational component only - no user input, no data fetching, no auth"
+  performance:
+    status: PASS
+    notes: "Static content, Radix optimized animations, lazy accordion content rendering"
+  reliability:
+    status: PASS
+    notes: "Robust Radix UI primitives, proper error boundaries at page level"
+  maintainability:
+    status: PASS
+    notes: "Well-documented with JSDoc, typed interfaces, follows established patterns"
+
+risk_summary:
+  totals: { critical: 0, high: 0, medium: 0, low: 0 }
+  recommendations:
+    must_fix: []
+    monitor: []
+
+recommendations:
+  immediate: []
+  future: []

@@ -5,8 +5,7 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/container";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { EmailSignupForm } from "@/components/forms/email-signup-form";
 
 /**
  * Represents a social media link with platform identifier.
@@ -163,7 +162,7 @@ export function Footer(): React.ReactElement {
                 <span className="text-primary">Agency</span>
                 <span>Site</span>
               </Link>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-foreground/70 text-sm">
                 Honest e-commerce consulting for Amazon &amp; Etsy sellers
               </p>
             </div>
@@ -180,7 +179,7 @@ export function Footer(): React.ReactElement {
                       <Link
                         href={link.href}
                         className={cn(
-                          "text-sm text-muted-foreground transition-colors",
+                          "text-sm text-foreground/70 transition-colors",
                           "hover:text-primary"
                         )}
                       >
@@ -201,7 +200,7 @@ export function Footer(): React.ReactElement {
                 <a
                   href="mailto:contact@agencysite.com"
                   className={cn(
-                    "text-sm text-muted-foreground transition-colors",
+                    "text-sm text-foreground/70 transition-colors",
                     "hover:text-primary"
                   )}
                 >
@@ -223,7 +222,7 @@ export function Footer(): React.ReactElement {
                       rel="noopener noreferrer"
                       aria-label={link.label}
                       className={cn(
-                        "text-muted-foreground transition-colors",
+                        "text-foreground/70 transition-colors",
                         "hover:text-primary"
                       )}
                     >
@@ -239,24 +238,10 @@ export function Footer(): React.ReactElement {
               <h3 className="font-semibold text-sm uppercase tracking-wider">
                 Stay Updated
               </h3>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-sm text-foreground/70">
                 Subscribe to our newsletter for tips and updates.
               </p>
-              {/* TODO: Integration with ConvertKit in Epic 3, Story 3.5 */}
-              <form
-                className="flex gap-2"
-                onSubmit={(e) => e.preventDefault()}
-              >
-                <Input
-                  type="email"
-                  placeholder="Enter your email"
-                  aria-label="Email address for newsletter"
-                  className="flex-1"
-                />
-                <Button type="submit" disabled>
-                  Subscribe
-                </Button>
-              </form>
+              <EmailSignupForm compact />
             </div>
           </div>
         </div>
@@ -264,7 +249,7 @@ export function Footer(): React.ReactElement {
         {/* Bottom Bar with Legal Links and Copyright */}
         <div className="border-t py-6">
           <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <div className="flex gap-4 text-sm text-muted-foreground">
+            <div className="flex gap-4 text-sm text-foreground/70">
               <Link
                 href="/privacy"
                 className="transition-colors hover:text-primary"
@@ -278,7 +263,7 @@ export function Footer(): React.ReactElement {
                 Terms of Service
               </Link>
             </div>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-foreground/70">
               © {new Date().getFullYear()} Agency Site. All rights reserved.
             </p>
           </div>

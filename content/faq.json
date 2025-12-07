@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "headline": "Frequently Asked Questions",
+    "subheadline": "Find answers to common questions about our services, pricing, and how we work with clients."
+  },
+  "faqs": [
+    {
+      "id": "faq-general-1",
+      "category": "general",
+      "question": "What platforms do you support?",
+      "answer": "We specialize in Amazon and Etsy marketplace consulting. Whether you're selling on one platform or both, we can help optimize your presence and grow your sales."
+    },
+    {
+      "id": "faq-general-2",
+      "category": "general",
+      "question": "How does the consultation process work?",
+      "answer": "We start with a free discovery call to understand your business and goals. From there, we create a custom strategy tailored to your specific needs and provide ongoing support throughout implementation."
+    },
+    {
+      "id": "faq-general-3",
+      "category": "general",
+      "question": "How long before I see results?",
+      "answer": "Results vary depending on your starting point and goals, but most clients see measurable improvements within 30-60 days. We focus on sustainable growth, not quick fixes."
+    },
+    {
+      "id": "faq-amazon-1",
+      "category": "amazon",
+      "question": "Can you help with Amazon PPC advertising?",
+      "answer": "Yes! Our Amazon advertising services include campaign setup, keyword research, bid optimization, and ongoing performance monitoring to maximize your ROI."
+    },
+    {
+      "id": "faq-amazon-2",
+      "category": "amazon",
+      "question": "Do you help with Amazon account suspensions?",
+      "answer": "Absolutely. We have experience helping sellers navigate account health issues, including suspension appeals and compliance guidance to prevent future problems."
+    },
+    {
+      "id": "faq-etsy-1",
+      "category": "etsy",
+      "question": "How can you improve my Etsy SEO?",
+      "answer": "We optimize your shop and listings for Etsy's search algorithm, including title optimization, tag research, category selection, and attribute usage to improve visibility."
+    },
+    {
+      "id": "faq-etsy-2",
+      "category": "etsy",
+      "question": "Do you offer Etsy shop setup assistance?",
+      "answer": "Yes, we help new sellers set up their Etsy shops properly from the start, including shop branding, policy creation, and listing optimization best practices."
+    },
+    {
+      "id": "faq-pricing-1",
+      "category": "pricing",
+      "question": "Are there any hidden fees?",
+      "answer": "No hidden fees, ever. We believe in transparent pricing. What you see on our pricing page is what you pay. We'll always discuss any costs upfront before starting work."
+    },
+    {
+      "id": "faq-pricing-2",
+      "category": "pricing",
+      "question": "Do you offer refunds or guarantees?",
+      "answer": "We stand behind our work. While marketplace success depends on many factors, we offer a satisfaction guarantee on our consulting services. If you're not happy with our recommendations, we'll work with you to make it right."
+    },
+    {
+      "id": "faq-pricing-3",
+      "category": "pricing",
+      "question": "Is there a discount for using both Amazon and Etsy services?",
+      "answer": "Yes! We offer a bundle discount for clients who use our services for both platforms. Check our pricing page for details on our multi-platform packages."
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+[
+  {
+    "id": "shop-setup",
+    "platform": "etsy",
+    "title": "Shop Setup & Configuration",
+    "description": "Get your Etsy shop configured correctly from day one. We handle shop settings, policies, payment setup, and branding so you can start selling with confidence.",
+    "icon": "store",
+    "features": [
+      "Shop settings and policies setup",
+      "Payment and shipping configuration",
+      "Branding and banner design guidance",
+      "Shop announcement optimization"
+    ]
+  },
+  {
+    "id": "seo-optimization",
+    "platform": "etsy",
+    "title": "SEO & Search Optimization",
+    "description": "Maximize your visibility in Etsy search results with strategic keyword optimization. We research and implement the best tags, titles, and attributes for your products.",
+    "icon": "search",
+    "features": [
+      "Keyword research and strategy",
+      "Tag optimization for all listings",
+      "Category and attribute optimization",
+      "Search ranking improvement"
+    ]
+  },
+  {
+    "id": "marketing-promotion",
+    "platform": "etsy",
+    "title": "Etsy Marketing & Promotion",
+    "description": "Drive targeted traffic and increase sales with strategic marketing campaigns. We manage Etsy Ads, social media promotion, and offsite marketing channels.",
+    "icon": "megaphone",
+    "features": [
+      "Etsy Ads campaign management",
+      "Social media marketing strategy",
+      "Email marketing integration",
+      "Promotional sales planning"
+    ]
+  },
+  {
+    "id": "listing-optimization",
+    "platform": "etsy",
+    "title": "Listing Optimization",
+    "description": "Transform your listings into conversion machines with compelling titles, descriptions, and photography guidance. We optimize every element for maximum sales.",
+    "icon": "file-text",
+    "features": [
+      "Title and description copywriting",
+      "Photography and styling tips",
+      "Pricing strategy optimization",
+      "Variation and inventory setup"
+    ]
+  },
+  {
+    "id": "shop-management",
+    "platform": "etsy",
+    "title": "Shop Management & Growth",
+    "description": "Scale your Etsy business with ongoing support and strategic guidance. We help with inventory management, customer service, and growth planning.",
+    "icon": "trending-up",
+    "features": [
+      "Performance analytics review",
+      "Customer service optimization",
+      "Inventory management strategies",
+      "Long-term growth planning"
+    ]
+  }
+]

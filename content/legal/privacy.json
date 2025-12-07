@@ -1,0 +1,64 @@
+{
+  "title": "Privacy Policy",
+  "lastUpdated": "2025-12-06",
+  "introduction": "At Marketplace Consultants, we take your privacy seriously. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website or use our services.",
+  "sections": [
+    {
+      "id": "data-collection",
+      "title": "Data Collection",
+      "content": [
+        "We collect information you provide directly to us, such as when you fill out a contact form, schedule a consultation, or subscribe to our newsletter.",
+        "The types of personal information we may collect include: your name, email address, phone number, and any messages or inquiries you submit through our forms.",
+        "We do not sell, rent, or trade your personal information to third parties for marketing purposes."
+      ]
+    },
+    {
+      "id": "cookies",
+      "title": "Cookies and Tracking",
+      "content": [
+        "We use Plausible Analytics, a privacy-friendly analytics service that does not use cookies and does not collect personal data. Plausible is fully GDPR, CCPA, and PECR compliant.",
+        "Plausible collects only aggregate, anonymized data such as page views, referral sources, and browser types. No individual tracking or personal identification occurs.",
+        "Our website may use essential cookies required for basic functionality, such as maintaining your session state."
+      ]
+    },
+    {
+      "id": "third-party-services",
+      "title": "Third-Party Services",
+      "content": [
+        "We use the following third-party services to provide our website functionality:",
+        "Formspree: Handles contact form submissions. When you submit a contact form, your name, email, platform preference, and message are transmitted to Formspree for processing. View their privacy policy at formspree.io/legal/privacy-policy.",
+        "ConvertKit: Manages our email newsletter. When you subscribe to our newsletter, your email address is stored by ConvertKit. You can unsubscribe at any time using the link in our emails. View their privacy policy at convertkit.com/privacy.",
+        "Cal.com: Powers our consultation booking system. When you schedule a consultation, your name, email, and scheduling information are processed by Cal.com. View their privacy policy at cal.com/privacy.",
+        "Plausible Analytics: Provides privacy-friendly website analytics without cookies or personal data collection. View their data policy at plausible.io/data-policy."
+      ]
+    },
+    {
+      "id": "user-rights",
+      "title": "Your Rights",
+      "content": [
+        "You have the right to access, correct, or delete your personal information that we hold.",
+        "You can unsubscribe from our newsletter at any time by clicking the unsubscribe link in any email we send.",
+        "If you have submitted a contact form or booked a consultation and wish to have your data deleted, please contact us using the information below.",
+        "For users in the European Union, you have additional rights under GDPR including the right to data portability and the right to lodge a complaint with a supervisory authority."
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Contact Us",
+      "content": [
+        "If you have any questions about this Privacy Policy or our data practices, please contact us:",
+        "Email: admin@scalenty.net",
+        "You may also use our contact form on the Contact page to reach us regarding privacy concerns."
+      ]
+    },
+    {
+      "id": "changes",
+      "title": "Changes to This Policy",
+      "content": [
+        "We may update this Privacy Policy from time to time to reflect changes in our practices or for legal, operational, or regulatory reasons.",
+        "When we make changes, we will update the \"Last Updated\" date at the top of this page.",
+        "We encourage you to review this Privacy Policy periodically to stay informed about how we protect your information."
+      ]
+    }
+  ]
+}

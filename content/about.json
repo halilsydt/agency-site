@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "headline": "About Us",
+    "subheadline": "We're marketplace experts dedicated to helping Amazon and Etsy sellers grow their businesses with honest, results-driven strategies."
+  },
+  "mission": {
+    "headline": "Our Mission",
+    "text": "We're dedicated to helping Amazon and Etsy sellers succeed through honest, results-driven consulting. No hype, no empty promises—just real strategies that work. We believe every seller deserves access to expert guidance that delivers measurable results."
+  },
+  "approach": {
+    "headline": "Our Approach",
+    "description": "We believe in a different kind of consulting. One built on transparency, data-driven decisions, and genuine partnership with our clients.",
+    "points": [
+      "Honest assessments of your current situation",
+      "Data-driven strategies tailored to your goals",
+      "Transparent pricing with no hidden fees",
+      "Real results you can measure and track"
+    ]
+  },
+  "team": [
+    {
+      "id": "founder-1",
+      "name": "Mehmet Ali Sabaz",
+      "role": "Co-Founder",
+      "bio": "With extensive experience helping sellers on Amazon and Etsy, Mehmet has seen what works and what doesn't. His mission is to share that knowledge and help you grow your business."
+    },
+    {
+      "id": "founder-2",
+      "name": "Halil Saydut",
+      "role": "Co-Founder",
+      "bio": "Halil brings deep marketplace expertise to help Amazon and Etsy sellers succeed. He's passionate about delivering results-driven strategies that make a real difference."
+    }
+  ],
+  "highlights": [
+    {
+      "id": "years",
+      "label": "Years Experience",
+      "value": "5+",
+      "icon": "calendar"
+    },
+    {
+      "id": "clients",
+      "label": "Clients Helped",
+      "value": "100+",
+      "icon": "users"
+    },
+    {
+      "id": "revenue",
+      "label": "Revenue Generated",
+      "value": "$1M+",
+      "icon": "trending-up"
+    },
+    {
+      "id": "platforms",
+      "label": "Platforms",
+      "value": "2",
+      "icon": "store"
+    }
+  ]
+}

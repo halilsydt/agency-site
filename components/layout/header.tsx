@@ -96,7 +96,7 @@ export function Header(): React.ReactElement {
           </Link>
 
           {/* Desktop Navigation */}
-          <NavigationMenu className="hidden md:flex">
+          <NavigationMenu className="hidden md:flex" aria-label="Main navigation">
             <NavigationMenuList>
               {navItems.map((item) =>
                 item.children ? (

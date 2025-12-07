@@ -1,0 +1,122 @@
+{
+  "amazon": [
+    {
+      "id": "amazon-starter",
+      "platform": "amazon",
+      "tier": "starter",
+      "name": "Starter",
+      "price": 299,
+      "priceUnit": "/month",
+      "description": "Perfect for new Amazon sellers getting started",
+      "features": [
+        "Account audit & setup review",
+        "Basic listing optimization (5 listings)",
+        "Monthly performance report",
+        "Email support"
+      ],
+      "isPopular": false,
+      "ctaText": "Get Started",
+      "ctaHref": "/contact"
+    },
+    {
+      "id": "amazon-growth",
+      "platform": "amazon",
+      "tier": "growth",
+      "name": "Growth",
+      "price": 499,
+      "priceUnit": "/month",
+      "description": "Ideal for growing sellers ready to scale",
+      "features": [
+        "Everything in Starter",
+        "PPC campaign management",
+        "A+ Content creation",
+        "Listing optimization (15 listings)",
+        "Weekly performance reports",
+        "Priority email & chat support"
+      ],
+      "isPopular": true,
+      "ctaText": "Get Started",
+      "ctaHref": "/contact"
+    },
+    {
+      "id": "amazon-premium",
+      "platform": "amazon",
+      "tier": "premium",
+      "name": "Premium",
+      "price": 799,
+      "priceUnit": "/month",
+      "description": "Complete solution for serious sellers",
+      "features": [
+        "Everything in Growth",
+        "Full account management",
+        "Unlimited listing optimization",
+        "Brand Store design & management",
+        "Competitor analysis",
+        "Priority phone support"
+      ],
+      "isPopular": false,
+      "ctaText": "Get Started",
+      "ctaHref": "/contact"
+    }
+  ],
+  "etsy": [
+    {
+      "id": "etsy-starter",
+      "platform": "etsy",
+      "tier": "starter",
+      "name": "Starter",
+      "price": 199,
+      "priceUnit": "/month",
+      "description": "Perfect for new Etsy sellers getting started",
+      "features": [
+        "Shop audit & setup review",
+        "Basic SEO optimization (10 listings)",
+        "Monthly performance report",
+        "Email support"
+      ],
+      "isPopular": false,
+      "ctaText": "Get Started",
+      "ctaHref": "/contact"
+    },
+    {
+      "id": "etsy-growth",
+      "platform": "etsy",
+      "tier": "growth",
+      "name": "Growth",
+      "price": 399,
+      "priceUnit": "/month",
+      "description": "Ideal for growing shops ready to scale",
+      "features": [
+        "Everything in Starter",
+        "Marketing strategy development",
+        "Listing optimization (25 listings)",
+        "Photography guidance",
+        "Weekly performance reports",
+        "Priority email & chat support"
+      ],
+      "isPopular": true,
+      "ctaText": "Get Started",
+      "ctaHref": "/contact"
+    },
+    {
+      "id": "etsy-premium",
+      "platform": "etsy",
+      "tier": "premium",
+      "name": "Premium",
+      "price": 599,
+      "priceUnit": "/month",
+      "description": "Complete solution for serious sellers",
+      "features": [
+        "Everything in Growth",
+        "Full shop management",
+        "Unlimited listing optimization",
+        "Social media strategy",
+        "Competitor analysis",
+        "Priority phone support"
+      ],
+      "isPopular": false,
+      "ctaText": "Get Started",
+      "ctaHref": "/contact"
+    }
+  ]
+}
