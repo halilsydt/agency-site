@@ -29,6 +29,9 @@ export const metadata: Metadata = {
     description:
       "Honest, results-driven consulting to help Amazon and Etsy sellers grow their businesses.",
   },
+  verification: {
+    google: "r_PDR1rHDF6dUI0uh8L1ax1DyTUUXg-YVn06qEkWuoE",
+  },
 };
 
 /**
