@@ -21,7 +21,7 @@ describe("Header", () => {
 
   it("renders the logo linked to homepage", () => {
     render(<Header />);
-    const logoLink = screen.getByRole("link", { name: /agency.*site/i });
+    const logoLink = screen.getByRole("link", { name: /scalenty/i });
     expect(logoLink).toBeInTheDocument();
     expect(logoLink).toHaveAttribute("href", "/");
   });

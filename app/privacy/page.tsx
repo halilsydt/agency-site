@@ -3,20 +3,20 @@ import { getPrivacyPolicyContent } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy | Marketplace Consultants",
+  title: "Privacy Policy | Scalenty",
   description:
-    "Learn how Marketplace Consultants collects, uses, and protects your personal information.",
+    "Learn how Scalenty collects, uses, and protects your personal information.",
   openGraph: {
-    title: "Privacy Policy | Marketplace Consultants",
+    title: "Privacy Policy | Scalenty",
     description:
-      "Learn how Marketplace Consultants collects, uses, and protects your personal information.",
+      "Learn how Scalenty collects, uses, and protects your personal information.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Privacy Policy | Marketplace Consultants",
+    title: "Privacy Policy | Scalenty",
     description:
-      "Learn how Marketplace Consultants collects, uses, and protects your personal information.",
+      "Learn how Scalenty collects, uses, and protects your personal information.",
   },
 };
 

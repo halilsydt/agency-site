@@ -10,15 +10,14 @@ vi.mock("@/lib/api/convertkit", () => ({
 describe("Footer", () => {
   it("renders the logo with correct text", () => {
     render(<Footer />);
-    expect(screen.getByText("Agency")).toBeInTheDocument();
-    expect(screen.getByText("Site")).toBeInTheDocument();
+    expect(screen.getByText("Scalenty")).toBeInTheDocument();
   });
 
   it("renders logo linked to homepage", () => {
     render(<Footer />);
     // Find the logo link specifically by looking for the one with href="/"
     const logoLinks = screen.getAllByRole("link").filter(
-      (link) => link.getAttribute("href") === "/" && link.textContent?.includes("Agency")
+      (link) => link.getAttribute("href") === "/" && link.textContent?.includes("Scalenty")
     );
     expect(logoLinks).toHaveLength(1);
     expect(logoLinks[0]).toHaveAttribute("href", "/");
@@ -34,29 +33,13 @@ describe("Footer", () => {
   it("renders contact email with mailto link", () => {
     render(<Footer />);
     const emailLink = screen.getByRole("link", {
-      name: "contact@agencysite.com",
+      name: "admin@scalenty.net",
     });
     expect(emailLink).toBeInTheDocument();
-    expect(emailLink).toHaveAttribute("href", "mailto:contact@agencysite.com");
+    expect(emailLink).toHaveAttribute("href", "mailto:admin@scalenty.net");
   });
 
-  it("renders all social links with correct aria-labels", () => {
-    render(<Footer />);
-    expect(
-      screen.getByRole("link", { name: /instagram/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("link", { name: /linkedin/i })
-    ).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: /twitter/i })).toBeInTheDocument();
-  });
-
-  it("renders social links with correct attributes", () => {
-    render(<Footer />);
-    const instagramLink = screen.getByRole("link", { name: /instagram/i });
-    expect(instagramLink).toHaveAttribute("target", "_blank");
-    expect(instagramLink).toHaveAttribute("rel", "noopener noreferrer");
-  });
+  // Social links are currently empty - tests will be added when social profiles are created
 
   it("renders all quick links", () => {
     render(<Footer />);
@@ -128,7 +111,7 @@ describe("Footer", () => {
     expect(
       screen.getByText(new RegExp(`© ${currentYear}`))
     ).toBeInTheDocument();
-    expect(screen.getByText(/agency site.*all rights reserved/i)).toBeInTheDocument();
+    expect(screen.getByText(/scalenty.*all rights reserved/i)).toBeInTheDocument();
   });
 
   it("renders with proper semantic HTML (footer element)", () => {
@@ -159,7 +142,7 @@ describe("Footer", () => {
     // Contact heading - use getAllByText since "Contact" also exists as a quick link
     const contactHeadings = screen.getAllByText("Contact");
     expect(contactHeadings.length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText("Follow Us")).toBeInTheDocument();
+    // Follow Us is conditionally rendered when social links exist
     expect(screen.getByText("Stay Updated")).toBeInTheDocument();
   });
 

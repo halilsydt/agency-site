@@ -40,7 +40,7 @@ describe("TermsPage", () => {
   it("renders introduction text", () => {
     render(<TermsPage />);
     expect(
-      screen.getByText(/welcome to marketplace consultants/i)
+      screen.getByText(/welcome to scalenty/i)
     ).toBeInTheDocument();
   });
 });

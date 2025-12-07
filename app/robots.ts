@@ -13,6 +13,6 @@ export default function robots(): MetadataRoute.Robots {
       allow: "/",
       disallow: "/style-guide",
     },
-    sitemap: "https://agency-site.vercel.app/sitemap.xml",
+    sitemap: "https://scalenty.net/sitemap.xml",
   };
 }

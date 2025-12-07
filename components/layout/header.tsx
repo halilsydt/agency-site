@@ -91,8 +91,7 @@ export function Header(): React.ReactElement {
             href="/"
             className="flex items-center space-x-2 font-bold text-xl"
           >
-            <span className="text-primary">Agency</span>
-            <span>Site</span>
+            <span className="text-primary">Scalenty</span>
           </Link>
 
           {/* Desktop Navigation */}

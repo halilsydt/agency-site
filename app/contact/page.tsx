@@ -11,18 +11,18 @@ import { Container } from "@/components/layout/container";
  * SEO metadata for the Contact page.
  */
 export const metadata: Metadata = {
-  title: "Contact Us | Marketplace Consultants",
+  title: "Contact Us | Scalenty",
   description:
     "Get in touch with our team. Ask questions about Amazon or Etsy consulting services, or book a free consultation.",
   openGraph: {
-    title: "Contact Us | Marketplace Consultants",
+    title: "Contact Us | Scalenty",
     description:
       "Have questions? Reach out to our marketplace consulting experts.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Us | Marketplace Consultants",
+    title: "Contact Us | Scalenty",
     description:
       "Have questions? Reach out to our marketplace consulting experts.",
   },

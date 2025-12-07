@@ -31,25 +31,9 @@ interface QuickLink {
 
 /**
  * Social media links configuration.
- * Placeholder URLs to be updated when actual links are provided.
+ * Currently empty - to be populated when social profiles are created.
  */
-const socialLinks: SocialLink[] = [
-  {
-    platform: "instagram",
-    url: "https://instagram.com/agencysite",
-    label: "Follow us on Instagram",
-  },
-  {
-    platform: "linkedin",
-    url: "https://linkedin.com/company/agencysite",
-    label: "Connect with us on LinkedIn",
-  },
-  {
-    platform: "twitter",
-    url: "https://twitter.com/agencysite",
-    label: "Follow us on Twitter",
-  },
-];
+const socialLinks: SocialLink[] = [];
 
 /**
  * Quick navigation links for the footer.
@@ -159,8 +143,7 @@ export function Footer(): React.ReactElement {
                 href="/"
                 className="flex items-center space-x-2 font-bold text-xl"
               >
-                <span className="text-primary">Agency</span>
-                <span>Site</span>
+                <span className="text-primary">Scalenty</span>
               </Link>
               <p className="text-foreground/70 text-sm">
                 Honest e-commerce consulting for Amazon &amp; Etsy sellers
@@ -198,39 +181,43 @@ export function Footer(): React.ReactElement {
               </h3>
               <address className="not-italic">
                 <a
-                  href="mailto:contact@agencysite.com"
+                  href="mailto:admin@scalenty.net"
                   className={cn(
                     "text-sm text-foreground/70 transition-colors",
                     "hover:text-primary"
                   )}
                 >
-                  contact@agencysite.com
+                  admin@scalenty.net
                 </a>
               </address>
 
-              <h3 className="font-semibold text-sm uppercase tracking-wider pt-4">
-                Follow Us
-              </h3>
-              <div className="flex space-x-4">
-                {socialLinks.map((link) => {
-                  const Icon = socialIcons[link.platform];
-                  return (
-                    <a
-                      key={link.platform}
-                      href={link.url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={link.label}
-                      className={cn(
-                        "text-foreground/70 transition-colors",
-                        "hover:text-primary"
-                      )}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </a>
-                  );
-                })}
-              </div>
+              {socialLinks.length > 0 && (
+                <>
+                  <h3 className="font-semibold text-sm uppercase tracking-wider pt-4">
+                    Follow Us
+                  </h3>
+                  <div className="flex space-x-4">
+                    {socialLinks.map((link) => {
+                      const Icon = socialIcons[link.platform];
+                      return (
+                        <a
+                          key={link.platform}
+                          href={link.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={link.label}
+                          className={cn(
+                            "text-foreground/70 transition-colors",
+                            "hover:text-primary"
+                          )}
+                        >
+                          <Icon className="h-5 w-5" />
+                        </a>
+                      );
+                    })}
+                  </div>
+                </>
+              )}
             </div>
 
             {/* Email Signup Section */}
@@ -264,7 +251,7 @@ export function Footer(): React.ReactElement {
               </Link>
             </div>
             <p className="text-sm text-foreground/70">
-              © {new Date().getFullYear()} Agency Site. All rights reserved.
+              © {new Date().getFullYear()} Scalenty. All rights reserved.
             </p>
           </div>
         </div>

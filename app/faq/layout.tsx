@@ -5,18 +5,18 @@ import type { Metadata } from "next";
  * Defined in layout to support client component page.
  */
 export const metadata: Metadata = {
-  title: "FAQ | Marketplace Consultants",
+  title: "FAQ | Scalenty",
   description:
     "Find answers to common questions about our Amazon and Etsy consulting services, pricing, and how we work with clients.",
   openGraph: {
-    title: "FAQ | Marketplace Consultants",
+    title: "FAQ | Scalenty",
     description:
       "Answers to frequently asked questions about marketplace consulting.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FAQ | Marketplace Consultants",
+    title: "FAQ | Scalenty",
     description:
       "Answers to frequently asked questions about marketplace consulting.",
   },

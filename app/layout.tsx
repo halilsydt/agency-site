@@ -14,18 +14,18 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://agency-site.vercel.app"),
+  metadataBase: new URL("https://scalenty.net"),
   title: {
-    default: "Agency Site | E-commerce Consulting for Amazon & Etsy Sellers",
-    template: "%s | Agency Site",
+    default: "Scalenty | E-commerce Consulting for Amazon & Etsy Sellers",
+    template: "%s | Scalenty",
   },
   description:
     "Honest, results-driven consulting to help Amazon and Etsy sellers grow their businesses. Transparent pricing, real expertise.",
   openGraph: {
     type: "website",
     locale: "en_US",
-    siteName: "Agency Site",
-    title: "Agency Site | E-commerce Consulting for Amazon & Etsy Sellers",
+    siteName: "Scalenty",
+    title: "Scalenty | E-commerce Consulting for Amazon & Etsy Sellers",
     description:
       "Honest, results-driven consulting to help Amazon and Etsy sellers grow their businesses.",
   },
@@ -38,14 +38,14 @@ export const metadata: Metadata = {
 const organizationSchema = {
   "@context": "https://schema.org",
   "@type": "Organization",
-  name: "Agency Site",
-  url: "https://agency-site.vercel.app",
+  name: "Scalenty",
+  url: "https://scalenty.net",
   description:
     "Honest, results-driven consulting to help Amazon and Etsy sellers grow their businesses. Transparent pricing, real expertise.",
   contactPoint: {
     "@type": "ContactPoint",
     contactType: "customer service",
-    url: "https://agency-site.vercel.app/contact",
+    url: "https://scalenty.net/contact",
   },
 };
 
@@ -56,8 +56,8 @@ const organizationSchema = {
 const websiteSchema = {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  name: "Agency Site",
-  url: "https://agency-site.vercel.app",
+  name: "Scalenty",
+  url: "https://scalenty.net",
   description:
     "E-commerce consulting services for Amazon and Etsy sellers.",
 };

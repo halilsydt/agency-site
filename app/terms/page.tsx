@@ -3,18 +3,18 @@ import { getTermsOfServiceContent } from "@/lib/content";
 import { Container } from "@/components/layout/container";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | Marketplace Consultants",
+  title: "Terms of Service | Scalenty",
   description:
     "Read our terms of service and conditions for using our consulting services.",
   openGraph: {
-    title: "Terms of Service | Marketplace Consultants",
+    title: "Terms of Service | Scalenty",
     description:
       "Read our terms of service and conditions for using our consulting services.",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Terms of Service | Marketplace Consultants",
+    title: "Terms of Service | Scalenty",
     description:
       "Read our terms of service and conditions for using our consulting services.",
   },

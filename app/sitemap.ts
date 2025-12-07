@@ -7,7 +7,7 @@ import type { MetadataRoute } from "next";
  * @returns Sitemap configuration for Next.js
  */
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://agency-site.vercel.app";
+  const baseUrl = "https://scalenty.net";
 
   return [
     {
