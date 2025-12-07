@@ -4,7 +4,6 @@ import { ContactHero } from "@/components/sections/contact-hero";
 import { ContactInfo } from "@/components/sections/contact-info";
 import { ContactForm } from "@/components/forms/contact-form";
 import { BookingSection } from "@/components/sections/booking-section";
-import { NewsletterSignupSection } from "@/components/sections/newsletter-signup-section";
 import { Container } from "@/components/layout/container";
 
 /**
@@ -57,11 +56,6 @@ export default function ContactPage(): React.ReactElement {
           </div>
         </Container>
       </section>
-
-      <NewsletterSignupSection
-        headline={contact.newsletter.headline}
-        subheadline={contact.newsletter.subheadline}
-      />
 
       <BookingSection
         headline={contact.booking.headline}

@@ -1,11 +1,6 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect } from "vitest";
 import { Footer } from "@/components/layout/footer";
-
-// Mock ConvertKit API for EmailSignupForm
-vi.mock("@/lib/api/convertkit", () => ({
-  subscribeToNewsletter: vi.fn(),
-}));
 
 describe("Footer", () => {
   it("renders the logo with correct text", () => {
@@ -76,21 +71,6 @@ describe("Footer", () => {
     );
   });
 
-  it("renders email signup form", () => {
-    render(<Footer />);
-    expect(
-      screen.getByRole("textbox", { name: /email address/i })
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /subscribe/i })
-    ).toBeInTheDocument();
-  });
-
-  it("renders email signup form with consent text", () => {
-    render(<Footer />);
-    expect(screen.getByText(/we respect your privacy/i)).toBeInTheDocument();
-  });
-
   it("renders Privacy Policy link with correct href", () => {
     render(<Footer />);
     const privacyLink = screen.getByRole("link", { name: /privacy policy/i });
@@ -142,8 +122,6 @@ describe("Footer", () => {
     // Contact heading - use getAllByText since "Contact" also exists as a quick link
     const contactHeadings = screen.getAllByText("Contact");
     expect(contactHeadings.length).toBeGreaterThanOrEqual(1);
-    // Follow Us is conditionally rendered when social links exist
-    expect(screen.getByText("Stay Updated")).toBeInTheDocument();
   });
 
   it("renders footer navigation with aria-label", () => {

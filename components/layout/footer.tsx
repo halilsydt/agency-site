@@ -5,7 +5,6 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { Container } from "@/components/layout/container";
-import { EmailSignupForm } from "@/components/forms/email-signup-form";
 
 /**
  * Represents a social media link with platform identifier.
@@ -218,17 +217,6 @@ export function Footer(): React.ReactElement {
                   </div>
                 </>
               )}
-            </div>
-
-            {/* Email Signup Section */}
-            <div className="space-y-4">
-              <h3 className="font-semibold text-sm uppercase tracking-wider">
-                Stay Updated
-              </h3>
-              <p className="text-sm text-foreground/70">
-                Subscribe to our newsletter for tips and updates.
-              </p>
-              <EmailSignupForm compact />
             </div>
           </div>
         </div>

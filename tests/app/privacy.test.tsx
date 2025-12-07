@@ -42,7 +42,6 @@ describe("PrivacyPage", () => {
     // Use getAllByText since services may be mentioned multiple times
     expect(screen.getAllByText(/plausible/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/formspree/i).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/convertkit/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/cal\.com/i).length).toBeGreaterThan(0);
   });
 

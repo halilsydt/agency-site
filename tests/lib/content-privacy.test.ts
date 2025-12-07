@@ -51,7 +51,6 @@ describe("getPrivacyPolicyContent", () => {
     const sectionText = thirdPartySection!.content.join(" ").toLowerCase();
     expect(sectionText).toContain("plausible");
     expect(sectionText).toContain("formspree");
-    expect(sectionText).toContain("convertkit");
     expect(sectionText).toContain("cal.com");
   });
 });

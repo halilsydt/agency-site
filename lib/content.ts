@@ -12,7 +12,7 @@ import contactData from "@/content/contact.json";
 import faqData from "@/content/faq.json";
 import privacyData from "@/content/legal/privacy.json";
 import termsData from "@/content/legal/terms.json";
-import type { Service, PricingPackage, TeamMember, ExperienceHighlight, BookingContent, NewsletterContent, FAQ, FAQCategory, FAQPageContent, PrivacyPolicyContent, TermsOfServiceContent } from "./types";
+import type { Service, PricingPackage, TeamMember, ExperienceHighlight, BookingContent, FAQ, FAQCategory, FAQPageContent, PrivacyPolicyContent, TermsOfServiceContent } from "./types";
 
 /**
  * Retrieves all Amazon-specific services.
@@ -166,8 +166,6 @@ export interface ContactContent {
   contactInfo: { email: string; phone?: string; address?: string };
   /** Booking section content */
   booking: BookingContent;
-  /** Newsletter section content */
-  newsletter: NewsletterContent;
 }
 
 /**

@@ -7,7 +7,7 @@
       "id": "data-collection",
       "title": "Data Collection",
       "content": [
-        "We collect information you provide directly to us, such as when you fill out a contact form, schedule a consultation, or subscribe to our newsletter.",
+        "We collect information you provide directly to us, such as when you fill out a contact form or schedule a consultation.",
         "The types of personal information we may collect include: your name, email address, phone number, and any messages or inquiries you submit through our forms.",
         "We do not sell, rent, or trade your personal information to third parties for marketing purposes."
       ]
@@ -27,7 +27,6 @@
       "content": [
         "We use the following third-party services to provide our website functionality:",
         "Formspree: Handles contact form submissions. When you submit a contact form, your name, email, platform preference, and message are transmitted to Formspree for processing. View their privacy policy at formspree.io/legal/privacy-policy.",
-        "ConvertKit: Manages our email newsletter. When you subscribe to our newsletter, your email address is stored by ConvertKit. You can unsubscribe at any time using the link in our emails. View their privacy policy at convertkit.com/privacy.",
         "Cal.com: Powers our consultation booking system. When you schedule a consultation, your name, email, and scheduling information are processed by Cal.com. View their privacy policy at cal.com/privacy.",
         "Plausible Analytics: Provides privacy-friendly website analytics without cookies or personal data collection. View their data policy at plausible.io/data-policy."
       ]
@@ -37,7 +36,6 @@
       "title": "Your Rights",
       "content": [
         "You have the right to access, correct, or delete your personal information that we hold.",
-        "You can unsubscribe from our newsletter at any time by clicking the unsubscribe link in any email we send.",
         "If you have submitted a contact form or booked a consultation and wish to have your data deleted, please contact us using the information below.",
         "For users in the European Union, you have additional rights under GDPR including the right to data portability and the right to lodge a complaint with a supervisory authority."
       ]

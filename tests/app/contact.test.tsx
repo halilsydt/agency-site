@@ -7,11 +7,6 @@ vi.mock("@/lib/api/formspree", () => ({
   submitContactForm: vi.fn(),
 }));
 
-// Mock ConvertKit API for NewsletterSignupSection
-vi.mock("@/lib/api/convertkit", () => ({
-  subscribeToNewsletter: vi.fn(),
-}));
-
 // Mock CalendarEmbed to avoid Cal.com dependencies in tests
 vi.mock("@/components/forms/calendar-embed", () => ({
   CalendarEmbed: () => <div data-testid="calendar-embed">Calendar Embed</div>,
@@ -80,12 +75,5 @@ describe("Contact Page", () => {
   it("includes calendar embed section", () => {
     render(<ContactPage />);
     expect(screen.getByTestId("calendar-embed")).toBeInTheDocument();
-  });
-
-  it("renders newsletter section headline", () => {
-    render(<ContactPage />);
-    expect(
-      screen.getByRole("heading", { name: /stay updated/i })
-    ).toBeInTheDocument();
   });
 });

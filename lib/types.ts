@@ -112,21 +112,6 @@ export interface BookingContent {
 }
 
 /**
- * Email signup form submission status.
- */
-export type EmailSignupStatus = "idle" | "submitting" | "success" | "error";
-
-/**
- * Newsletter section content.
- */
-export interface NewsletterContent {
-  /** Section headline */
-  headline: string;
-  /** Supporting description */
-  subheadline: string;
-}
-
-/**
  * FAQ category for filtering.
  */
 export type FAQCategory = "general" | "amazon" | "etsy" | "pricing";
