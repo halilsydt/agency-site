@@ -194,3 +194,21 @@ export interface CookieConsentState {
   /** Timestamp when consent was given/denied */
   timestamp?: string;
 }
+
+/**
+ * Supported locale codes for internationalization.
+ * - 'en': English (default)
+ * - 'tr': Turkish
+ */
+export type Locale = "en" | "tr";
+
+/**
+ * Array of all supported locale codes.
+ * Used for validation and iteration over available locales.
+ */
+export const SUPPORTED_LOCALES: readonly Locale[] = ["en", "tr"] as const;
+
+/**
+ * Default locale used when no preference is set or locale is unsupported.
+ */
+export const DEFAULT_LOCALE: Locale = "en";

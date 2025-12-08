@@ -1,0 +1,60 @@
+{
+  "hero": {
+    "headline": "Hakkımızda",
+    "subheadline": "Amazon ve Etsy satıcılarının işletmelerini dürüst, sonuç odaklı stratejilerle büyütmelerine yardımcı olmaya adanmış pazar yeri uzmanlarıyız."
+  },
+  "mission": {
+    "headline": "Misyonumuz",
+    "text": "Amazon ve Etsy satıcılarının dürüst, sonuç odaklı danışmanlıkla başarılı olmalarına yardımcı olmaya adanmış durumdayız. Abartı yok, boş vaatler yok—sadece işe yarayan gerçek stratejiler. Her satıcının ölçülebilir sonuçlar sunan uzman rehberliğine erişmeyi hak ettiğine inanıyoruz."
+  },
+  "approach": {
+    "headline": "Yaklaşımımız",
+    "description": "Farklı bir danışmanlık anlayışına inanıyoruz. Şeffaflık, veriye dayalı kararlar ve müşterilerimizle gerçek ortaklık üzerine kurulu bir anlayış.",
+    "points": [
+      "Mevcut durumunuzun dürüst değerlendirmesi",
+      "Hedeflerinize özel veriye dayalı stratejiler",
+      "Gizli ücretsiz şeffaf fiyatlandırma",
+      "Ölçebileceğiniz ve takip edebileceğiniz gerçek sonuçlar"
+    ]
+  },
+  "team": [
+    {
+      "id": "founder-1",
+      "name": "Mehmet Ali Sabaz",
+      "role": "Kurucu Ortak",
+      "bio": "Amazon ve Etsy'de satıcılara yardım etme konusunda kapsamlı deneyime sahip olan Mehmet, neyin işe yaradığını neyin yaramadığını gördü. Misyonu bu bilgiyi paylaşmak ve işletmenizi büyütmenize yardımcı olmaktır."
+    },
+    {
+      "id": "founder-2",
+      "name": "Halil Saydut",
+      "role": "Kurucu Ortak",
+      "bio": "Halil, Amazon ve Etsy satıcılarının başarılı olmasına yardımcı olmak için derin pazar yeri uzmanlığı getiriyor. Gerçek bir fark yaratan sonuç odaklı stratejiler sunma konusunda tutkulu."
+    }
+  ],
+  "highlights": [
+    {
+      "id": "years",
+      "label": "Yıllık Deneyim",
+      "value": "5+",
+      "icon": "calendar"
+    },
+    {
+      "id": "clients",
+      "label": "Yardım Edilen Müşteri",
+      "value": "100+",
+      "icon": "users"
+    },
+    {
+      "id": "revenue",
+      "label": "Oluşturulan Gelir",
+      "value": "$1M+",
+      "icon": "trending-up"
+    },
+    {
+      "id": "platforms",
+      "label": "Platform",
+      "value": "2",
+      "icon": "store"
+    }
+  ]
+}

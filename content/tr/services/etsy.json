@@ -1,0 +1,67 @@
+[
+  {
+    "id": "shop-setup",
+    "platform": "etsy",
+    "title": "Mağaza Kurulumu ve Yapılandırma",
+    "description": "Etsy mağazanızı ilk günden doğru şekilde yapılandırın. Mağaza ayarları, politikalar, ödeme kurulumu ve markalaşmayı hallediyoruz, böylece güvenle satışa başlayabilirsiniz.",
+    "icon": "store",
+    "features": [
+      "Mağaza ayarları ve politikalar kurulumu",
+      "Ödeme ve kargo yapılandırması",
+      "Markalaşma ve banner tasarım rehberliği",
+      "Mağaza duyurusu optimizasyonu"
+    ]
+  },
+  {
+    "id": "seo-optimization",
+    "platform": "etsy",
+    "title": "SEO ve Arama Optimizasyonu",
+    "description": "Stratejik anahtar kelime optimizasyonu ile Etsy arama sonuçlarındaki görünürlüğünüzü maksimize edin. Ürünleriniz için en iyi etiketleri, başlıkları ve özellikleri araştırıyor ve uyguluyoruz.",
+    "icon": "search",
+    "features": [
+      "Anahtar kelime araştırması ve strateji",
+      "Tüm listeler için etiket optimizasyonu",
+      "Kategori ve özellik optimizasyonu",
+      "Arama sıralaması iyileştirme"
+    ]
+  },
+  {
+    "id": "marketing-promotion",
+    "platform": "etsy",
+    "title": "Etsy Pazarlama ve Tanıtım",
+    "description": "Stratejik pazarlama kampanyalarıyla hedefli trafik çekin ve satışları artırın. Etsy Reklamları, sosyal medya tanıtımı ve site dışı pazarlama kanallarını yönetiyoruz.",
+    "icon": "megaphone",
+    "features": [
+      "Etsy Reklamları kampanya yönetimi",
+      "Sosyal medya pazarlama stratejisi",
+      "E-posta pazarlama entegrasyonu",
+      "Promosyonel satış planlaması"
+    ]
+  },
+  {
+    "id": "listing-optimization",
+    "platform": "etsy",
+    "title": "Liste Optimizasyonu",
+    "description": "Etkileyici başlıklar, açıklamalar ve fotoğraf rehberliğiyle listelerinizi dönüşüm makinelerine dönüştürün. Maksimum satış için her öğeyi optimize ediyoruz.",
+    "icon": "file-text",
+    "features": [
+      "Başlık ve açıklama yazımı",
+      "Fotoğrafçılık ve stil ipuçları",
+      "Fiyatlandırma stratejisi optimizasyonu",
+      "Varyasyon ve envanter kurulumu"
+    ]
+  },
+  {
+    "id": "shop-management",
+    "platform": "etsy",
+    "title": "Mağaza Yönetimi ve Büyüme",
+    "description": "Sürekli destek ve stratejik rehberlikle Etsy işletmenizi ölçeklendirin. Envanter yönetimi, müşteri hizmetleri ve büyüme planlaması konularında yardımcı oluyoruz.",
+    "icon": "trending-up",
+    "features": [
+      "Performans analitik incelemesi",
+      "Müşteri hizmetleri optimizasyonu",
+      "Envanter yönetimi stratejileri",
+      "Uzun vadeli büyüme planlaması"
+    ]
+  }
+]

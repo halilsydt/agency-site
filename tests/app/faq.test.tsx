@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import FAQPage from "@/app/faq/page";
+import { LanguageProvider } from "@/components/providers/language-provider";
 
 // Mock content accessor
 vi.mock("@/lib/content", () => ({
@@ -33,36 +34,84 @@ vi.mock("@/lib/content", () => ({
   }),
 }));
 
+// Mock translations
+vi.mock("@/lib/translations", () => ({
+  getTranslations: () => ({
+    common: {
+      faqCtaHeadline: "Still Have Questions?",
+      faqCtaDescription: "We're here to help.",
+      contactUs: "Contact Us",
+    },
+  }),
+}));
+
+/**
+ * Render FAQPage with LanguageProvider wrapper
+ */
+function renderFAQPage() {
+  return render(
+    <LanguageProvider>
+      <FAQPage />
+    </LanguageProvider>
+  );
+}
+
 describe("FAQPage", () => {
+  let localStorageMock: Record<string, string>;
+
+  beforeEach(() => {
+    // Reset localStorage mock
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    // Mock navigator.language
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("renders page headline", () => {
-    render(<FAQPage />);
+    renderFAQPage();
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       "Frequently Asked Questions"
     );
   });
 
   it("renders page subheadline", () => {
-    render(<FAQPage />);
+    renderFAQPage();
     expect(
       screen.getByText("Find answers to common questions.")
     ).toBeInTheDocument();
   });
 
   it("renders FAQ accordion", () => {
-    render(<FAQPage />);
+    renderFAQPage();
     expect(screen.getByText("General Q?")).toBeInTheDocument();
     expect(screen.getByText("Amazon Q?")).toBeInTheDocument();
     expect(screen.getByText("Pricing Q?")).toBeInTheDocument();
   });
 
   it("renders category filter", () => {
-    render(<FAQPage />);
+    renderFAQPage();
     expect(screen.getByRole("button", { name: "All" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Amazon" })).toBeInTheDocument();
   });
 
   it("renders contact CTA at bottom", () => {
-    render(<FAQPage />);
+    renderFAQPage();
     expect(
       screen.getByRole("heading", { name: /Still Have Questions/i })
     ).toBeInTheDocument();
@@ -74,7 +123,7 @@ describe("FAQPage", () => {
 
   it("filtering by category shows only matching FAQs", async () => {
     const user = userEvent.setup();
-    render(<FAQPage />);
+    renderFAQPage();
 
     // Initially all FAQs visible
     expect(screen.getByText("General Q?")).toBeInTheDocument();
@@ -92,7 +141,7 @@ describe("FAQPage", () => {
 
   it("clicking All filter shows all FAQs again", async () => {
     const user = userEvent.setup();
-    render(<FAQPage />);
+    renderFAQPage();
 
     // Click Amazon filter first
     await user.click(screen.getByRole("button", { name: "Amazon" }));

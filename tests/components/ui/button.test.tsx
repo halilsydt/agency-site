@@ -13,7 +13,7 @@ describe("Button", () => {
   it("renders with secondary variant", () => {
     render(<Button variant="secondary">Secondary</Button>);
     const button = screen.getByRole("button", { name: /secondary/i });
-    expect(button).toHaveClass("bg-neutral-100");
+    expect(button).toHaveClass("bg-secondary");
   });
 
   it("renders with outline variant", () => {
@@ -26,7 +26,7 @@ describe("Button", () => {
   it("renders with ghost variant", () => {
     render(<Button variant="ghost">Ghost</Button>);
     const button = screen.getByRole("button", { name: /ghost/i });
-    expect(button).toHaveClass("hover:bg-neutral-100");
+    expect(button).toHaveClass("hover:bg-accent");
   });
 
   it("renders with link variant", () => {

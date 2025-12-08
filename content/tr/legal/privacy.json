@@ -1,0 +1,62 @@
+{
+  "title": "Gizlilik Politikası",
+  "lastUpdated": "2025-12-06",
+  "introduction": "Scalenty olarak gizliliğinizi ciddiye alıyoruz. Bu Gizlilik Politikası, web sitemizi ziyaret ettiğinizde veya hizmetlerimizi kullandığınızda kişisel bilgilerinizi nasıl topladığımızı, kullandığımızı ve koruduğumuzu açıklar.",
+  "sections": [
+    {
+      "id": "data-collection",
+      "title": "Veri Toplama",
+      "content": [
+        "Bize doğrudan sağladığınız bilgileri topluyoruz; örneğin bir iletişim formu doldurduğunuzda veya danışmanlık randevusu aldığınızda.",
+        "Toplayabileceğimiz kişisel bilgi türleri şunlardır: adınız, e-posta adresiniz, telefon numaranız ve formlarımız aracılığıyla gönderdiğiniz mesajlar veya sorular.",
+        "Kişisel bilgilerinizi pazarlama amaçlı üçüncü taraflara satmıyoruz, kiralamıyoruz veya takas etmiyoruz."
+      ]
+    },
+    {
+      "id": "cookies",
+      "title": "Çerezler ve İzleme",
+      "content": [
+        "Çerez kullanmayan ve kişisel veri toplamayan, gizlilik dostu bir analiz hizmeti olan Plausible Analytics kullanıyoruz. Plausible tamamen GDPR, CCPA ve PECR uyumludur.",
+        "Plausible yalnızca sayfa görüntülemeleri, yönlendirme kaynakları ve tarayıcı türleri gibi toplu, anonimleştirilmiş veriler toplar. Bireysel izleme veya kişisel tanımlama yapılmaz.",
+        "Web sitemiz, oturum durumunuzu korumak gibi temel işlevsellik için gerekli olan zorunlu çerezler kullanabilir."
+      ]
+    },
+    {
+      "id": "third-party-services",
+      "title": "Üçüncü Taraf Hizmetler",
+      "content": [
+        "Web site işlevselliğimizi sağlamak için aşağıdaki üçüncü taraf hizmetlerini kullanıyoruz:",
+        "Formspree: İletişim formu gönderimlerini işler. Bir iletişim formu gönderdiğinizde, adınız, e-postanız, platform tercihiniz ve mesajınız işlenmek üzere Formspree'ye iletilir. Gizlilik politikalarını formspree.io/legal/privacy-policy adresinde görüntüleyebilirsiniz.",
+        "Cal.com: Danışmanlık rezervasyon sistemimizi güçlendirir. Danışmanlık randevusu aldığınızda, adınız, e-postanız ve randevu bilgileriniz Cal.com tarafından işlenir. Gizlilik politikalarını cal.com/privacy adresinde görüntüleyebilirsiniz.",
+        "Plausible Analytics: Çerez veya kişisel veri toplamadan gizlilik dostu web sitesi analitiği sağlar. Veri politikalarını plausible.io/data-policy adresinde görüntüleyebilirsiniz."
+      ]
+    },
+    {
+      "id": "user-rights",
+      "title": "Haklarınız",
+      "content": [
+        "Elimizde bulunan kişisel bilgilerinize erişme, düzeltme veya silme hakkına sahipsiniz.",
+        "Bir iletişim formu gönderdiyseniz veya danışmanlık randevusu aldıysanız ve verilerinizin silinmesini istiyorsanız, lütfen aşağıdaki bilgileri kullanarak bizimle iletişime geçin.",
+        "Avrupa Birliği'ndeki kullanıcılar için GDPR kapsamında veri taşınabilirliği hakkı ve denetim makamına şikayette bulunma hakkı dahil ek haklarınız bulunmaktadır."
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Bize Ulaşın",
+      "content": [
+        "Bu Gizlilik Politikası veya veri uygulamalarımız hakkında sorularınız varsa, lütfen bizimle iletişime geçin:",
+        "E-posta: admin@scalenty.net",
+        "Gizlilik endişeleri konusunda bize ulaşmak için İletişim sayfasındaki iletişim formumuzu da kullanabilirsiniz."
+      ]
+    },
+    {
+      "id": "changes",
+      "title": "Bu Politikadaki Değişiklikler",
+      "content": [
+        "Uygulamalarımızdaki değişiklikleri veya yasal, operasyonel veya düzenleyici nedenlerle bu Gizlilik Politikasını zaman zaman güncelleyebiliriz.",
+        "Değişiklik yaptığımızda, bu sayfanın üstündeki \"Son Güncelleme\" tarihini güncelleyeceğiz.",
+        "Bilgilerinizi nasıl koruduğumuz hakkında bilgi sahibi olmak için bu Gizlilik Politikasını düzenli olarak gözden geçirmenizi öneririz."
+      ]
+    }
+  ]
+}

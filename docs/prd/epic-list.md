@@ -11,3 +11,6 @@ Implement Pricing, About Us, Contact, and FAQ pages with all third-party integra
 
 ## Epic 4: Polish, Legal & Launch Prep
 Add Privacy Policy and Terms pages, implement cookie consent, perform cross-browser testing, accessibility audit, SEO optimization, and prepare for production launch.
+
+## Epic 5: Internationalization, Language Switcher & Dark Mode
+Add multi-language support (English/Turkish) with visitor locale auto-detection, a manual language switcher, and dark mode theming with system preference detection to enhance accessibility and reach Turkish-speaking audiences.

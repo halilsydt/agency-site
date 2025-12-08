@@ -1,0 +1,122 @@
+{
+  "amazon": [
+    {
+      "id": "amazon-starter",
+      "platform": "amazon",
+      "tier": "starter",
+      "name": "Başlangıç",
+      "price": 299,
+      "priceUnit": "/ay",
+      "description": "Yeni başlayan Amazon satıcıları için mükemmel",
+      "features": [
+        "Hesap denetimi ve kurulum incelemesi",
+        "Temel liste optimizasyonu (5 liste)",
+        "Aylık performans raporu",
+        "E-posta desteği"
+      ],
+      "isPopular": false,
+      "ctaText": "Başlayın",
+      "ctaHref": "/contact"
+    },
+    {
+      "id": "amazon-growth",
+      "platform": "amazon",
+      "tier": "growth",
+      "name": "Büyüme",
+      "price": 499,
+      "priceUnit": "/ay",
+      "description": "Ölçeklemeye hazır büyüyen satıcılar için ideal",
+      "features": [
+        "Başlangıç'taki her şey",
+        "PPC kampanya yönetimi",
+        "A+ İçerik oluşturma",
+        "Liste optimizasyonu (15 liste)",
+        "Haftalık performans raporları",
+        "Öncelikli e-posta ve sohbet desteği"
+      ],
+      "isPopular": true,
+      "ctaText": "Başlayın",
+      "ctaHref": "/contact"
+    },
+    {
+      "id": "amazon-premium",
+      "platform": "amazon",
+      "tier": "premium",
+      "name": "Premium",
+      "price": 799,
+      "priceUnit": "/ay",
+      "description": "Ciddi satıcılar için eksiksiz çözüm",
+      "features": [
+        "Büyüme'deki her şey",
+        "Tam hesap yönetimi",
+        "Sınırsız liste optimizasyonu",
+        "Brand Store tasarımı ve yönetimi",
+        "Rakip analizi",
+        "Öncelikli telefon desteği"
+      ],
+      "isPopular": false,
+      "ctaText": "Başlayın",
+      "ctaHref": "/contact"
+    }
+  ],
+  "etsy": [
+    {
+      "id": "etsy-starter",
+      "platform": "etsy",
+      "tier": "starter",
+      "name": "Başlangıç",
+      "price": 199,
+      "priceUnit": "/ay",
+      "description": "Yeni başlayan Etsy satıcıları için mükemmel",
+      "features": [
+        "Mağaza denetimi ve kurulum incelemesi",
+        "Temel SEO optimizasyonu (10 liste)",
+        "Aylık performans raporu",
+        "E-posta desteği"
+      ],
+      "isPopular": false,
+      "ctaText": "Başlayın",
+      "ctaHref": "/contact"
+    },
+    {
+      "id": "etsy-growth",
+      "platform": "etsy",
+      "tier": "growth",
+      "name": "Büyüme",
+      "price": 399,
+      "priceUnit": "/ay",
+      "description": "Ölçeklemeye hazır büyüyen mağazalar için ideal",
+      "features": [
+        "Başlangıç'taki her şey",
+        "Pazarlama stratejisi geliştirme",
+        "Liste optimizasyonu (25 liste)",
+        "Fotoğrafçılık rehberliği",
+        "Haftalık performans raporları",
+        "Öncelikli e-posta ve sohbet desteği"
+      ],
+      "isPopular": true,
+      "ctaText": "Başlayın",
+      "ctaHref": "/contact"
+    },
+    {
+      "id": "etsy-premium",
+      "platform": "etsy",
+      "tier": "premium",
+      "name": "Premium",
+      "price": 599,
+      "priceUnit": "/ay",
+      "description": "Ciddi satıcılar için eksiksiz çözüm",
+      "features": [
+        "Büyüme'deki her şey",
+        "Tam mağaza yönetimi",
+        "Sınırsız liste optimizasyonu",
+        "Sosyal medya stratejisi",
+        "Rakip analizi",
+        "Öncelikli telefon desteği"
+      ],
+      "isPopular": false,
+      "ctaText": "Başlayın",
+      "ctaHref": "/contact"
+    }
+  ]
+}

@@ -1,7 +1,9 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi, beforeEach } from "vitest";
-import { Header, navItems } from "@/components/layout/header";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
+import { Header } from "@/components/layout/header";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { LanguageProvider } from "@/components/providers/language-provider";
 
 // Mock next/navigation
 const mockPathname = vi.fn(() => "/");
@@ -14,20 +16,55 @@ vi.mock("@/components/layout/mobile-nav", () => ({
   MobileNav: () => <div data-testid="mobile-nav">Mobile Nav</div>,
 }));
 
+/**
+ * Render component wrapped with ThemeProvider and LanguageProvider
+ */
+function renderWithProvider(ui: React.ReactElement) {
+  return render(
+    <LanguageProvider>
+      <ThemeProvider>{ui}</ThemeProvider>
+    </LanguageProvider>
+  );
+}
+
 describe("Header", () => {
+  let localStorageMock: Record<string, string>;
+
   beforeEach(() => {
     mockPathname.mockReturnValue("/");
+
+    // Reset localStorage mock
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    // Mock navigator.language
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it("renders the logo linked to homepage", () => {
-    render(<Header />);
+    renderWithProvider(<Header />);
     const logoLink = screen.getByRole("link", { name: /scalenty/i });
     expect(logoLink).toBeInTheDocument();
     expect(logoLink).toHaveAttribute("href", "/");
   });
 
   it("renders all main navigation items", () => {
-    render(<Header />);
+    renderWithProvider(<Header />);
     expect(screen.getByText("Services")).toBeInTheDocument();
     expect(screen.getByText("Pricing")).toBeInTheDocument();
     expect(screen.getByText("About")).toBeInTheDocument();
@@ -36,7 +73,7 @@ describe("Header", () => {
 
   it("renders Services dropdown with Amazon and Etsy links", async () => {
     const user = userEvent.setup();
-    render(<Header />);
+    renderWithProvider(<Header />);
 
     // Click Services to open dropdown
     const servicesButton = screen.getByText("Services");
@@ -49,7 +86,7 @@ describe("Header", () => {
 
   it("renders Services dropdown links with correct hrefs", async () => {
     const user = userEvent.setup();
-    render(<Header />);
+    renderWithProvider(<Header />);
 
     const servicesButton = screen.getByText("Services");
     await user.click(servicesButton);
@@ -62,7 +99,7 @@ describe("Header", () => {
   });
 
   it("applies sticky positioning classes", () => {
-    render(<Header />);
+    renderWithProvider(<Header />);
     const header = screen.getByRole("banner");
     expect(header).toHaveClass("sticky");
     expect(header).toHaveClass("top-0");
@@ -70,19 +107,19 @@ describe("Header", () => {
   });
 
   it("applies backdrop blur effect", () => {
-    render(<Header />);
+    renderWithProvider(<Header />);
     const header = screen.getByRole("banner");
     expect(header).toHaveClass("backdrop-blur");
   });
 
   it("renders MobileNav component", () => {
-    render(<Header />);
+    renderWithProvider(<Header />);
     expect(screen.getByTestId("mobile-nav")).toBeInTheDocument();
   });
 
   it("applies active styling when on a matching route", () => {
     mockPathname.mockReturnValue("/pricing");
-    render(<Header />);
+    renderWithProvider(<Header />);
 
     const pricingLink = screen.getByRole("link", { name: "Pricing" });
     expect(pricingLink).toHaveClass("text-primary");
@@ -90,7 +127,7 @@ describe("Header", () => {
 
   it("applies active styling for nested routes", () => {
     mockPathname.mockReturnValue("/services/amazon");
-    render(<Header />);
+    renderWithProvider(<Header />);
 
     // Services trigger should be active
     const servicesButton = screen.getByText("Services");
@@ -98,7 +135,7 @@ describe("Header", () => {
   });
 
   it("navigation items have correct href values", () => {
-    render(<Header />);
+    renderWithProvider(<Header />);
 
     expect(screen.getByRole("link", { name: "Pricing" })).toHaveAttribute(
       "href",
@@ -114,12 +151,4 @@ describe("Header", () => {
     );
   });
 
-  it("exports navItems with correct structure", () => {
-    expect(navItems).toHaveLength(4);
-
-    const services = navItems.find((item) => item.label === "Services");
-    expect(services?.children).toHaveLength(2);
-    expect(services?.children?.[0].href).toBe("/services/amazon");
-    expect(services?.children?.[1].href).toBe("/services/etsy");
-  });
 });

@@ -52,4 +52,17 @@ describe("getTermsOfServiceContent", () => {
     const sectionText = disclaimerSection!.content.join(" ").toLowerCase();
     expect(sectionText).toContain("results");
   });
+
+  it("returns English content by default", () => {
+    const content = getTermsOfServiceContent();
+    expect(content.title).toBe("Terms of Service");
+  });
+
+  it("accepts locale parameter", () => {
+    const enContent = getTermsOfServiceContent("en");
+    const trContent = getTermsOfServiceContent("tr");
+
+    expect(enContent.title).toBeTruthy();
+    expect(trContent.title).toBeTruthy();
+  });
 });

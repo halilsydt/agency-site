@@ -1,0 +1,74 @@
+{
+  "title": "Kullanım Şartları",
+  "lastUpdated": "2025-12-06",
+  "introduction": "Scalenty'ye hoş geldiniz. Web sitemize erişerek veya danışmanlık hizmetlerimizi kullanarak bu Kullanım Şartları'na bağlı olmayı kabul etmiş olursunuz. Hizmetlerimizle etkileşime geçmeden önce lütfen bunları dikkatlice okuyun.",
+  "sections": [
+    {
+      "id": "services",
+      "title": "Hizmetler",
+      "content": [
+        "Scalenty, Amazon ve Etsy satıcıları için mağaza optimizasyonu, liste oluşturma, reklam yönetimi ve stratejik rehberlik dahil ancak bunlarla sınırlı olmamak üzere danışmanlık hizmetleri sunmaktadır.",
+        "Hizmetlerimiz danışmanlık niteliğindedir. Sektör en iyi uygulamalarına ve uzmanlığımıza dayalı öneriler sunuyor ve stratejiler uyguluyoruz, ancak belirli sonuçları garanti edemiyoruz.",
+        "Hizmet teslimat süreleri ve çıktılar, özel hizmet sözleşmenizde veya danışmanlık özetinizde belirtilecektir."
+      ]
+    },
+    {
+      "id": "disclaimers",
+      "title": "Sorumluluk Reddi",
+      "content": [
+        "Bu web sitesinde ve hizmetlerimiz aracılığıyla sağlanan bilgiler yalnızca genel bilgilendirme amaçlıdır. Doğru ve güncel bilgi sağlamaya çalışsak da, açık veya zımni herhangi bir garanti vermiyoruz.",
+        "Danışmanlık hizmetlerimizden elde edilen sonuçlar değişebilir. Geçmiş performans ve vaka çalışmaları gelecekteki sonuçların göstergesi değildir. Başarı, pazar koşulları, ürün kalitesi ve uygulama dahil birçok faktöre bağlıdır.",
+        "İşletmenizi veya önerilerimizin etkinliğini etkileyebilecek Amazon, Etsy veya herhangi bir üçüncü taraf platform politikalarındaki değişikliklerden sorumlu değiliz.",
+        "Web sitemizde görüntülenen referanslar veya yorumlar bireysel deneyimleri temsil eder ve garantili sonuçlar değildir."
+      ]
+    },
+    {
+      "id": "liability",
+      "title": "Sorumluluk Sınırlaması",
+      "content": [
+        "Kanunun izin verdiği azami ölçüde, Scalenty hizmetlerimizi kullanmanızdan kaynaklanan veya bununla ilgili dolaylı, arızi, özel, sonuç niteliğinde veya cezai zararlardan sorumlu olmayacaktır.",
+        "Hizmetlerimizden kaynaklanan herhangi bir talep için toplam sorumluluğumuz, talebe neden olan belirli hizmet için ödediğiniz toplam tutarı aşmayacaktır.",
+        "Hizmetlerimizden veya önerilerimize güvenmenizden kaynaklanan kar, gelir, veri veya iş fırsatı kaybından sorumlu değiliz.",
+        "Bir e-ticaret işletmesi işletmenin doğasında var olan riskler içerdiğini kabul ediyor ve iş kararlarınız için sorumluluk üstleniyorsunuz."
+      ]
+    },
+    {
+      "id": "intellectual-property",
+      "title": "Fikri Mülkiyet",
+      "content": [
+        "Bu web sitesindeki metin, grafik, logo ve görseller dahil tüm içerik Scalenty'nin mülkiyetindedir ve fikri mülkiyet yasalarıyla korunmaktadır.",
+        "Danışmanlık çalışmalarımız sırasında sağlanan materyaller ve stratejiler yalnızca sizin kullanımınız içindir ve yazılı iznimiz olmadan paylaşılamaz, yeniden satılamaz veya dağıtılamaz.",
+        "İş verilerinizin, ürün bilgilerinizin ve çalışmamız sırasında bize sağladığınız tüm materyallerin mülkiyeti size aittir.",
+        "Hizmetlerimizi geliştirmek ve sektör içgörüleri geliştirmek için müşteri çalışmalarımızdan anonimleştirilmiş, toplu verileri kullanabiliriz."
+      ]
+    },
+    {
+      "id": "termination",
+      "title": "Fesih",
+      "content": [
+        "Taraflardan herhangi biri, hizmet sözleşmenizde belirtildiği şekilde yazılı bildirimle danışmanlık hizmetlerini feshedebilir.",
+        "Fesih üzerine, fesih tarihine kadar sunulan tüm hizmetlerin ödemesinden siz sorumlusunuz.",
+        "Hizmetlerimizi yasa dışı amaçlarla veya Amazon veya Etsy politikalarını ihlal ederek kullandığınızı düşünürsek, hizmetleri derhal feshetme hakkımızı saklı tutuyoruz.",
+        "Fikri mülkiyet, sorumluluk sınırlaması ve yürürlükteki hukuka ilişkin hükümler fesihten sonra da geçerliliğini koruyacaktır."
+      ]
+    },
+    {
+      "id": "governing-law",
+      "title": "Yürürlükteki Hukuk",
+      "content": [
+        "Bu Kullanım Şartları, kanunlar ihtilafı ilkeleri dikkate alınmaksızın Amerika Birleşik Devletleri yasalarına göre yönetilecek ve yorumlanacaktır.",
+        "Bu şartlardan veya hizmetlerimizden kaynaklanan herhangi bir anlaşmazlık, Amerikan Tahkim Derneği kurallarına uygun olarak bağlayıcı tahkim yoluyla çözülecektir.",
+        "Scalenty'ye karşı toplu davalara katılma hakkınızdan feragat etmeyi kabul ediyorsunuz."
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "İletişim",
+      "content": [
+        "Bu Kullanım Şartları hakkında sorularınız varsa, lütfen bizimle iletişime geçin:",
+        "E-posta: admin@scalenty.net",
+        "Sorularınız veya endişeleriniz için İletişim sayfasındaki iletişim formumuzu da kullanabilirsiniz."
+      ]
+    }
+  ]
+}

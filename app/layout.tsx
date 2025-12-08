@@ -5,6 +5,8 @@ import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
 import { PlausibleProvider } from "@/components/analytics/plausible-provider";
 import { CookieConsentProvider } from "@/components/analytics/cookie-consent-provider";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { LanguageProvider } from "@/components/providers/language-provider";
 
 const nunito = Nunito({
   subsets: ["latin"],
@@ -71,8 +73,43 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('scalenty-theme');
+                  var theme = stored;
+                  if (!theme || theme === 'system') {
+                    theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+                  }
+                  if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('scalenty-locale');
+                  var locale = stored;
+                  if (!locale || (locale !== 'en' && locale !== 'tr')) {
+                    var browserLang = navigator.language.toLowerCase();
+                    locale = browserLang.startsWith('tr') ? 'tr' : 'en';
+                  }
+                  document.documentElement.lang = locale;
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -89,13 +126,17 @@ export default function RootLayout({
       <body
         className={`${nunito.variable} antialiased min-h-screen flex flex-col`}
       >
-        <CookieConsentProvider>
-          <PlausibleProvider>
-            <Header />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </PlausibleProvider>
-        </CookieConsentProvider>
+        <LanguageProvider>
+          <ThemeProvider>
+            <CookieConsentProvider>
+              <PlausibleProvider>
+                <Header />
+                <main className="flex-1">{children}</main>
+                <Footer />
+              </PlausibleProvider>
+            </CookieConsentProvider>
+          </ThemeProvider>
+        </LanguageProvider>
       </body>
     </html>
   );

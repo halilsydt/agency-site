@@ -5,6 +5,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import { cn } from "@/lib/utils";
+import { getTranslations } from "@/lib/translations";
+import { useLanguage } from "@/components/providers/language-provider";
 import { Container } from "@/components/layout/container";
 import {
   NavigationMenu,
@@ -16,6 +18,8 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { MobileNav } from "@/components/layout/mobile-nav";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 
 /**
  * Represents a navigation item with optional children for dropdowns.
@@ -29,23 +33,6 @@ export interface NavItem {
   children?: NavItem[];
 }
 
-/**
- * Main navigation items configuration.
- * Defines the structure of the site navigation including dropdowns.
- */
-export const navItems: NavItem[] = [
-  {
-    label: "Services",
-    href: "/services",
-    children: [
-      { label: "Amazon Services", href: "/services/amazon" },
-      { label: "Etsy Services", href: "/services/etsy" },
-    ],
-  },
-  { label: "Pricing", href: "/pricing" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
 
 /**
  * Sticky header component with logo, desktop navigation, and mobile menu.
@@ -70,6 +57,26 @@ export const navItems: NavItem[] = [
  */
 export function Header(): React.ReactElement {
   const pathname = usePathname();
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
+  /**
+   * Localized navigation items configuration.
+   * Rebuilt when locale changes to update labels.
+   */
+  const navItems: NavItem[] = [
+    {
+      label: t.nav.services,
+      href: "/services",
+      children: [
+        { label: t.nav.amazonServices, href: "/services/amazon" },
+        { label: t.nav.etsyServices, href: "/services/etsy" },
+      ],
+    },
+    { label: t.nav.pricing, href: "/pricing" },
+    { label: t.nav.about, href: "/about" },
+    { label: t.nav.contact, href: "/contact" },
+  ];
 
   /**
    * Checks if a navigation item is currently active.
@@ -145,6 +152,12 @@ export function Header(): React.ReactElement {
               )}
             </NavigationMenuList>
           </NavigationMenu>
+
+          {/* Theme & Language Toggle (Desktop) */}
+          <div className="hidden md:flex items-center gap-2">
+            <LanguageToggle />
+            <ThemeToggle />
+          </div>
 
           {/* Mobile Navigation */}
           <MobileNav items={navItems} isActive={isActive} />

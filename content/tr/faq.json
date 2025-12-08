@@ -1,0 +1,68 @@
+{
+  "hero": {
+    "headline": "Sıkça Sorulan Sorular",
+    "subheadline": "Hizmetlerimiz, fiyatlandırmamız ve müşterilerimizle nasıl çalıştığımız hakkında sık sorulan soruların yanıtlarını bulun."
+  },
+  "faqs": [
+    {
+      "id": "faq-general-1",
+      "category": "general",
+      "question": "Hangi platformları destekliyorsunuz?",
+      "answer": "Amazon ve Etsy pazar yeri danışmanlığında uzmanlaşıyoruz. Tek bir platformda veya her ikisinde de satış yapıyor olun, varlığınızı optimize etmenize ve satışlarınızı artırmanıza yardımcı olabiliriz."
+    },
+    {
+      "id": "faq-general-2",
+      "category": "general",
+      "question": "Danışmanlık süreci nasıl işliyor?",
+      "answer": "İşletmenizi ve hedeflerinizi anlamak için ücretsiz bir keşif görüşmesiyle başlıyoruz. Ardından, özel ihtiyaçlarınıza göre uyarlanmış özel bir strateji oluşturuyoruz ve uygulama boyunca sürekli destek sağlıyoruz."
+    },
+    {
+      "id": "faq-general-3",
+      "category": "general",
+      "question": "Sonuçları ne kadar sürede görebilirim?",
+      "answer": "Sonuçlar başlangıç noktanıza ve hedeflerinize bağlı olarak değişir, ancak çoğu müşteri 30-60 gün içinde ölçülebilir iyileşmeler görür. Hızlı çözümler yerine sürdürülebilir büyümeye odaklanıyoruz."
+    },
+    {
+      "id": "faq-amazon-1",
+      "category": "amazon",
+      "question": "Amazon PPC reklamcılığı konusunda yardımcı olabilir misiniz?",
+      "answer": "Evet! Amazon reklam hizmetlerimiz, ROI'nizi maksimize etmek için kampanya kurulumu, anahtar kelime araştırması, teklif optimizasyonu ve sürekli performans izlemeyi içerir."
+    },
+    {
+      "id": "faq-amazon-2",
+      "category": "amazon",
+      "question": "Amazon hesap askıya almaları konusunda yardımcı oluyor musunuz?",
+      "answer": "Kesinlikle. Satıcıların askıya alma itirazları ve gelecekteki sorunları önlemek için uyumluluk rehberliği dahil hesap sağlığı sorunlarını çözmelerine yardımcı etme konusunda deneyimimiz var."
+    },
+    {
+      "id": "faq-etsy-1",
+      "category": "etsy",
+      "question": "Etsy SEO'mu nasıl iyileştirebilirsiniz?",
+      "answer": "Görünürlüğü artırmak için başlık optimizasyonu, etiket araştırması, kategori seçimi ve özellik kullanımı dahil olmak üzere mağazanızı ve ilanlarınızı Etsy'nin arama algoritması için optimize ediyoruz."
+    },
+    {
+      "id": "faq-etsy-2",
+      "category": "etsy",
+      "question": "Etsy mağaza kurulum yardımı sunuyor musunuz?",
+      "answer": "Evet, yeni satıcıların Etsy mağazalarını baştan doğru şekilde kurmalarına yardımcı oluyoruz; mağaza markalaması, politika oluşturma ve ilan optimizasyonu en iyi uygulamaları dahil."
+    },
+    {
+      "id": "faq-pricing-1",
+      "category": "pricing",
+      "question": "Gizli ücretler var mı?",
+      "answer": "Gizli ücret yok, asla. Şeffaf fiyatlandırmaya inanıyoruz. Fiyatlandırma sayfamızda gördüğünüz ödediğiniz tutardır. Çalışmaya başlamadan önce her zaman maliyetleri önceden tartışırız."
+    },
+    {
+      "id": "faq-pricing-2",
+      "category": "pricing",
+      "question": "İade veya garanti sunuyor musunuz?",
+      "answer": "İşimizin arkasındayız. Pazar yeri başarısı birçok faktöre bağlı olsa da, danışmanlık hizmetlerimizde memnuniyet garantisi sunuyoruz. Önerilerimizden memnun kalmazsanız, durumu düzeltmek için sizinle çalışacağız."
+    },
+    {
+      "id": "faq-pricing-3",
+      "category": "pricing",
+      "question": "Hem Amazon hem de Etsy hizmetlerini kullanmak için indirim var mı?",
+      "answer": "Evet! Her iki platform için hizmetlerimizi kullanan müşterilere paket indirimi sunuyoruz. Çoklu platform paketlerimiz hakkında ayrıntılar için fiyatlandırma sayfamızı kontrol edin."
+    }
+  ]
+}

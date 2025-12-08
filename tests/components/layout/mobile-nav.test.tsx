@@ -1,14 +1,27 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import type { NavItem } from "@/components/layout/header";
+import { ThemeProvider } from "@/components/providers/theme-provider";
+import { LanguageProvider } from "@/components/providers/language-provider";
 
 // Mock next/navigation
 const mockPathname = vi.fn(() => "/");
 vi.mock("next/navigation", () => ({
   usePathname: () => mockPathname(),
 }));
+
+/**
+ * Render component wrapped with ThemeProvider and LanguageProvider
+ */
+function renderWithProvider(ui: React.ReactElement) {
+  return render(
+    <LanguageProvider>
+      <ThemeProvider>{ui}</ThemeProvider>
+    </LanguageProvider>
+  );
+}
 
 const mockNavItems: NavItem[] = [
   {
@@ -27,26 +40,50 @@ const mockNavItems: NavItem[] = [
 const mockIsActive = vi.fn((href: string) => href === mockPathname());
 
 describe("MobileNav", () => {
+  let localStorageMock: Record<string, string>;
+
   beforeEach(() => {
     mockPathname.mockReturnValue("/");
     mockIsActive.mockImplementation((href: string) => href === mockPathname());
+
+    // Reset localStorage mock
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    // Mock navigator.language
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it("renders hamburger button with correct aria-label", () => {
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
     const button = screen.getByRole("button", { name: "Open menu" });
     expect(button).toBeInTheDocument();
   });
 
   it("hamburger button is hidden on md screens and above", () => {
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
     const button = screen.getByRole("button", { name: "Open menu" });
     expect(button).toHaveClass("md:hidden");
   });
 
   it("opens sheet when hamburger is clicked", async () => {
     const user = userEvent.setup();
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     const button = screen.getByRole("button", { name: "Open menu" });
     await user.click(button);
@@ -57,7 +94,7 @@ describe("MobileNav", () => {
 
   it("displays all navigation items when sheet is open", async () => {
     const user = userEvent.setup();
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
@@ -71,7 +108,7 @@ describe("MobileNav", () => {
 
   it("displays Services children as sub-items", async () => {
     const user = userEvent.setup();
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
@@ -85,7 +122,7 @@ describe("MobileNav", () => {
 
   it("sheet can be closed via close button", async () => {
     const user = userEvent.setup();
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
     expect(screen.getByText("Navigation")).toBeInTheDocument();
@@ -104,7 +141,7 @@ describe("MobileNav", () => {
     mockIsActive.mockImplementation((href: string) => href === "/pricing");
 
     const user = userEvent.setup();
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
@@ -121,7 +158,7 @@ describe("MobileNav", () => {
     );
 
     const user = userEvent.setup();
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
@@ -131,7 +168,7 @@ describe("MobileNav", () => {
 
   it("has mobile navigation landmark", async () => {
     const user = userEvent.setup();
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
@@ -141,7 +178,7 @@ describe("MobileNav", () => {
 
   it("renders navigation links with correct hrefs", async () => {
     const user = userEvent.setup();
-    render(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 

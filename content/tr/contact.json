@@ -1,0 +1,13 @@
+{
+  "hero": {
+    "headline": "İletişime Geçin",
+    "subheadline": "Hizmetlerimiz hakkında sorularınız mı var? Sizden haber almak isteriz. Bize bir mesaj gönderin, en kısa sürede yanıt vereceğiz."
+  },
+  "contactInfo": {
+    "email": "admin@scalenty.net"
+  },
+  "booking": {
+    "headline": "Ücretsiz Danışmanlığınızı Rezerve Edin",
+    "subheadline": "Pazar yeri hedeflerinizi görüşmek için 30 dakikalık bir görüşme planlayın. Zorunluluk yok, sadece faydalı tavsiyeler."
+  }
+}

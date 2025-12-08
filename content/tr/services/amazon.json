@@ -1,0 +1,67 @@
+[
+  {
+    "id": "account-setup",
+    "platform": "amazon",
+    "title": "Hesap Açma ve Kurulum",
+    "description": "Amazon satıcı hesabınızı ilk günden doğru şekilde yapılandırın. Hesap doğrulama, başlangıç ayarları ve vergi kurulumunu hallediyoruz, böylece güvenle satışa başlayabilirsiniz.",
+    "icon": "user-plus",
+    "features": [
+      "Hesap doğrulama yardımı",
+      "Başlangıç ayarları yapılandırması",
+      "Vergi ve işletme bilgileri kurulumu",
+      "Brand Registry rehberliği"
+    ]
+  },
+  {
+    "id": "listing-optimization",
+    "platform": "amazon",
+    "title": "Ürün Listesi Optimizasyonu",
+    "description": "Uzman elinden çıkmış ürün listeleriyle görünürlüğü ve dönüşümleri maksimize edin. Arama sıralaması için başlıkları, madde işaretlerini, açıklamaları ve arka uç anahtar kelimelerini optimize ediyoruz.",
+    "icon": "file-text",
+    "features": [
+      "Anahtar kelime araştırması ve strateji",
+      "Başlık ve madde işareti optimizasyonu",
+      "A+ İçerik oluşturma",
+      "Arka uç arama terimi optimizasyonu"
+    ]
+  },
+  {
+    "id": "ppc-advertising",
+    "platform": "amazon",
+    "title": "Amazon Reklamcılığı (PPC)",
+    "description": "Veriye dayalı reklam kampanyalarıyla hedefli trafik çekin ve satışları artırın. Maksimum ROI için Sponsored Products, Brands ve Display reklamlarını yönetiyoruz.",
+    "icon": "trending-up",
+    "features": [
+      "Kampanya stratejisi ve kurulumu",
+      "Sponsored Products yönetimi",
+      "Sponsored Brands optimizasyonu",
+      "Performans raporlama ve optimizasyon"
+    ]
+  },
+  {
+    "id": "store-optimization",
+    "platform": "amazon",
+    "title": "Mağaza Optimizasyonu",
+    "description": "Profesyonelce tasarlanmış Amazon Brand Store ile etkileyici bir marka varlığı oluşturun. Tüm ürün hattınızı sergileyin ve marka hikayenizi anlatın.",
+    "icon": "store",
+    "features": [
+      "Brand Store tasarımı ve kurulumu",
+      "Özel sayfa düzenleri",
+      "Ürün sergileme stratejisi",
+      "Trafik ve dönüşüm optimizasyonu"
+    ]
+  },
+  {
+    "id": "troubleshooting",
+    "platform": "amazon",
+    "title": "Sorun Giderme ve Hesap Sağlığı",
+    "description": "Karmaşık Amazon sorunlarını uzman rehberliğiyle aşın. Hesap askıya almalarını, liste engellemelerini çözmenize ve sağlıklı performans metriklerini korumanıza yardımcı oluyoruz.",
+    "icon": "shield-check",
+    "features": [
+      "Hesap yeniden etkinleştirme desteği",
+      "Liste engelleme çözümü",
+      "Politika ihlali itirazları",
+      "Hesap sağlığı izleme"
+    ]
+  }
+]

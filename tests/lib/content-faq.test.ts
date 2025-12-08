@@ -76,4 +76,18 @@ describe("FAQ Content Accessors", () => {
       expect(faqs.length).toBeGreaterThan(0);
     });
   });
+
+  it("getFAQs returns English content by default", () => {
+    const faqs = getFAQs();
+    expect(faqs.length).toBeGreaterThan(0);
+    expect(faqs[0].question).toBeTruthy();
+  });
+
+  it("getFAQs accepts locale parameter", () => {
+    const enFaqs = getFAQs("en");
+    const trFaqs = getFAQs("tr");
+
+    expect(enFaqs.length).toBeGreaterThan(0);
+    expect(trFaqs.length).toBeGreaterThan(0);
+  });
 });

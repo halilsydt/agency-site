@@ -4,6 +4,8 @@ import * as React from "react";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
+import { getTranslations } from "@/lib/translations";
+import { useLanguage } from "@/components/providers/language-provider";
 import { Container } from "@/components/layout/container";
 
 /**
@@ -34,16 +36,6 @@ interface QuickLink {
  */
 const socialLinks: SocialLink[] = [];
 
-/**
- * Quick navigation links for the footer.
- */
-const quickLinks: QuickLink[] = [
-  { label: "Amazon Services", href: "/services/amazon" },
-  { label: "Etsy Services", href: "/services/etsy" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
-];
 
 /**
  * Instagram icon SVG component.
@@ -130,6 +122,20 @@ const socialIcons: Record<SocialLink["platform"], React.ComponentType<{ classNam
  * ```
  */
 export function Footer(): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
+  /**
+   * Localized quick navigation links for the footer.
+   */
+  const quickLinks: QuickLink[] = [
+    { label: t.nav.amazonServices, href: "/services/amazon" },
+    { label: t.nav.etsyServices, href: "/services/etsy" },
+    { label: t.nav.pricing, href: "/pricing" },
+    { label: t.nav.about, href: "/about" },
+    { label: t.nav.contact, href: "/contact" },
+  ];
+
   return (
     <footer className="bg-muted mt-auto">
       <Container>
@@ -145,14 +151,14 @@ export function Footer(): React.ReactElement {
                 <span className="text-primary">Scalenty</span>
               </Link>
               <p className="text-foreground/70 text-sm">
-                Honest e-commerce consulting for Amazon &amp; Etsy sellers
+                {t.footer.tagline}
               </p>
             </div>
 
             {/* Quick Links Section */}
             <div className="space-y-4">
               <h3 className="font-semibold text-sm uppercase tracking-wider">
-                Quick Links
+                {t.footer.quickLinks}
               </h3>
               <nav aria-label="Footer quick links">
                 <ul className="space-y-2">
@@ -176,7 +182,7 @@ export function Footer(): React.ReactElement {
             {/* Contact and Social Section */}
             <div className="space-y-4">
               <h3 className="font-semibold text-sm uppercase tracking-wider">
-                Contact
+                {t.footer.contact}
               </h3>
               <address className="not-italic">
                 <a
@@ -193,7 +199,7 @@ export function Footer(): React.ReactElement {
               {socialLinks.length > 0 && (
                 <>
                   <h3 className="font-semibold text-sm uppercase tracking-wider pt-4">
-                    Follow Us
+                    {t.footer.followUs}
                   </h3>
                   <div className="flex space-x-4">
                     {socialLinks.map((link) => {
@@ -229,17 +235,17 @@ export function Footer(): React.ReactElement {
                 href="/privacy"
                 className="transition-colors hover:text-primary"
               >
-                Privacy Policy
+                {t.footer.privacyPolicy}
               </Link>
               <Link
                 href="/terms"
                 className="transition-colors hover:text-primary"
               >
-                Terms of Service
+                {t.footer.termsOfService}
               </Link>
             </div>
             <p className="text-sm text-foreground/70">
-              © {new Date().getFullYear()} Scalenty. All rights reserved.
+              {t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}
             </p>
           </div>
         </div>

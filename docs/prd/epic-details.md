@@ -486,3 +486,106 @@ so that **the site is ready for public announcement**.
 10. Favicon and social images uploaded
 11. Site submitted to Google Search Console
 12. Backup/recovery plan documented
+
+---
+
+## Epic 5: Internationalization, Language Switcher & Dark Mode
+
+**Goal:** Add multi-language support (English/Turkish) with visitor locale auto-detection, a manual language switcher, and dark mode theming with system preference detection to enhance accessibility and reach Turkish-speaking audiences.
+
+### Existing System Context
+
+- **Current functionality:** Static marketing site for Scalenty e-commerce consulting with 9 pages
+- **Technology stack:** Next.js 14, TypeScript, Tailwind CSS (with `darkMode: ["class"]` already configured), shadcn/ui, React Context
+- **Content system:** JSON files in `content/` directory (8 files across services, pricing, about, contact, legal, faq)
+- **Layout structure:** Header with desktop nav + mobile drawer, Footer, wrapped in providers
+
+### Story 5.1: Dark Mode Implementation
+
+As a **visitor**,
+I want **the site to respect my system's dark/light preference and allow manual override**,
+so that **I can browse comfortably in any lighting condition**.
+
+**Acceptance Criteria:**
+1. Site respects `prefers-color-scheme` system preference on initial load
+2. Dark mode toggle appears in header (desktop) and mobile nav drawer
+3. Manual toggle overrides system preference and persists in localStorage
+4. All existing components render correctly in both light and dark modes
+5. No flash of wrong theme on page load (proper hydration)
+6. Toggle uses appropriate icons (sun/moon) with smooth transition
+
+### Story 5.2: Internationalization (i18n) Infrastructure
+
+As a **developer**,
+I want **a language context and content loading system**,
+so that **the site can display content in multiple languages**.
+
+**Acceptance Criteria:**
+1. `LanguageProvider` context manages current locale state
+2. Browser locale auto-detected on first visit (navigator.language)
+3. Language preference persists in localStorage
+4. Content utility functions load JSON from language-specific directories
+5. Default language is English when locale not supported
+6. `html lang` attribute updates to reflect current language
+
+### Story 5.3: Language Switcher & Content Integration
+
+As a **visitor**,
+I want **to manually switch between English and Turkish**,
+so that **I can read the site in my preferred language**.
+
+**Acceptance Criteria:**
+1. Language switcher appears in header (desktop) and mobile nav drawer
+2. Switcher shows current language with flag/label (EN/TR)
+3. Clicking switcher toggles between languages immediately
+4. All page content updates to selected language without page reload
+5. Navigation labels update to selected language
+6. Footer content updates to selected language
+
+### Technical Notes
+
+**Dark Mode Implementation:**
+- ThemeProvider manages: localStorage preference → system preference fallback → 'dark' class on `<html>`
+- Inline `<script>` in `<head>` prevents flash of wrong theme
+
+**i18n Implementation (Cookie/localStorage approach - no route changes):**
+- LanguageProvider manages: localStorage preference → navigator.language detection → map to 'en' | 'tr'
+- Content loading: `getContent('services/amazon', locale)` reads from `content/{locale}/`
+- `<html lang>` attribute updates dynamically
+
+**Content Directory Structure:**
+```
+content/
+├── en/
+│   ├── services/
+│   ├── pricing/
+│   ├── legal/
+│   ├── about.json
+│   ├── contact.json
+│   └── faq.json
+└── tr/
+    └── (mirror structure with Turkish translations)
+```
+
+### Compatibility Requirements
+
+- Existing APIs remain unchanged (no backend)
+- No database schema changes (static site)
+- UI changes follow existing shadcn/ui patterns
+- Performance impact minimal (JSON content already loaded)
+- Tailwind `darkMode: ["class"]` already configured
+
+### Risk Mitigation
+
+- **Primary Risk:** Flash of unstyled/wrong language content on hydration
+- **Mitigation:** Inline script in `<head>` to set theme/language class before React hydrates
+- **Rollback Plan:** Revert provider additions; content structure change is additive
+
+### Definition of Done
+
+- All 3 stories completed with acceptance criteria met
+- Existing functionality verified through testing (365+ tests still passing)
+- Dark mode renders correctly across all pages
+- Turkish translations complete for all content
+- No regression in existing features
+- Build successful, lint clean

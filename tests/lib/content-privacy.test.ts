@@ -53,4 +53,17 @@ describe("getPrivacyPolicyContent", () => {
     expect(sectionText).toContain("formspree");
     expect(sectionText).toContain("cal.com");
   });
+
+  it("returns English content by default", () => {
+    const content = getPrivacyPolicyContent();
+    expect(content.title).toBe("Privacy Policy");
+  });
+
+  it("accepts locale parameter", () => {
+    const enContent = getPrivacyPolicyContent("en");
+    const trContent = getPrivacyPolicyContent("tr");
+
+    expect(enContent.title).toBeTruthy();
+    expect(trContent.title).toBeTruthy();
+  });
 });

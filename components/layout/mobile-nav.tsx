@@ -6,6 +6,8 @@ import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { getTranslations } from "@/lib/translations";
+import { useLanguage } from "@/components/providers/language-provider";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -16,6 +18,8 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import type { NavItem } from "@/components/layout/header";
+import { ThemeToggle } from "@/components/ui/theme-toggle";
+import { LanguageToggle } from "@/components/ui/language-toggle";
 
 /**
  * Props for the MobileNav component.
@@ -47,6 +51,8 @@ export interface MobileNavProps {
 export function MobileNav({ items, isActive }: MobileNavProps): React.ReactElement {
   const [open, setOpen] = React.useState(false);
   const pathname = usePathname();
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
 
   // Close sheet on route change
   React.useEffect(() => {
@@ -67,7 +73,7 @@ export function MobileNav({ items, isActive }: MobileNavProps): React.ReactEleme
       </SheetTrigger>
       <SheetContent side="right" className="w-72">
         <SheetHeader>
-          <SheetTitle>Navigation</SheetTitle>
+          <SheetTitle>{t.mobileNav.navigation}</SheetTitle>
           <SheetDescription className="sr-only">
             Site navigation menu
           </SheetDescription>
@@ -118,6 +124,22 @@ export function MobileNav({ items, isActive }: MobileNavProps): React.ReactEleme
             ))}
           </ul>
         </nav>
+
+        {/* Theme Toggle */}
+        <div className="mt-6 border-t pt-6">
+          <div className="flex items-center justify-between px-3">
+            <span className="text-sm text-muted-foreground">{t.mobileNav.theme}</span>
+            <ThemeToggle />
+          </div>
+        </div>
+
+        {/* Language Toggle */}
+        <div className="mt-4">
+          <div className="flex items-center justify-between px-3">
+            <span className="text-sm text-muted-foreground">{t.mobileNav.language}</span>
+            <LanguageToggle />
+          </div>
+        </div>
       </SheetContent>
     </Sheet>
   );
