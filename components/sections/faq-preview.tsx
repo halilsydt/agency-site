@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
@@ -7,6 +9,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * Represents a single FAQ item.
@@ -28,54 +32,16 @@ export interface FAQPreviewSectionProps {
   headline: string;
   /** Optional subheadline text */
   subheadline?: string;
-  /** Array of FAQ items to display (defaults to common questions) */
-  faqItems?: FAQItem[];
 }
-
-/**
- * Default FAQ items covering common questions about the agency services.
- */
-const defaultFAQItems: FAQItem[] = [
-  {
-    id: "faq-1",
-    question: "What platforms do you support?",
-    answer:
-      "We specialize in Amazon and Etsy marketplace consulting. Whether you're selling on one platform or both, we can help optimize your presence and grow your sales.",
-  },
-  {
-    id: "faq-2",
-    question: "How does the consultation process work?",
-    answer:
-      "We start with a free discovery call to understand your business and goals. From there, we create a custom strategy tailored to your specific needs and provide ongoing support throughout implementation.",
-  },
-  {
-    id: "faq-3",
-    question: "Are there any hidden fees?",
-    answer:
-      "No hidden fees, ever. We believe in transparent pricing. What you see on our pricing page is what you pay. We'll always discuss any costs upfront before starting work.",
-  },
-  {
-    id: "faq-4",
-    question: "How long before I see results?",
-    answer:
-      "Results vary depending on your starting point and goals, but most clients see measurable improvements within 30-60 days. We focus on sustainable growth, not quick fixes.",
-  },
-  {
-    id: "faq-5",
-    question: "Do you offer refunds or guarantees?",
-    answer:
-      "We stand behind our work. While marketplace success depends on many factors, we offer a satisfaction guarantee on our consulting services. If you're not happy with our recommendations, we'll work with you to make it right.",
-  },
-];
 
 /**
  * Displays a preview of frequently asked questions on the homepage.
  * Features an accessible accordion for expandable Q&A and a link to the full FAQ page.
+ * Supports internationalization through the language context.
  *
  * @param props - Component props
  * @param props.headline - Section headline text
  * @param props.subheadline - Optional subheadline text
- * @param props.faqItems - Optional custom FAQ items (defaults to common questions)
  *
  * @example
  * ```tsx
@@ -84,15 +50,44 @@ const defaultFAQItems: FAQItem[] = [
  * <FAQPreviewSection
  *   headline="FAQs"
  *   subheadline="Quick answers to help you decide"
- *   faqItems={customFAQs}
  * />
  * ```
  */
 export function FAQPreviewSection({
   headline,
   subheadline,
-  faqItems = defaultFAQItems,
 }: FAQPreviewSectionProps): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
+  const faqItems: FAQItem[] = [
+    {
+      id: "faq-1",
+      question: t.faqPreview.q1,
+      answer: t.faqPreview.a1,
+    },
+    {
+      id: "faq-2",
+      question: t.faqPreview.q2,
+      answer: t.faqPreview.a2,
+    },
+    {
+      id: "faq-3",
+      question: t.faqPreview.q3,
+      answer: t.faqPreview.a3,
+    },
+    {
+      id: "faq-4",
+      question: t.faqPreview.q4,
+      answer: t.faqPreview.a4,
+    },
+    {
+      id: "faq-5",
+      question: t.faqPreview.q5,
+      answer: t.faqPreview.a5,
+    },
+  ];
+
   return (
     <section className="py-16 md:py-24">
       <Container>
@@ -122,7 +117,7 @@ export function FAQPreviewSection({
 
         <div className="text-center mt-10">
           <Button asChild variant="outline" size="lg">
-            <Link href="/faq">View All FAQs</Link>
+            <Link href="/faq">{t.faqPreview.viewAllFaqs}</Link>
           </Button>
         </div>
       </Container>

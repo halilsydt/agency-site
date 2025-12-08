@@ -1,11 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import { Gift } from "lucide-react";
 import { Container } from "@/components/layout/container";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * Bundle discount highlight section for the pricing page.
  * Prominently displays the bundle discount offer with a CTA.
+ * Supports internationalization through the language context.
  *
  * @example
  * ```tsx
@@ -13,6 +18,9 @@ import { Button } from "@/components/ui/button";
  * ```
  */
 export function BundleHighlight(): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
   return (
     <section className="py-12 bg-accent/10">
       <Container>
@@ -23,15 +31,15 @@ export function BundleHighlight(): React.ReactElement {
             </div>
             <div>
               <h3 className="text-xl font-bold text-foreground">
-                Bundle & Save 15%
+                {t.bundle.title}
               </h3>
               <p className="text-muted-foreground">
-                Get both Amazon + Etsy services and save on your monthly package
+                {t.bundle.description}
               </p>
             </div>
           </div>
           <Button asChild size="lg" variant="accent">
-            <Link href="/contact">Get Bundle Quote</Link>
+            <Link href="/contact">{t.bundle.cta}</Link>
           </Button>
         </div>
       </Container>

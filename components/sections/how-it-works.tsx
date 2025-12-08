@@ -1,5 +1,9 @@
+"use client";
+
 import { Container } from "@/components/layout/container";
 import { StepCard } from "@/components/cards/step-card";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * A single step in the "How It Works" process.
@@ -23,46 +27,17 @@ export interface HowItWorksProps {
   headline: string;
   /** Optional subheadline text */
   subheadline?: string;
-  /** Array of steps to display. Uses default steps if not provided. */
-  steps?: Step[];
 }
-
-/**
- * Default steps for the consulting process.
- */
-const defaultSteps: Step[] = [
-  {
-    stepNumber: 1,
-    title: "Book Consultation",
-    description:
-      "Schedule a free discovery call to discuss your marketplace goals and challenges.",
-    icon: "📅",
-  },
-  {
-    stepNumber: 2,
-    title: "Get Custom Strategy",
-    description:
-      "Receive a tailored action plan designed specifically for your Amazon or Etsy business.",
-    icon: "📋",
-  },
-  {
-    stepNumber: 3,
-    title: "Implement & Grow",
-    description:
-      "Execute the strategy with our guidance and watch your business thrive.",
-    icon: "🚀",
-  },
-];
 
 /**
  * Homepage "How It Works" section displaying the consulting process as a step-by-step flow.
  * Features numbered steps with icons, titles, and descriptions connected by visual flow lines.
  * Responsive layout: horizontal on desktop, vertical stack on mobile.
+ * Supports internationalization through the language context.
  *
  * @param props - Component props
  * @param props.headline - Section headline displayed as h2
  * @param props.subheadline - Optional supporting text below headline
- * @param props.steps - Array of steps to display. Defaults to standard 3-step process.
  *
  * @example
  * ```tsx
@@ -75,8 +50,31 @@ const defaultSteps: Step[] = [
 export function HowItWorks({
   headline,
   subheadline,
-  steps = defaultSteps,
 }: HowItWorksProps): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
+  const steps: Step[] = [
+    {
+      stepNumber: 1,
+      title: t.howItWorks.step1Title,
+      description: t.howItWorks.step1Description,
+      icon: "📅",
+    },
+    {
+      stepNumber: 2,
+      title: t.howItWorks.step2Title,
+      description: t.howItWorks.step2Description,
+      icon: "📋",
+    },
+    {
+      stepNumber: 3,
+      title: t.howItWorks.step3Title,
+      description: t.howItWorks.step3Description,
+      icon: "🚀",
+    },
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-muted/30">
       <Container>

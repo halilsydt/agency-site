@@ -1,5 +1,9 @@
+"use client";
+
 import { Container } from "@/components/layout/container";
 import { ResultCard } from "@/components/cards/result-card";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * A single result proof item showing client success.
@@ -27,58 +31,18 @@ export interface ResultsGalleryProps {
   headline: string;
   /** Optional subheadline text */
   subheadline?: string;
-  /** Array of result proofs to display (defaults to 4 real client results) */
-  results?: ResultProof[];
 }
-
-/**
- * Default results showcasing real client success stories.
- */
-const defaultResults: ResultProof[] = [
-  {
-    id: "result-1",
-    imageSrc: "/images/results/amazon-year.png",
-    imageAlt: "Amazon seller dashboard showing yearly sales performance",
-    caption: "Amazon seller: Full year sales growth",
-    platform: "amazon",
-    metric: "2025 Annual Results",
-  },
-  {
-    id: "result-2",
-    imageSrc: "/images/results/etsy-alltime.png",
-    imageAlt: "Etsy shop analytics showing all-time sales from 2020 to 2025",
-    caption: "Etsy shop: 5 years of consistent growth",
-    platform: "etsy",
-    metric: "2020-2025 Growth",
-  },
-  {
-    id: "result-3",
-    imageSrc: "/images/results/etsy-year.png",
-    imageAlt: "Etsy shop dashboard showing yearly sales performance",
-    caption: "Etsy shop: Strong yearly performance",
-    platform: "etsy",
-    metric: "2025 Annual Results",
-  },
-  {
-    id: "result-4",
-    imageSrc: "/images/results/etsy-new.png",
-    imageAlt: "New Etsy shop growth from May showing rapid sales increase",
-    caption: "New Etsy shop: Rapid growth since launch",
-    platform: "etsy",
-    metric: "May-Dec 2025 Growth",
-  },
-];
 
 /**
  * Homepage "Results/Proof" section displaying anonymized client success stories.
  * Features a 2x2 grid of result cards with dashboard screenshots, captions,
  * and platform indicators to build trust with potential clients.
  * Responsive layout: 1 column mobile, 2 columns tablet and desktop.
+ * Supports internationalization through the language context.
  *
  * @param props - Component props
  * @param props.headline - Section headline displayed as h2
  * @param props.subheadline - Optional supporting text below headline
- * @param props.results - Array of result proofs to display. Defaults to 4 real client results.
  *
  * @example
  * ```tsx
@@ -91,8 +55,45 @@ const defaultResults: ResultProof[] = [
 export function ResultsGallery({
   headline,
   subheadline,
-  results = defaultResults,
 }: ResultsGalleryProps): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
+  const results: ResultProof[] = [
+    {
+      id: "result-1",
+      imageSrc: "/images/results/amazon-year.png",
+      imageAlt: t.resultsGallery.result1Alt,
+      caption: t.resultsGallery.result1Caption,
+      platform: "amazon",
+      metric: t.resultsGallery.result1Metric,
+    },
+    {
+      id: "result-2",
+      imageSrc: "/images/results/etsy-alltime.png",
+      imageAlt: t.resultsGallery.result2Alt,
+      caption: t.resultsGallery.result2Caption,
+      platform: "etsy",
+      metric: t.resultsGallery.result2Metric,
+    },
+    {
+      id: "result-3",
+      imageSrc: "/images/results/etsy-year.png",
+      imageAlt: t.resultsGallery.result3Alt,
+      caption: t.resultsGallery.result3Caption,
+      platform: "etsy",
+      metric: t.resultsGallery.result3Metric,
+    },
+    {
+      id: "result-4",
+      imageSrc: "/images/results/etsy-new.png",
+      imageAlt: t.resultsGallery.result4Alt,
+      caption: t.resultsGallery.result4Caption,
+      platform: "etsy",
+      metric: t.resultsGallery.result4Metric,
+    },
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-muted/30">
       <Container>

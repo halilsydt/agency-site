@@ -1,5 +1,9 @@
+"use client";
+
 import { Container } from "@/components/layout/container";
 import { DifferentiatorCard } from "@/components/cards/differentiator-card";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * A single differentiator point.
@@ -21,49 +25,18 @@ export interface WhyChooseUsProps {
   headline: string;
   /** Optional subheadline text */
   subheadline?: string;
-  /** Array of differentiators to display (defaults to 4 core values) */
-  differentiators?: Differentiator[];
 }
-
-/**
- * Default differentiators highlighting agency values.
- */
-const defaultDifferentiators: Differentiator[] = [
-  {
-    icon: "🤝",
-    title: "Honest Approach",
-    description:
-      "No hype, no empty promises. Just real strategies that work for your business.",
-  },
-  {
-    icon: "📈",
-    title: "Real Results",
-    description:
-      "Track record of measurable growth for Amazon and Etsy sellers.",
-  },
-  {
-    icon: "💰",
-    title: "Transparent Pricing",
-    description:
-      "Clear pricing with no hidden fees or surprises. Know exactly what you pay for.",
-  },
-  {
-    icon: "🎯",
-    title: "Platform Expertise",
-    description: "Deep specialization in both Amazon and Etsy ecosystems.",
-  },
-];
 
 /**
  * Homepage "Why Choose Us" section displaying the agency's key differentiators.
  * Features a grid of cards highlighting honest approach, real results,
  * transparent pricing, and platform expertise.
  * Responsive layout: 1 column mobile, 2 columns tablet, 4 columns desktop.
+ * Supports internationalization through the language context.
  *
  * @param props - Component props
  * @param props.headline - Section headline displayed as h2
  * @param props.subheadline - Optional supporting text below headline
- * @param props.differentiators - Array of differentiators to display. Defaults to 4 core values.
  *
  * @example
  * ```tsx
@@ -76,8 +49,33 @@ const defaultDifferentiators: Differentiator[] = [
 export function WhyChooseUs({
   headline,
   subheadline,
-  differentiators = defaultDifferentiators,
 }: WhyChooseUsProps): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
+  const differentiators: Differentiator[] = [
+    {
+      icon: "🤝",
+      title: t.whyChooseUs.honestTitle,
+      description: t.whyChooseUs.honestDescription,
+    },
+    {
+      icon: "📈",
+      title: t.whyChooseUs.resultsTitle,
+      description: t.whyChooseUs.resultsDescription,
+    },
+    {
+      icon: "💰",
+      title: t.whyChooseUs.pricingTitle,
+      description: t.whyChooseUs.pricingDescription,
+    },
+    {
+      icon: "🎯",
+      title: t.whyChooseUs.expertiseTitle,
+      description: t.whyChooseUs.expertiseDescription,
+    },
+  ];
+
   return (
     <section className="py-16 md:py-24 bg-primary/5">
       <Container>

@@ -1,7 +1,8 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { describe, it, expect, vi, beforeEach, beforeAll } from "vitest";
+import { describe, it, expect, vi, beforeEach, beforeAll, afterEach } from "vitest";
 import { ContactForm } from "@/components/forms/contact-form";
+import { LanguageProvider } from "@/components/providers/language-provider";
 
 // Mock the formspree API
 vi.mock("@/lib/api/formspree", () => ({
@@ -19,13 +20,46 @@ beforeAll(() => {
   window.HTMLElement.prototype.scrollIntoView = vi.fn();
 });
 
+/**
+ * Render ContactForm with LanguageProvider wrapper
+ */
+function renderContactForm() {
+  return render(
+    <LanguageProvider>
+      <ContactForm />
+    </LanguageProvider>
+  );
+}
+
 describe("ContactForm", () => {
+  let localStorageMock: Record<string, string>;
+
   beforeEach(() => {
     vi.clearAllMocks();
+
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
   });
 
   it("renders all form fields", () => {
-    render(<ContactForm />);
+    renderContactForm();
     expect(screen.getByLabelText(/name/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/email/i)).toBeInTheDocument();
     expect(screen.getByLabelText(/platform/i)).toBeInTheDocument();
@@ -33,7 +67,7 @@ describe("ContactForm", () => {
   });
 
   it("renders submit button", () => {
-    render(<ContactForm />);
+    renderContactForm();
     expect(
       screen.getByRole("button", { name: /send message/i })
     ).toBeInTheDocument();
@@ -41,7 +75,7 @@ describe("ContactForm", () => {
 
   it("shows validation errors for empty required fields", async () => {
     const user = userEvent.setup();
-    render(<ContactForm />);
+    renderContactForm();
 
     await user.click(screen.getByRole("button", { name: /send/i }));
 
@@ -52,7 +86,7 @@ describe("ContactForm", () => {
 
   it("validates email format on submission", async () => {
     const user = userEvent.setup();
-    render(<ContactForm />);
+    renderContactForm();
 
     // Fill in all fields except email with valid data
     await user.type(screen.getByLabelText(/name/i), "John Doe");
@@ -75,7 +109,7 @@ describe("ContactForm", () => {
 
   it("shows validation error for short message", async () => {
     const user = userEvent.setup();
-    render(<ContactForm />);
+    renderContactForm();
 
     await user.type(screen.getByLabelText(/name/i), "John Doe");
     await user.type(screen.getByLabelText(/email/i), "john@example.com");
@@ -89,7 +123,7 @@ describe("ContactForm", () => {
 
   it("shows platform validation error when not selected", async () => {
     const user = userEvent.setup();
-    render(<ContactForm />);
+    renderContactForm();
 
     await user.type(screen.getByLabelText(/name/i), "John Doe");
     await user.type(screen.getByLabelText(/email/i), "john@example.com");

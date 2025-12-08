@@ -1,4 +1,8 @@
+"use client";
+
 import { Mail } from "lucide-react";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * Props for the ContactInfo component.
@@ -15,6 +19,7 @@ export interface ContactInfoProps {
 /**
  * Contact information section displaying alternative contact methods.
  * Shows email with mailto link, and optional phone/address.
+ * Supports internationalization through the language context.
  *
  * @param props - ContactInfo component props
  * @param props.email - Email address displayed with mailto link
@@ -31,10 +36,13 @@ export function ContactInfo({
   phone,
   address,
 }: ContactInfoProps): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
   return (
     <div className="space-y-6">
       <h2 className="text-2xl font-semibold text-foreground">
-        Or reach us directly
+        {t.common.orReachUsDirectly}
       </h2>
 
       <div className="space-y-4">

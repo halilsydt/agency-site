@@ -1,6 +1,10 @@
+"use client";
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { Check } from "lucide-react";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * Props for the PricingPreviewCard component.
@@ -20,8 +24,8 @@ export interface PricingPreviewCardProps {
  * Platform-specific header styling.
  */
 const platformStyles: Record<"amazon" | "etsy", string> = {
-  amazon: "bg-orange-100 text-orange-800",
-  etsy: "bg-orange-50 text-orange-700",
+  amazon: "bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200",
+  etsy: "bg-orange-50 text-orange-700 dark:bg-orange-900 dark:text-orange-300",
 };
 
 /**
@@ -43,6 +47,7 @@ function formatPrice(price: number): string {
  * Displays a pricing package preview in a card format.
  * Shows platform name, starting price, and feature highlights.
  * Used on the homepage pricing preview section.
+ * Supports internationalization through the language context.
  *
  * @param props - Component props
  * @param props.platform - Platform identifier (amazon or etsy)
@@ -66,6 +71,9 @@ export function PricingPreviewCard({
   startingPrice,
   features,
 }: PricingPreviewCardProps): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
   return (
     <Card className="h-full">
       <CardHeader className="text-center pb-4">
@@ -86,11 +94,11 @@ export function PricingPreviewCard({
 
         {/* Pricing */}
         <div className="mt-4">
-          <span className="text-sm text-muted-foreground">Starting at</span>
+          <span className="text-sm text-muted-foreground">{t.common.startingAt}</span>
           <div className="text-3xl font-bold text-foreground">
             {formatPrice(startingPrice)}
             <span className="text-base font-normal text-muted-foreground">
-              /month
+              {t.common.perMonth}
             </span>
           </div>
         </div>
