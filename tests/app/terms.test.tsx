@@ -1,23 +1,59 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import TermsPage from "@/app/terms/page";
+import { LanguageProvider } from "@/components/providers/language-provider";
+
+/**
+ * Render TermsPage with LanguageProvider wrapper
+ */
+function renderTermsPage() {
+  return render(
+    <LanguageProvider>
+      <TermsPage />
+    </LanguageProvider>
+  );
+}
 
 describe("TermsPage", () => {
+  let localStorageMock: Record<string, string>;
+
+  beforeEach(() => {
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("renders page title", () => {
-    render(<TermsPage />);
+    renderTermsPage();
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       /terms of service/i
     );
   });
 
   it("renders last updated date in hero section", () => {
-    render(<TermsPage />);
+    renderTermsPage();
     // The hero section contains "Last updated: YYYY-MM-DD"
     expect(screen.getByText(/last updated: \d{4}-\d{2}-\d{2}/i)).toBeInTheDocument();
   });
 
   it("renders all content sections with h2 headings", () => {
-    render(<TermsPage />);
+    renderTermsPage();
     const h2s = screen.getAllByRole("heading", { level: 2 });
     expect(h2s.length).toBeGreaterThan(0);
     // Verify expected sections exist
@@ -28,7 +64,7 @@ describe("TermsPage", () => {
   });
 
   it("has correct heading hierarchy", () => {
-    render(<TermsPage />);
+    renderTermsPage();
     // h1 for main title
     const h1 = screen.getByRole("heading", { level: 1 });
     expect(h1).toBeInTheDocument();
@@ -38,7 +74,7 @@ describe("TermsPage", () => {
   });
 
   it("renders introduction text", () => {
-    render(<TermsPage />);
+    renderTermsPage();
     expect(
       screen.getByText(/welcome to scalenty/i)
     ).toBeInTheDocument();

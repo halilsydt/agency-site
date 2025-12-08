@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect, vi, beforeAll } from "vitest";
+import { describe, it, expect, vi, beforeAll, beforeEach, afterEach } from "vitest";
 import ContactPage from "@/app/contact/page";
+import { LanguageProvider } from "@/components/providers/language-provider";
 
 // Mock the formspree API
 vi.mock("@/lib/api/formspree", () => ({
@@ -21,16 +22,51 @@ beforeAll(() => {
   window.HTMLElement.prototype.scrollIntoView = vi.fn();
 });
 
+/**
+ * Render ContactPage with LanguageProvider wrapper
+ */
+function renderContactPage() {
+  return render(
+    <LanguageProvider>
+      <ContactPage />
+    </LanguageProvider>
+  );
+}
+
 describe("Contact Page", () => {
+  let localStorageMock: Record<string, string>;
+
+  beforeEach(() => {
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("renders the contact hero with headline", () => {
-    render(<ContactPage />);
+    renderContactPage();
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       /touch/i
     );
   });
 
   it("renders the contact form with fields", () => {
-    render(<ContactPage />);
+    renderContactPage();
     // Check for form elements by text content and role
     expect(screen.getByText(/name/i, { selector: "label" })).toBeInTheDocument();
     expect(screen.getByText(/email/i, { selector: "label" })).toBeInTheDocument();
@@ -39,7 +75,7 @@ describe("Contact Page", () => {
   });
 
   it("renders contact info with email", () => {
-    render(<ContactPage />);
+    renderContactPage();
     const emailLink = screen.getByRole("link", {
       name: /admin@scalenty\.net/i,
     });
@@ -47,33 +83,33 @@ describe("Contact Page", () => {
   });
 
   it("renders main element", () => {
-    render(<ContactPage />);
+    renderContactPage();
     expect(screen.getByRole("main")).toBeInTheDocument();
   });
 
   it("renders form section heading", () => {
-    render(<ContactPage />);
+    renderContactPage();
     expect(
       screen.getByRole("heading", { name: /send us a message/i })
     ).toBeInTheDocument();
   });
 
   it("renders contact info heading", () => {
-    render(<ContactPage />);
+    renderContactPage();
     expect(
       screen.getByRole("heading", { name: /reach us directly/i })
     ).toBeInTheDocument();
   });
 
   it("renders booking section with headline", () => {
-    render(<ContactPage />);
+    renderContactPage();
     expect(
       screen.getByRole("heading", { name: /book your free consultation/i })
     ).toBeInTheDocument();
   });
 
   it("includes calendar embed section", () => {
-    render(<ContactPage />);
+    renderContactPage();
     expect(screen.getByTestId("calendar-embed")).toBeInTheDocument();
   });
 });

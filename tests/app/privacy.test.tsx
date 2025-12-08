@@ -1,23 +1,59 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import PrivacyPage from "@/app/privacy/page";
+import { LanguageProvider } from "@/components/providers/language-provider";
+
+/**
+ * Render PrivacyPage with LanguageProvider wrapper
+ */
+function renderPrivacyPage() {
+  return render(
+    <LanguageProvider>
+      <PrivacyPage />
+    </LanguageProvider>
+  );
+}
 
 describe("PrivacyPage", () => {
+  let localStorageMock: Record<string, string>;
+
+  beforeEach(() => {
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("renders page title", () => {
-    render(<PrivacyPage />);
+    renderPrivacyPage();
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
       /privacy policy/i
     );
   });
 
   it("renders last updated date in hero section", () => {
-    render(<PrivacyPage />);
+    renderPrivacyPage();
     // The hero section contains "Last updated: YYYY-MM-DD"
     expect(screen.getByText(/last updated: \d{4}-\d{2}-\d{2}/i)).toBeInTheDocument();
   });
 
   it("renders all content sections with h2 headings", () => {
-    render(<PrivacyPage />);
+    renderPrivacyPage();
     const h2s = screen.getAllByRole("heading", { level: 2 });
     expect(h2s.length).toBeGreaterThan(0);
     // Verify expected sections exist
@@ -28,7 +64,7 @@ describe("PrivacyPage", () => {
   });
 
   it("has correct heading hierarchy", () => {
-    render(<PrivacyPage />);
+    renderPrivacyPage();
     // h1 for main title
     const h1 = screen.getByRole("heading", { level: 1 });
     expect(h1).toBeInTheDocument();
@@ -38,7 +74,7 @@ describe("PrivacyPage", () => {
   });
 
   it("mentions third-party services", () => {
-    render(<PrivacyPage />);
+    renderPrivacyPage();
     // Use getAllByText since services may be mentioned multiple times
     expect(screen.getAllByText(/plausible/i).length).toBeGreaterThan(0);
     expect(screen.getAllByText(/formspree/i).length).toBeGreaterThan(0);
@@ -46,7 +82,7 @@ describe("PrivacyPage", () => {
   });
 
   it("renders introduction text", () => {
-    render(<PrivacyPage />);
+    renderPrivacyPage();
     expect(
       screen.getByText(/we take your privacy seriously/i)
     ).toBeInTheDocument();

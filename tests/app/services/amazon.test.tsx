@@ -1,24 +1,60 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import AmazonServicesPage from "@/app/services/amazon/page";
+import { LanguageProvider } from "@/components/providers/language-provider";
+
+/**
+ * Render AmazonServicesPage with LanguageProvider wrapper
+ */
+function renderAmazonServicesPage() {
+  return render(
+    <LanguageProvider>
+      <AmazonServicesPage />
+    </LanguageProvider>
+  );
+}
 
 describe("Amazon Services Page", () => {
+  let localStorageMock: Record<string, string>;
+
+  beforeEach(() => {
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("renders ServiceHero with Amazon headline", () => {
-    render(<AmazonServicesPage />);
+    renderAmazonServicesPage();
     expect(
       screen.getByRole("heading", { level: 1, name: /amazon services/i })
     ).toBeInTheDocument();
   });
 
   it("renders ServiceHero subheadline", () => {
-    render(<AmazonServicesPage />);
+    renderAmazonServicesPage();
     expect(
       screen.getByText(/expert consulting and management services/i)
     ).toBeInTheDocument();
   });
 
   it("renders all 5 Amazon services", () => {
-    render(<AmazonServicesPage />);
+    renderAmazonServicesPage();
     expect(screen.getByText("Account Opening & Setup")).toBeInTheDocument();
     expect(screen.getByText("Product Listing Optimization")).toBeInTheDocument();
     expect(screen.getByText("Amazon Advertising (PPC)")).toBeInTheDocument();
@@ -29,13 +65,13 @@ describe("Amazon Services Page", () => {
   });
 
   it("renders 5 service cards with icons", () => {
-    render(<AmazonServicesPage />);
+    renderAmazonServicesPage();
     const serviceIcons = screen.getAllByTestId("service-icon");
     expect(serviceIcons).toHaveLength(5);
   });
 
   it("renders CTA links in hero section pointing to contact", () => {
-    render(<AmazonServicesPage />);
+    renderAmazonServicesPage();
     const consultationLinks = screen.getAllByRole("link", {
       name: /book free consultation/i,
     });
@@ -44,7 +80,7 @@ describe("Amazon Services Page", () => {
   });
 
   it("renders CTA links in hero section pointing to pricing", () => {
-    render(<AmazonServicesPage />);
+    renderAmazonServicesPage();
     const pricingLinks = screen.getAllByRole("link", {
       name: /view pricing/i,
     });
@@ -53,7 +89,7 @@ describe("Amazon Services Page", () => {
   });
 
   it("renders bottom CTA section", () => {
-    render(<AmazonServicesPage />);
+    renderAmazonServicesPage();
     expect(
       screen.getByRole("heading", {
         level: 2,
@@ -63,7 +99,7 @@ describe("Amazon Services Page", () => {
   });
 
   it("renders services list section headline", () => {
-    render(<AmazonServicesPage />);
+    renderAmazonServicesPage();
     expect(
       screen.getByRole("heading", { level: 2, name: /our amazon services/i })
     ).toBeInTheDocument();

@@ -1,15 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
-import { PricingHero } from "@/components/sections/pricing-hero";
-import { PricingSection } from "@/components/sections/pricing-section";
-import { BundleHighlight } from "@/components/sections/bundle-highlight";
-import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
-import { PricingPageTracker } from "@/components/analytics/pricing-page-tracker";
-import {
-  getAmazonPricingPackages,
-  getEtsyPricingPackages,
-} from "@/lib/content";
+import { PricingPageClient } from "./pricing-page-client";
 
 /**
  * SEO metadata for the Pricing page.
@@ -35,56 +25,8 @@ export const metadata: Metadata = {
 
 /**
  * Pricing page component.
- * Displays all pricing packages for Amazon and Etsy services
- * with transparent pricing and bundle discounts.
- *
- * @returns The Pricing page
+ * Renders client component that handles locale-aware content loading.
  */
 export default function PricingPage(): React.ReactElement {
-  const amazonPackages = getAmazonPricingPackages();
-  const etsyPackages = getEtsyPricingPackages();
-
-  return (
-    <main>
-      <PricingPageTracker />
-      <PricingHero
-        headline="Simple, Transparent Pricing"
-        subheadline="No hidden fees. No surprise charges. Choose the package that fits your business needs and budget."
-      />
-
-      <PricingSection
-        headline="Amazon Packages"
-        packages={amazonPackages}
-        platform="amazon"
-      />
-
-      <BundleHighlight />
-
-      <PricingSection
-        headline="Etsy Packages"
-        packages={etsyPackages}
-        platform="etsy"
-      />
-
-      {/* Bottom CTA Section */}
-      <section className="py-16 bg-muted/50">
-        <Container>
-          <div className="text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
-              Not Sure Which Package Is Right For You?
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              Schedule a free consultation and we&apos;ll help you find the
-              perfect fit for your business goals.
-            </p>
-            <div className="mt-8">
-              <Button asChild size="lg">
-                <Link href="/contact">Book Free Consultation</Link>
-              </Button>
-            </div>
-          </div>
-        </Container>
-      </section>
-    </main>
-  );
+  return <PricingPageClient />;
 }
