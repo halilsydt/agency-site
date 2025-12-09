@@ -29,6 +29,8 @@ export interface HeroProps {
   imageUrl?: string;
   /** Optional alt text for illustration */
   imageAlt?: string;
+  /** Optional illustration placeholder text */
+  illustrationPlaceholder?: string;
 }
 
 /**
@@ -61,6 +63,7 @@ export function Hero({
   secondaryCta,
   imageUrl,
   imageAlt = "Hero illustration",
+  illustrationPlaceholder = "Illustration Placeholder",
 }: HeroProps): React.ReactElement {
   return (
     <section className="py-16 md:py-24 lg:py-32">
@@ -106,7 +109,7 @@ export function Hero({
             ) : (
               <div className="w-full max-w-md lg:max-w-lg aspect-[4/3] bg-muted rounded-xl flex items-center justify-center">
                 <span className="text-muted-foreground text-sm">
-                  Illustration Placeholder
+                  {illustrationPlaceholder}
                 </span>
               </div>
             )}

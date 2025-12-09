@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { Check } from "lucide-react";
 import {
@@ -10,6 +12,8 @@ import {
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import type { PricingPackage } from "@/lib/types";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * Props for the PricingCard component.
@@ -32,6 +36,9 @@ export interface PricingCardProps {
  * ```
  */
 export function PricingCard({ package: pkg }: PricingCardProps): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
   return (
     <Card
       className={cn(
@@ -42,7 +49,7 @@ export function PricingCard({ package: pkg }: PricingCardProps): React.ReactElem
       {pkg.isPopular && (
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
           <span className="bg-primary text-primary-foreground px-3 py-1 text-sm font-medium rounded-full">
-            Most Popular
+            {t.common.mostPopular}
           </span>
         </div>
       )}

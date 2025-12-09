@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { PricingSection } from "@/components/sections/pricing-section";
+import { LanguageProvider } from "@/components/providers/language-provider";
 import type { PricingPackage } from "@/lib/types";
 
 const mockPackages: PricingPackage[] = [
@@ -45,76 +46,103 @@ const mockPackages: PricingPackage[] = [
   },
 ];
 
+/**
+ * Render PricingSection with LanguageProvider wrapper
+ */
+function renderPricingSection(props: {
+  headline: string;
+  packages: PricingPackage[];
+  platform: "amazon" | "etsy";
+}) {
+  return render(
+    <LanguageProvider>
+      <PricingSection {...props} />
+    </LanguageProvider>
+  );
+}
+
 describe("PricingSection", () => {
+  let localStorageMock: Record<string, string>;
+
+  beforeEach(() => {
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("renders the section headline", () => {
-    render(
-      <PricingSection
-        headline="Amazon Packages"
-        packages={mockPackages}
-        platform="amazon"
-      />
-    );
+    renderPricingSection({
+      headline: "Amazon Packages",
+      packages: mockPackages,
+      platform: "amazon",
+    });
     expect(
       screen.getByRole("heading", { level: 2, name: /amazon packages/i })
     ).toBeInTheDocument();
   });
 
   it("renders all packages passed as props", () => {
-    render(
-      <PricingSection
-        headline="Amazon Packages"
-        packages={mockPackages}
-        platform="amazon"
-      />
-    );
+    renderPricingSection({
+      headline: "Amazon Packages",
+      packages: mockPackages,
+      platform: "amazon",
+    });
     expect(screen.getByText("Starter")).toBeInTheDocument();
     expect(screen.getByText("Growth")).toBeInTheDocument();
     expect(screen.getByText("Premium")).toBeInTheDocument();
   });
 
   it("renders pricing for all packages", () => {
-    render(
-      <PricingSection
-        headline="Amazon Packages"
-        packages={mockPackages}
-        platform="amazon"
-      />
-    );
+    renderPricingSection({
+      headline: "Amazon Packages",
+      packages: mockPackages,
+      platform: "amazon",
+    });
     expect(screen.getByText("$299")).toBeInTheDocument();
     expect(screen.getByText("$499")).toBeInTheDocument();
     expect(screen.getByText("$799")).toBeInTheDocument();
   });
 
   it("shows popular badge for popular package", () => {
-    render(
-      <PricingSection
-        headline="Amazon Packages"
-        packages={mockPackages}
-        platform="amazon"
-      />
-    );
+    renderPricingSection({
+      headline: "Amazon Packages",
+      packages: mockPackages,
+      platform: "amazon",
+    });
     expect(screen.getByText("Most Popular")).toBeInTheDocument();
   });
 
   it("has correct platform data attribute", () => {
-    const { container } = render(
-      <PricingSection
-        headline="Amazon Packages"
-        packages={mockPackages}
-        platform="amazon"
-      />
-    );
+    const { container } = renderPricingSection({
+      headline: "Amazon Packages",
+      packages: mockPackages,
+      platform: "amazon",
+    });
     expect(container.querySelector('[data-platform="amazon"]')).toBeInTheDocument();
   });
 
   it("renders CTA buttons for all packages", () => {
-    render(
-      <PricingSection
-        headline="Amazon Packages"
-        packages={mockPackages}
-        platform="amazon"
-      />
-    );
+    renderPricingSection({
+      headline: "Amazon Packages",
+      packages: mockPackages,
+      platform: "amazon",
+    });
     const ctaButtons = screen.getAllByRole("link", { name: /get started/i });
     expect(ctaButtons).toHaveLength(3);
   });
@@ -125,13 +153,11 @@ describe("PricingSection", () => {
       platform: "etsy" as const,
     }));
 
-    const { container } = render(
-      <PricingSection
-        headline="Etsy Packages"
-        packages={etsyPackages}
-        platform="etsy"
-      />
-    );
+    const { container } = renderPricingSection({
+      headline: "Etsy Packages",
+      packages: etsyPackages,
+      platform: "etsy",
+    });
     expect(
       screen.getByRole("heading", { name: /etsy packages/i })
     ).toBeInTheDocument();

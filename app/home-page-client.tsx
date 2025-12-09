@@ -25,6 +25,7 @@ export function HomePageClient(): React.ReactElement {
         subheadline={t.homePage.heroSubheadline}
         primaryCta={{ text: t.common.bookFreeConsultation, href: "/contact" }}
         secondaryCta={{ text: t.common.viewPricing, href: "/pricing" }}
+        illustrationPlaceholder={t.common.illustrationPlaceholder}
       />
       <ServicesOverview headline={t.homePage.servicesHeadline} />
       <HowItWorks headline={t.homePage.howItWorksHeadline} />

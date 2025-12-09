@@ -65,6 +65,10 @@ describe("translations", () => {
 
       expect(t.common.faqCtaHeadline).toBe("Still Have Questions?");
       expect(t.common.contactUs).toBe("Contact Us");
+      expect(t.common.mostPopular).toBe("Most Popular");
+      expect(t.common.phone).toBe("Phone");
+      expect(t.common.address).toBe("Address");
+      expect(t.common.illustrationPlaceholder).toBe("Illustration Placeholder");
     });
 
     it("includes common UI translations for Turkish", () => {
@@ -72,6 +76,30 @@ describe("translations", () => {
 
       expect(t.common.faqCtaHeadline).toBe("Hâlâ Sorularınız mı Var?");
       expect(t.common.contactUs).toBe("Bize Ulaşın");
+      expect(t.common.mostPopular).toBe("En Popüler");
+      expect(t.common.phone).toBe("Telefon");
+      expect(t.common.address).toBe("Adres");
+      expect(t.common.illustrationPlaceholder).toBe("Görsel Yer Tutucu");
+    });
+
+    it("includes FAQ category translations for English", () => {
+      const t = getTranslations("en");
+
+      expect(t.faqCategories.all).toBe("All");
+      expect(t.faqCategories.general).toBe("General");
+      expect(t.faqCategories.amazon).toBe("Amazon");
+      expect(t.faqCategories.etsy).toBe("Etsy");
+      expect(t.faqCategories.pricing).toBe("Pricing");
+    });
+
+    it("includes FAQ category translations for Turkish", () => {
+      const t = getTranslations("tr");
+
+      expect(t.faqCategories.all).toBe("Tümü");
+      expect(t.faqCategories.general).toBe("Genel");
+      expect(t.faqCategories.amazon).toBe("Amazon");
+      expect(t.faqCategories.etsy).toBe("Etsy");
+      expect(t.faqCategories.pricing).toBe("Fiyatlandırma");
     });
 
     it("includes Amazon and Etsy service labels for English", () => {
@@ -126,6 +154,18 @@ describe("translations", () => {
         expect(t.common.faqCtaHeadline).toBeDefined();
         expect(t.common.faqCtaDescription).toBeDefined();
         expect(t.common.contactUs).toBeDefined();
+        expect(t.common.mostPopular).toBeDefined();
+        expect(t.common.phone).toBeDefined();
+        expect(t.common.address).toBeDefined();
+        expect(t.common.illustrationPlaceholder).toBeDefined();
+
+        // FAQ category keys
+        expect(t.faqCategories).toBeDefined();
+        expect(t.faqCategories.all).toBeDefined();
+        expect(t.faqCategories.general).toBeDefined();
+        expect(t.faqCategories.amazon).toBeDefined();
+        expect(t.faqCategories.etsy).toBeDefined();
+        expect(t.faqCategories.pricing).toBeDefined();
       });
 
       it(`${locale} translations have non-empty string values`, () => {
@@ -151,6 +191,12 @@ describe("translations", () => {
 
         // Check common values are non-empty
         Object.values(t.common).forEach((value) => {
+          expect(value).toBeTruthy();
+          expect(typeof value).toBe("string");
+        });
+
+        // Check faqCategories values are non-empty
+        Object.values(t.faqCategories).forEach((value) => {
           expect(value).toBeTruthy();
           expect(typeof value).toBe("string");
         });

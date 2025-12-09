@@ -2,6 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import type { FAQCategory } from "@/lib/types";
+import { useLanguage } from "@/components/providers/language-provider";
+import { getTranslations } from "@/lib/translations";
 
 /**
  * Category option including "all" for showing all FAQs.
@@ -17,17 +19,6 @@ export interface FAQCategoryFilterProps {
   /** Callback when category changes */
   onCategoryChange: (category: CategoryOption) => void;
 }
-
-/**
- * Category labels for display.
- */
-const categoryLabels: Record<CategoryOption, string> = {
-  all: "All",
-  general: "General",
-  amazon: "Amazon",
-  etsy: "Etsy",
-  pricing: "Pricing",
-};
 
 /**
  * Filter buttons for FAQ categories.
@@ -49,6 +40,9 @@ export function FAQCategoryFilter({
   activeCategory,
   onCategoryChange,
 }: FAQCategoryFilterProps): React.ReactElement {
+  const { locale } = useLanguage();
+  const t = getTranslations(locale);
+
   const categories: CategoryOption[] = [
     "all",
     "general",
@@ -66,7 +60,7 @@ export function FAQCategoryFilter({
           size="sm"
           onClick={() => onCategoryChange(category)}
         >
-          {categoryLabels[category]}
+          {t.faqCategories[category]}
         </Button>
       ))}
     </div>

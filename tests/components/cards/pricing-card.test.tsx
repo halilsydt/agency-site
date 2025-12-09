@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { PricingCard } from "@/components/cards/pricing-card";
+import { LanguageProvider } from "@/components/providers/language-provider";
 import type { PricingPackage } from "@/lib/types";
 
 const mockPackage: PricingPackage = {
@@ -17,50 +18,85 @@ const mockPackage: PricingPackage = {
   ctaHref: "/contact",
 };
 
+/**
+ * Render PricingCard with LanguageProvider wrapper
+ */
+function renderPricingCard(pkg: PricingPackage) {
+  return render(
+    <LanguageProvider>
+      <PricingCard package={pkg} />
+    </LanguageProvider>
+  );
+}
+
 describe("PricingCard", () => {
+  let localStorageMock: Record<string, string>;
+
+  beforeEach(() => {
+    localStorageMock = {};
+    vi.stubGlobal("localStorage", {
+      getItem: vi.fn((key: string) => localStorageMock[key] || null),
+      setItem: vi.fn((key: string, value: string) => {
+        localStorageMock[key] = value;
+      }),
+      removeItem: vi.fn((key: string) => {
+        delete localStorageMock[key];
+      }),
+    });
+
+    Object.defineProperty(navigator, "language", {
+      get: () => "en-US",
+      configurable: true,
+    });
+  });
+
+  afterEach(() => {
+    vi.unstubAllGlobals();
+  });
+
   it("renders package name", () => {
-    render(<PricingCard package={mockPackage} />);
+    renderPricingCard(mockPackage);
     expect(screen.getByText("Growth")).toBeInTheDocument();
   });
 
   it("renders package price", () => {
-    render(<PricingCard package={mockPackage} />);
+    renderPricingCard(mockPackage);
     expect(screen.getByText("$499")).toBeInTheDocument();
     expect(screen.getByText("/month")).toBeInTheDocument();
   });
 
   it("renders package description", () => {
-    render(<PricingCard package={mockPackage} />);
+    renderPricingCard(mockPackage);
     expect(screen.getByText("Perfect for growing sellers")).toBeInTheDocument();
   });
 
   it("renders all features", () => {
-    render(<PricingCard package={mockPackage} />);
+    renderPricingCard(mockPackage);
     expect(screen.getByText("PPC management")).toBeInTheDocument();
     expect(screen.getByText("Weekly reports")).toBeInTheDocument();
     expect(screen.getByText("A+ Content")).toBeInTheDocument();
   });
 
   it("shows popular badge when isPopular is true", () => {
-    render(<PricingCard package={mockPackage} />);
+    renderPricingCard(mockPackage);
     expect(screen.getByText("Most Popular")).toBeInTheDocument();
   });
 
   it("does not show popular badge when isPopular is false", () => {
     const basicPackage = { ...mockPackage, isPopular: false };
-    render(<PricingCard package={basicPackage} />);
+    renderPricingCard(basicPackage);
     expect(screen.queryByText("Most Popular")).not.toBeInTheDocument();
   });
 
   it("renders CTA button with correct text", () => {
-    render(<PricingCard package={mockPackage} />);
+    renderPricingCard(mockPackage);
     expect(
       screen.getByRole("link", { name: /get started/i })
     ).toBeInTheDocument();
   });
 
   it("renders CTA with correct href", () => {
-    render(<PricingCard package={mockPackage} />);
+    renderPricingCard(mockPackage);
     expect(screen.getByRole("link", { name: /get started/i })).toHaveAttribute(
       "href",
       "/contact"
@@ -68,7 +104,7 @@ describe("PricingCard", () => {
   });
 
   it("applies highlight styling for popular package", () => {
-    const { container } = render(<PricingCard package={mockPackage} />);
+    const { container } = renderPricingCard(mockPackage);
     const card = container.querySelector('[class*="ring-primary"]');
     expect(card).toBeInTheDocument();
   });
@@ -88,7 +124,7 @@ describe("PricingCard", () => {
       ctaHref: "/contact?plan=starter",
     };
 
-    render(<PricingCard package={starterPackage} />);
+    renderPricingCard(starterPackage);
     expect(screen.getByText("Starter")).toBeInTheDocument();
     expect(screen.getByText("$299")).toBeInTheDocument();
     expect(

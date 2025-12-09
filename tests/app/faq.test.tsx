@@ -42,6 +42,13 @@ vi.mock("@/lib/translations", () => ({
       faqCtaDescription: "We're here to help.",
       contactUs: "Contact Us",
     },
+    faqCategories: {
+      all: "All",
+      general: "General",
+      amazon: "Amazon",
+      etsy: "Etsy",
+      pricing: "Pricing",
+    },
   }),
 }));
 

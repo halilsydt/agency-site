@@ -57,13 +57,13 @@ export function ContactInfo({
 
         {phone && (
           <p className="text-muted-foreground">
-            <span className="font-medium">Phone:</span> {phone}
+            <span className="font-medium">{t.common.phone}:</span> {phone}
           </p>
         )}
 
         {address && (
           <p className="text-muted-foreground">
-            <span className="font-medium">Address:</span> {address}
+            <span className="font-medium">{t.common.address}:</span> {address}
           </p>
         )}
       </div>

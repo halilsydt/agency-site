@@ -18,6 +18,12 @@ export interface ServiceHeroProps {
   imageUrl?: string;
   /** Optional alt text for illustration */
   imageAlt?: string;
+  /** Optional primary CTA button text */
+  primaryCtaText?: string;
+  /** Optional secondary CTA button text */
+  secondaryCtaText?: string;
+  /** Optional illustration placeholder text */
+  illustrationPlaceholder?: string;
 }
 
 /**
@@ -54,6 +60,9 @@ export function ServiceHero({
   platform,
   imageUrl,
   imageAlt = "Service illustration",
+  primaryCtaText = "Book Free Consultation",
+  secondaryCtaText = "View Pricing",
+  illustrationPlaceholder = "Illustration Placeholder",
 }: ServiceHeroProps): React.ReactElement {
   return (
     <section
@@ -74,10 +83,10 @@ export function ServiceHero({
             </p>
             <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
               <Button asChild size="lg">
-                <Link href="/contact">Book Free Consultation</Link>
+                <Link href="/contact">{primaryCtaText}</Link>
               </Button>
               <Button asChild variant="outline" size="lg">
-                <Link href="/pricing">View Pricing</Link>
+                <Link href="/pricing">{secondaryCtaText}</Link>
               </Button>
             </div>
           </div>
@@ -102,7 +111,7 @@ export function ServiceHero({
             ) : (
               <div className="w-full max-w-md lg:max-w-lg aspect-[4/3] bg-muted rounded-xl flex items-center justify-center">
                 <span className="text-muted-foreground text-sm">
-                  Illustration Placeholder
+                  {illustrationPlaceholder}
                 </span>
               </div>
             )}

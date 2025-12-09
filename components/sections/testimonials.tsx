@@ -31,6 +31,9 @@ export interface TestimonialsSectionProps {
 
 /**
  * Default testimonials showcasing placeholder client feedback.
+ * NOTE: This section is not currently used in production. The default testimonials
+ * contain placeholder data in English only. If this component is added to the site,
+ * testimonials should be passed as props from a client component with translated content.
  */
 const defaultTestimonials: Testimonial[] = [
   {

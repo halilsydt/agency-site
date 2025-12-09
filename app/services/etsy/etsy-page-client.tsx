@@ -24,6 +24,9 @@ export function EtsyServicesPageClient(): React.ReactElement {
         headline={t.etsyPage.heroHeadline}
         subheadline={t.etsyPage.heroSubheadline}
         platform="etsy"
+        primaryCtaText={t.common.bookFreeConsultation}
+        secondaryCtaText={t.common.viewPricing}
+        illustrationPlaceholder={t.common.illustrationPlaceholder}
       />
 
       <ServiceListSection

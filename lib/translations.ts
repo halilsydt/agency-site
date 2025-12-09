@@ -75,6 +75,30 @@ interface CommonTranslations {
   perMonth: string;
   /** Or reach us directly label */
   orReachUsDirectly: string;
+  /** Most popular badge label */
+  mostPopular: string;
+  /** Phone label */
+  phone: string;
+  /** Address label */
+  address: string;
+  /** Illustration placeholder text */
+  illustrationPlaceholder: string;
+}
+
+/**
+ * FAQ category filter translation strings.
+ */
+interface FAQCategoriesTranslations {
+  /** All categories label */
+  all: string;
+  /** General category label */
+  general: string;
+  /** Amazon category label */
+  amazon: string;
+  /** Etsy category label */
+  etsy: string;
+  /** Pricing category label */
+  pricing: string;
 }
 
 /**
@@ -413,6 +437,8 @@ export interface Translations {
   faqPreview: FAQPreviewTranslations;
   /** Contact form */
   contactForm: ContactFormTranslations;
+  /** FAQ category filter labels */
+  faqCategories: FAQCategoriesTranslations;
 }
 
 /**
@@ -451,6 +477,10 @@ const translations: Record<Locale, Translations> = {
       startingAt: 'Starting at',
       perMonth: '/month',
       orReachUsDirectly: 'Or reach us directly',
+      mostPopular: 'Most Popular',
+      phone: 'Phone',
+      address: 'Address',
+      illustrationPlaceholder: 'Illustration Placeholder',
     },
     aboutPage: {
       meetTheFounder: 'Meet the Founder',
@@ -586,6 +616,13 @@ const translations: Record<Locale, Translations> = {
       successMessage: "We'll get back to you soon.",
       errorMessage: 'Something went wrong. Please try again.',
     },
+    faqCategories: {
+      all: 'All',
+      general: 'General',
+      amazon: 'Amazon',
+      etsy: 'Etsy',
+      pricing: 'Pricing',
+    },
   },
   tr: {
     nav: {
@@ -619,6 +656,10 @@ const translations: Record<Locale, Translations> = {
       startingAt: 'Başlangıç fiyatı',
       perMonth: '/ay',
       orReachUsDirectly: 'Veya doğrudan bize ulaşın',
+      mostPopular: 'En Popüler',
+      phone: 'Telefon',
+      address: 'Adres',
+      illustrationPlaceholder: 'Görsel Yer Tutucu',
     },
     aboutPage: {
       meetTheFounder: 'Kurucuyla Tanışın',
@@ -753,6 +794,13 @@ const translations: Record<Locale, Translations> = {
       successTitle: 'Teşekkürler!',
       successMessage: 'En kısa sürede size döneceğiz.',
       errorMessage: 'Bir şeyler yanlış gitti. Lütfen tekrar deneyin.',
+    },
+    faqCategories: {
+      all: 'Tümü',
+      general: 'Genel',
+      amazon: 'Amazon',
+      etsy: 'Etsy',
+      pricing: 'Fiyatlandırma',
     },
   },
 };

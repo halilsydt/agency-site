@@ -542,6 +542,21 @@ so that **I can read the site in my preferred language**.
 5. Navigation labels update to selected language
 6. Footer content updates to selected language
 
+### Story 5.4: Fix Remaining Hardcoded English Strings
+
+As a **Turkish-speaking visitor**,
+I want **all UI text (badges, labels, filters, placeholders) to display in my selected language**,
+so that **I have a fully localized experience without any English text appearing unexpectedly**.
+
+**Acceptance Criteria:**
+1. "Most Popular" badge on pricing cards displays in the selected language
+2. Service hero CTA buttons ("Book Free Consultation", "View Pricing") display in the selected language
+3. FAQ category filter labels ("All", "General", "Amazon", "Etsy", "Pricing") display in the selected language
+4. Contact info labels ("Phone:", "Address:") display in the selected language
+5. Testimonials section content displays in the selected language (or is removed if not in use)
+6. All placeholder text displays in the selected language
+7. All existing tests pass after changes
+
 ### Technical Notes
 
 **Dark Mode Implementation:**

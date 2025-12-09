@@ -24,6 +24,9 @@ export function AmazonServicesPageClient(): React.ReactElement {
         headline={t.amazonPage.heroHeadline}
         subheadline={t.amazonPage.heroSubheadline}
         platform="amazon"
+        primaryCtaText={t.common.bookFreeConsultation}
+        secondaryCtaText={t.common.viewPricing}
+        illustrationPlaceholder={t.common.illustrationPlaceholder}
       />
 
       <ServiceListSection
