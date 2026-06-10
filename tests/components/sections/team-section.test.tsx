@@ -25,6 +25,17 @@ describe("TeamSection", () => {
     );
   });
 
+  it("renders the eyebrow when provided", () => {
+    render(
+      <TeamSection
+        eyebrow="Meet the founders"
+        headline="Meet Our Team"
+        team={mockTeam}
+      />
+    );
+    expect(screen.getByText("Meet the founders")).toBeInTheDocument();
+  });
+
   it("renders all team members", () => {
     render(<TeamSection headline="Meet Our Team" team={mockTeam} />);
     expect(screen.getByText("Jane Doe")).toBeInTheDocument();
@@ -42,16 +53,16 @@ describe("TeamSection", () => {
     const { container } = render(
       <TeamSection headline="Meet the Founder" team={singleMember} />
     );
-    const grid = container.querySelector(".grid");
+    const grid = container.querySelector(".team-grid");
     expect(grid?.className).toContain("max-w-md");
     expect(grid?.className).toContain("mx-auto");
   });
 
-  it("renders multiple members in grid", () => {
+  it("renders multiple members in the team grid", () => {
     const { container } = render(
       <TeamSection headline="Meet Our Team" team={mockTeam} />
     );
-    const grid = container.querySelector(".grid");
-    expect(grid?.className).toContain("md:grid-cols-2");
+    const grid = container.querySelector(".team-grid");
+    expect(grid?.className).toContain("min-[821px]:grid-cols-2");
   });
 });

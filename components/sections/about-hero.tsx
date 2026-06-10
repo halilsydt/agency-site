@@ -1,47 +1,55 @@
-import { Container } from "@/components/layout/container";
+import type { HeroTitle } from "@/lib/translations";
 
 /**
  * Props for the AboutHero component.
  */
 export interface AboutHeroProps {
-  /** Main headline text */
-  headline: string;
-  /** Supporting subheadline text */
+  /** Eyebrow label above the headline (Atlas `.eyebrow`). */
+  eyebrow: string;
+  /** Atlas hero `h1` sentence with a green-emphasized `.mark` segment. */
+  title: HeroTitle;
+  /** Supporting subheadline text. */
   subheadline: string;
 }
 
 /**
- * Hero section for the About page.
- * Displays a centered headline and subheadline with a welcoming design.
+ * Atlas interior hero (`.phero`, atlas.css:148–156) for the About page. A
+ * left-aligned, text-only single column inside the `.wrap` container with a
+ * soft radial-gradient glow `::before` (mirrors `service-hero.tsx`). Renders a
+ * green eyebrow, an `h1` whose `.mark` phrase is green, and a lead paragraph.
  *
- * @param props - AboutHero component props
- * @param props.headline - Main headline text displayed as h1
- * @param props.subheadline - Supporting text below the headline
+ * @param props - {@link AboutHeroProps}
+ * @param props.eyebrow - Small green label above the headline
+ * @param props.title - Headline triple (`pre` + green `mark` + `post`)
+ * @param props.subheadline - Lead paragraph below the headline
  *
  * @example
  * ```tsx
  * <AboutHero
- *   headline="About Us"
+ *   eyebrow="About Us"
+ *   title={{ pre: "Marketplace experts who keep it ", mark: "honest", post: "." }}
  *   subheadline="We help marketplace sellers succeed."
  * />
  * ```
  */
 export function AboutHero({
-  headline,
+  eyebrow,
+  title,
   subheadline,
 }: AboutHeroProps): React.ReactElement {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-transparent">
-      <Container>
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
-            {headline}
-          </h1>
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground">
-            {subheadline}
-          </p>
-        </div>
-      </Container>
+    <section className="relative overflow-x-clip pt-[76px] pb-6 before:pointer-events-none before:absolute before:-top-[260px] before:left-1/2 before:h-[560px] before:w-[900px] before:-translate-x-1/2 before:rounded-full before:bg-[radial-gradient(circle,rgba(14,140,90,.10),rgba(194,104,60,.05)_45%,transparent_70%)] before:content-['']">
+      <div className="wrap relative z-[1]">
+        <span className="eyebrow">{eyebrow}</span>
+        <h1 className="mt-[18px] font-disp text-[clamp(40px,5.4vw,68px)] font-bold leading-[.99] tracking-[-.035em]">
+          {title.pre}
+          <span className="text-green">{title.mark}</span>
+          {title.post}
+        </h1>
+        <p className="mt-[22px] max-w-[36em] text-[19px] text-soft">
+          {subheadline}
+        </p>
+      </div>
     </section>
   );
 }

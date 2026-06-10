@@ -3,16 +3,25 @@ import { describe, it, expect } from "vitest";
 import { ContactHero } from "@/components/sections/contact-hero";
 
 const defaultProps = {
-  headline: "Get in Touch",
+  eyebrow: "Contact",
+  title: {
+    pre: "Let's talk about your ",
+    mark: "growth",
+    post: ".",
+  },
   subheadline: "We'd love to hear from you.",
 };
 
 describe("ContactHero", () => {
-  it("renders headline as h1", () => {
+  it("renders the composed title as h1 with the marked word", () => {
     render(<ContactHero {...defaultProps} />);
-    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Get in Touch"
-    );
+    const h1 = screen.getByRole("heading", { level: 1 });
+    expect(h1).toHaveTextContent("Let's talk about your growth.");
+  });
+
+  it("renders the eyebrow", () => {
+    render(<ContactHero {...defaultProps} />);
+    expect(screen.getByText("Contact")).toBeInTheDocument();
   });
 
   it("renders subheadline", () => {

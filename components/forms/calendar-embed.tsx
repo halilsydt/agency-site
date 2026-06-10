@@ -32,7 +32,7 @@ export function CalendarEmbed({ calLink }: CalendarEmbedProps): React.ReactEleme
     (async function () {
       const cal = await getCalApi();
       cal("ui", {
-        styles: { branding: { brandColor: "#3b82f6" } },
+        styles: { branding: { brandColor: "#0E8C5A" } },
         hideEventTypeDetails: false,
         layout: "month_view",
       });

@@ -61,7 +61,7 @@ describe("Contact Page", () => {
   it("renders the contact hero with headline", () => {
     renderContactPage();
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      /touch/i
+      /growth/i
     );
   });
 
@@ -94,22 +94,24 @@ describe("Contact Page", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders contact info heading", () => {
+  it("renders the contact-info email row", () => {
     renderContactPage();
     expect(
-      screen.getByRole("heading", { name: /reach us directly/i })
+      screen.getByRole("heading", { name: /^email$/i })
     ).toBeInTheDocument();
   });
 
-  it("renders booking section with headline", () => {
+  it("renders the call-card booking prompt", () => {
     renderContactPage();
     expect(
-      screen.getByRole("heading", { name: /book your free consultation/i })
+      screen.getByRole("heading", { name: /prefer to book a call/i })
     ).toBeInTheDocument();
   });
 
-  it("includes calendar embed section", () => {
+  it("renders the booking dialog trigger button", () => {
     renderContactPage();
-    expect(screen.getByTestId("calendar-embed")).toBeInTheDocument();
+    expect(
+      screen.getByRole("button", { name: /book free consultation/i })
+    ).toBeInTheDocument();
   });
 });

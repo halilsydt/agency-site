@@ -1,64 +1,75 @@
-import { Container } from "@/components/layout/container";
+import { Reveal } from "@/components/ui/reveal";
 import { ServiceCard } from "@/components/cards/service-card";
+import { cn } from "@/lib/utils";
 import type { Service } from "@/lib/types";
 
 /**
  * Props for the ServiceListSection component.
  */
 export interface ServiceListSectionProps {
-  /** Section headline text */
+  /** Eyebrow label above the headline (Atlas `.eyebrow` / `.eyebrow.clay`). */
+  eyebrow: string;
+  /** Section headline (Atlas `.sec-head h2`). */
   headline: string;
-  /** Optional subheadline text */
+  /** Optional supporting paragraph. */
   subheadline?: string;
-  /** Array of services to display */
+  /** Array of services to display as `.sd` cards. */
   services: Service[];
+  /** Platform accent — green for Amazon, clay for Etsy. */
+  platform: "amazon" | "etsy";
+  /**
+   * Optional `service.id` to render as the full-width Atlas `.sd.wide` card
+   * (spans the grid, 2-column bullets). Amazon passes "troubleshooting"; Etsy
+   * passes nothing.
+   */
+  wideServiceId?: string;
 }
 
 /**
- * Displays a grid of service cards with a section headline.
- * Used on platform service pages to list all available services.
+ * Atlas service-detail section (`svc-detail`, atlas.css:183–199). A left-aligned
+ * section head (eyebrow + headline + supporting copy) over a two-column grid of
+ * {@link ServiceCard} `.sd` cards that collapses to one column below 820px. The
+ * platform drives the accent color, and {@link ServiceListSectionProps.wideServiceId}
+ * opts one card into the full-width `.sd.wide` treatment.
  *
- * @param props - Component props
- * @param props.headline - Section headline displayed above the grid
- * @param props.subheadline - Optional subheadline for additional context
- * @param props.services - Array of services to display as cards
- *
- * @example
- * ```tsx
- * <ServiceListSection
- *   headline="Our Amazon Services"
- *   subheadline="Everything you need to succeed on Amazon"
- *   services={amazonServices}
- * />
- * ```
+ * @param props - {@link ServiceListSectionProps}
  */
 export function ServiceListSection({
+  eyebrow,
   headline,
   subheadline,
   services,
+  platform,
+  wideServiceId,
 }: ServiceListSectionProps): React.ReactElement {
   return (
-    <section className="py-16 md:py-24">
-      <Container>
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+    <section className="pt-10 pb-[92px]">
+      <div className="wrap">
+        {/* Section head */}
+        <Reveal className="mb-12 max-w-[680px]">
+          <span className={cn("eyebrow", platform === "etsy" && "clay")}>
+            {eyebrow}
+          </span>
+          <h2 className="mt-5 font-disp text-[clamp(34px,4.4vw,52px)] font-bold leading-[1.02] tracking-[-.03em]">
             {headline}
           </h2>
           {subheadline && (
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              {subheadline}
-            </p>
+            <p className="mt-[18px] text-[18px] text-soft">{subheadline}</p>
           )}
-        </div>
+        </Reveal>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {services.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+        {/* Services grid */}
+        <div className="grid grid-cols-1 gap-6 min-[821px]:grid-cols-2">
+          {services.map((service, index) => (
+            <ServiceCard
+              key={service.id}
+              service={service}
+              delay={index % 2 === 1 ? 1 : undefined}
+              wide={service.id === wideServiceId}
+            />
           ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

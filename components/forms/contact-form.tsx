@@ -32,6 +32,22 @@ import type { ContactFormStatus } from "@/lib/types";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getTranslations } from "@/lib/translations";
 
+/** Right-arrow icon that nudges on hover (Atlas `.btn-green`). */
+function ArrowIcon(): React.ReactElement {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.2}
+      className="size-[17px] transition-transform duration-200 group-hover/submit:translate-x-[3px]"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
+
 /**
  * Contact form with validation and Formspree integration.
  * Handles form state, validation, and submission feedback.
@@ -87,11 +103,11 @@ export function ContactForm(): React.ReactElement {
 
   if (status === "success") {
     return (
-      <div className="text-center p-8 bg-green-50 rounded-lg border border-green-200">
-        <h3 className="text-xl font-semibold text-green-800">
+      <div className="rounded-[12px] border border-line bg-green-soft p-8 text-center">
+        <h3 className="font-disp text-xl font-bold text-green-d">
           {t.contactForm.successTitle}
         </h3>
-        <p className="mt-2 text-green-700">
+        <p className="mt-2 text-green-d/80">
           {t.contactForm.successMessage}
         </p>
       </div>
@@ -103,10 +119,10 @@ export function ContactForm(): React.ReactElement {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {status === "error" && (
           <div
-            className="p-4 bg-red-50 border border-red-200 rounded-lg"
+            className="rounded-[12px] border border-line bg-clay-soft p-4"
             role="alert"
           >
-            <p className="text-red-700">{errorMessage}</p>
+            <p className="text-clay">{errorMessage}</p>
           </div>
         )}
 
@@ -182,10 +198,13 @@ export function ContactForm(): React.ReactElement {
         <Button
           type="submit"
           size="lg"
-          className="w-full"
+          className="group/submit w-full justify-center gap-[9px]"
           disabled={status === "submitting"}
         >
-          {status === "submitting" ? t.contactForm.submittingButton : t.contactForm.submitButton}
+          {status === "submitting"
+            ? t.contactForm.submittingButton
+            : t.contactForm.submitButton}
+          {status !== "submitting" && <ArrowIcon />}
         </Button>
       </form>
     </Form>

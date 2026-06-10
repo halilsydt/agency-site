@@ -28,21 +28,14 @@ describe("TeamCard", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders placeholder when no image provided", () => {
+  it("renders a gradient initials avatar derived from the name", () => {
     render(<TeamCard member={mockMember} />);
-    expect(screen.getByTestId("team-card-placeholder")).toBeInTheDocument();
+    expect(screen.getByText("JD")).toBeInTheDocument();
   });
 
-  it("renders image when imageUrl provided", () => {
-    const memberWithImage = { ...mockMember, imageUrl: "/images/team/jane.jpg" };
-    render(<TeamCard member={memberWithImage} />);
-    expect(screen.getByRole("img", { name: "Jane Doe" })).toBeInTheDocument();
-  });
-
-  it("sets correct src when imageUrl provided", () => {
-    const memberWithImage = { ...mockMember, imageUrl: "/images/team/jane.jpg" };
-    render(<TeamCard member={memberWithImage} />);
-    const img = screen.getByRole("img", { name: "Jane Doe" });
-    expect(img.getAttribute("src")).toContain("jane.jpg");
+  it("derives initials from the first two words of a multi-word name", () => {
+    const member = { ...mockMember, name: "Mehmet Ali Sabaz" };
+    render(<TeamCard member={member} />);
+    expect(screen.getByText("MA")).toBeInTheDocument();
   });
 });

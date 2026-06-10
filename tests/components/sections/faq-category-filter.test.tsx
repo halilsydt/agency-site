@@ -65,9 +65,11 @@ describe("FAQCategoryFilter", () => {
     const amazonButton = screen.getByRole("button", { name: "Amazon" });
     const allButton = screen.getByRole("button", { name: "All" });
 
-    // Active button (default variant) is Atlas .btn-green; outline is .btn-ghost (line border)
-    expect(amazonButton.className).toContain("bg-green");
+    // Atlas .faq-cat: active pill is ink (bg-ink/text-white); inactive is surface/line
+    expect(amazonButton.className).toContain("bg-ink");
+    expect(amazonButton.className).toContain("text-white");
     expect(allButton.className).toContain("border-line");
+    expect(allButton.className).toContain("text-soft");
   });
 
   it("calls onCategoryChange when button clicked", async () => {

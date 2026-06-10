@@ -1,6 +1,4 @@
-import Image from "next/image";
-import { User } from "lucide-react";
-import { Card, CardHeader, CardContent, CardTitle } from "@/components/ui/card";
+import { Reveal } from "@/components/ui/reveal";
 import type { TeamMember } from "@/lib/types";
 
 /**
@@ -9,14 +7,33 @@ import type { TeamMember } from "@/lib/types";
 export interface TeamCardProps {
   /** The team member to display */
   member: TeamMember;
+  /** Stagger delay step (1–3) for the reveal animation. */
+  delay?: 1 | 2 | 3;
 }
 
 /**
- * Displays a team member in a card format with photo, name, role, and bio.
- * Shows a placeholder icon when no image is provided.
+ * Computes a gradient-avatar's initials from the first two words of a name.
+ * (e.g. "Mehmet Ali Sabaz" → "MA"; "Halil Saydut" → "HS").
+ */
+function getInitials(name: string): string {
+  return name
+    .trim()
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((word) => word[0] ?? "")
+    .join("")
+    .toUpperCase();
+}
+
+/**
+ * Atlas team `.member` card (About.html:92–109). A surface card with a gradient
+ * initials `.avatar` (ink→green) and a text column (name `h3`, green `.role`,
+ * bio). Lifts on hover. Replaces the former photo / `User` placeholder — Atlas
+ * member cards are initials-only.
  *
- * @param props - TeamCard component props
+ * @param props - {@link TeamCardProps}
  * @param props.member - The team member data to display
+ * @param props.delay - Optional stagger delay for the reveal
  *
  * @example
  * ```tsx
@@ -30,33 +47,23 @@ export interface TeamCardProps {
  * />
  * ```
  */
-export function TeamCard({ member }: TeamCardProps): React.ReactElement {
+export function TeamCard({ member, delay }: TeamCardProps): React.ReactElement {
   return (
-    <Card className="text-center">
-      <CardHeader>
-        <div className="w-24 h-24 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center overflow-hidden relative">
-          {member.imageUrl ? (
-            <Image
-              src={member.imageUrl}
-              alt={member.name}
-              fill
-              sizes="96px"
-              className="object-cover"
-              unoptimized={member.imageUrl.startsWith("http")}
-            />
-          ) : (
-            <User
-              className="w-12 h-12 text-muted-foreground"
-              data-testid="team-card-placeholder"
-            />
-          )}
+    <Reveal
+      pop
+      delay={delay}
+      className="flex gap-5 rounded-[22px] border border-line bg-surface p-8 transition-[transform,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-sh-md"
+    >
+      <div className="flex size-16 flex-none items-center justify-center rounded-[17px] bg-[linear-gradient(135deg,var(--ink),var(--green))] font-disp text-[22px] font-bold text-white">
+        {getInitials(member.name)}
+      </div>
+      <div>
+        <h3 className="font-disp text-[20px] font-bold">{member.name}</h3>
+        <div className="mt-[3px] font-disp text-[13.5px] font-semibold text-green-d">
+          {member.role}
         </div>
-        <CardTitle>{member.name}</CardTitle>
-        <p className="text-sm text-muted-foreground">{member.role}</p>
-      </CardHeader>
-      <CardContent>
-        <p className="text-muted-foreground">{member.bio}</p>
-      </CardContent>
-    </Card>
+        <p className="mt-3 text-[14.5px] text-soft">{member.bio}</p>
+      </div>
+    </Reveal>
   );
 }

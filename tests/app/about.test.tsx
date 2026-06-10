@@ -39,25 +39,25 @@ describe("About Page", () => {
     vi.unstubAllGlobals();
   });
 
-  it("renders the about hero with headline", () => {
+  it("renders the about hero with the Atlas headline and eyebrow", () => {
     renderAboutPage();
+    // Atlas h1 is the new "honest" sentence; "About Us" moves to the eyebrow.
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      /about/i
+      /honest/i
     );
+    expect(screen.getByText("About Us")).toBeInTheDocument();
   });
 
   it("renders mission section", () => {
     renderAboutPage();
-    expect(
-      screen.getByRole("heading", { name: /mission/i })
-    ).toBeInTheDocument();
+    // "Our Mission" is now the eyebrow span (the h2 is the "no hype" sentence).
+    expect(screen.getByText(/our mission/i)).toBeInTheDocument();
   });
 
   it("renders approach section", () => {
     renderAboutPage();
-    expect(
-      screen.getByRole("heading", { name: /approach/i })
-    ).toBeInTheDocument();
+    // "Our Approach" is now the clay eyebrow span.
+    expect(screen.getByText(/our approach/i)).toBeInTheDocument();
   });
 
   it("renders experience highlights", () => {
@@ -68,9 +68,9 @@ describe("About Page", () => {
 
   it("renders team section", () => {
     renderAboutPage();
-    expect(
-      screen.getByRole("heading", { name: /founder/i })
-    ).toBeInTheDocument();
+    // "Meet the founders" is the eyebrow; the h2 is "The people behind Scalenty".
+    expect(screen.getByText(/meet the founders/i)).toBeInTheDocument();
+    expect(screen.getByText(/the people behind scalenty/i)).toBeInTheDocument();
   });
 
   it("renders CTA linking to contact", () => {

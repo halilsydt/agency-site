@@ -105,9 +105,17 @@ describe("PricingCard", () => {
 
   it("applies highlight styling for popular package", () => {
     const { container } = renderPricingCard(mockPackage);
-    // Atlas: popular tier highlighted with emerald ring
-    const card = container.querySelector('[class*="ring-green"]');
+    // Atlas .tier.popular: green border + glow (replaces the old emerald ring).
+    const card = container.querySelector('[class*="border-green"]');
     expect(card).toBeInTheDocument();
+    // The "Most Popular" .pop-badge is rendered for the popular tier.
+    expect(screen.getByText("Most Popular")).toBeInTheDocument();
+  });
+
+  it("does not apply popular highlight for non-popular package", () => {
+    const { container } = renderPricingCard({ ...mockPackage, isPopular: false });
+    // Non-popular tiers keep the neutral .tier border, not the green treatment.
+    expect(container.querySelector('[class*="border-green"]')).not.toBeInTheDocument();
   });
 
   it("renders different package correctly", () => {

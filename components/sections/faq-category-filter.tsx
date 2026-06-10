@@ -1,6 +1,5 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import type { FAQCategory } from "@/lib/types";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getTranslations } from "@/lib/translations";
@@ -21,8 +20,11 @@ export interface FAQCategoryFilterProps {
 }
 
 /**
- * Filter buttons for FAQ categories.
- * Allows users to filter FAQs by category.
+ * Atlas `.faq-cats` filter row (atlas.css:301–304). A centered, wrapping row of
+ * bespoke `.faq-cat` pill buttons. The active pill uses the Atlas **ink** look
+ * (`bg-ink text-white`), inactive pills use the surface/line look. Rendered as
+ * native `<button>`s (not the green `Button` primitive) to match the ink active
+ * state, with `aria-pressed` + a focus-visible ring for keyboard a11y.
  *
  * @param props - Component props
  * @param props.activeCategory - Currently selected category
@@ -52,17 +54,25 @@ export function FAQCategoryFilter({
   ];
 
   return (
-    <div className="flex flex-wrap gap-2 justify-center">
-      {categories.map((category) => (
-        <Button
-          key={category}
-          variant={activeCategory === category ? "default" : "outline"}
-          size="sm"
-          onClick={() => onCategoryChange(category)}
-        >
-          {t.faqCategories[category]}
-        </Button>
-      ))}
+    <div className="mb-[34px] flex flex-wrap justify-center gap-[10px]">
+      {categories.map((category) => {
+        const isActive = activeCategory === category;
+        return (
+          <button
+            key={category}
+            type="button"
+            aria-pressed={isActive}
+            onClick={() => onCategoryChange(category)}
+            className={`cursor-pointer rounded-full border px-5 py-[10px] font-disp text-sm font-semibold transition-[.18s] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2 ${
+              isActive
+                ? "border-ink bg-ink text-white"
+                : "border-line bg-surface text-soft hover:border-ink"
+            }`}
+          >
+            {t.faqCategories[category]}
+          </button>
+        );
+      })}
     </div>
   );
 }

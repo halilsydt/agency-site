@@ -1,47 +1,58 @@
-import { Container } from "@/components/layout/container";
+import { Reveal } from "@/components/ui/reveal";
+import type { HeroTitle } from "@/lib/translations";
 
 /**
  * Props for the PricingHero component.
  */
 export interface PricingHeroProps {
-  /** Main headline text */
-  headline: string;
-  /** Supporting subheadline text */
+  /** Eyebrow label above the headline (Atlas `.eyebrow.cc`). */
+  eyebrow: string;
+  /** Atlas hero `h1` sentence, with a green `.mark` segment. */
+  title: HeroTitle;
+  /** Supporting subheadline text. */
   subheadline: string;
 }
 
 /**
- * Hero section for the pricing page.
- * Displays headline and subheadline with emphasis on transparent pricing.
+ * Atlas centered pricing hero (`.phero.cc`, atlas.css:148–156). A centered,
+ * text-only column inside the `.wrap` container: a centered eyebrow, an `h1`
+ * whose `.mark` phrase is green, and a lead paragraph. The bottom padding is
+ * reduced because the platform toggle follows immediately.
  *
- * @param props - Component props
- * @param props.headline - Main headline displayed as h1
+ * @param props - {@link PricingHeroProps}
+ * @param props.eyebrow - Eyebrow label rendered above the headline
+ * @param props.title - The `h1` sentence split around the green `.mark` word
  * @param props.subheadline - Supporting text below the headline
  *
  * @example
  * ```tsx
  * <PricingHero
- *   headline="Simple, Transparent Pricing"
- *   subheadline="No hidden fees. Choose the plan that's right for your business."
+ *   eyebrow="Pricing"
+ *   title={{ pre: "Simple, ", mark: "transparent", post: " pricing." }}
+ *   subheadline="No hidden fees…"
  * />
  * ```
  */
 export function PricingHero({
-  headline,
+  eyebrow,
+  title,
   subheadline,
 }: PricingHeroProps): React.ReactElement {
   return (
-    <section className="pt-16 md:pt-24 pb-8 md:pb-10 bg-gradient-to-b from-muted/50 to-transparent">
-      <Container>
-        <div className="text-center max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">
-            {headline}
+    <section className="pt-[76px] pb-[30px]">
+      <div className="wrap">
+        <Reveal className="text-center">
+          <span className="eyebrow cc">{eyebrow}</span>
+          <h1 className="mt-[18px] font-disp text-[clamp(40px,5.4vw,68px)] font-bold leading-[.99] tracking-[-.035em]">
+            {title.pre}
+            <span className="text-green">{title.mark}</span>
+            {title.post}
           </h1>
-          <p className="mt-6 text-lg md:text-xl text-muted-foreground">
+          <p className="mx-auto mt-[22px] max-w-[42em] text-[19px] text-soft">
             {subheadline}
           </p>
-        </div>
-      </Container>
+        </Reveal>
+      </div>
     </section>
   );
 }

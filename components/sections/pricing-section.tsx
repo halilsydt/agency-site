@@ -1,4 +1,4 @@
-import { Container } from "@/components/layout/container";
+import { Reveal } from "@/components/ui/reveal";
 import { PricingCard } from "@/components/cards/pricing-card";
 import type { PricingPackage } from "@/lib/types";
 
@@ -15,10 +15,13 @@ export interface PricingSectionProps {
 }
 
 /**
- * Displays a section of pricing cards for a specific platform.
- * Renders a headline and responsive grid of pricing cards.
+ * Atlas `.tiers` pricing grid (atlas.css:266–278). Renders a centered headline
+ * and the active platform's `.tier` cards in a 3-column grid that collapses to a
+ * single column at 860px. Each card is staggered via the Atlas `data-d` reveal
+ * delays (1/2 for the 2nd/3rd cards). Keeps the `data-platform` attribute used
+ * by analytics/tests.
  *
- * @param props - Component props
+ * @param props - {@link PricingSectionProps}
  * @param props.headline - Section headline displayed as h2
  * @param props.packages - Array of pricing packages to render
  * @param props.platform - Platform identifier (amazon or etsy)
@@ -38,17 +41,23 @@ export function PricingSection({
   platform,
 }: PricingSectionProps): React.ReactElement {
   return (
-    <section className="pt-8 md:pt-10 pb-16 md:pb-24" data-platform={platform}>
-      <Container>
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
-          {headline}
-        </h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {packages.map((pkg) => (
-            <PricingCard key={pkg.id} package={pkg} />
+    <section className="pt-2 pb-[68px]" data-platform={platform}>
+      <div className="wrap">
+        <Reveal className="mx-auto mb-12 max-w-[680px] text-center">
+          <h2 className="font-disp text-[clamp(30px,4vw,44px)] font-bold leading-[1.02] tracking-[-.03em]">
+            {headline}
+          </h2>
+        </Reveal>
+        <div className="grid grid-cols-1 gap-[22px] min-[861px]:grid-cols-3">
+          {packages.map((pkg, i) => (
+            <PricingCard
+              key={pkg.id}
+              package={pkg}
+              delay={(i || undefined) as 1 | 2 | undefined}
+            />
           ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }
