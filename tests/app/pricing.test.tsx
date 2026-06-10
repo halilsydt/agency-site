@@ -1,7 +1,17 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import PricingPage from "@/app/pricing/page";
 import { LanguageProvider } from "@/components/providers/language-provider";
+
+/**
+ * Switch the pricing page platform toggle to Amazon.
+ * The page defaults to showing Etsy packages; Amazon packages render
+ * only after activating the Amazon pill toggle.
+ */
+async function switchToAmazon() {
+  await userEvent.click(screen.getByRole("button", { name: "Amazon" }));
+}
 
 /**
  * Render PricingPage with LanguageProvider wrapper
@@ -51,8 +61,9 @@ describe("Pricing Page", () => {
     expect(screen.getByText(/no hidden fees/i)).toBeInTheDocument();
   });
 
-  it("renders Amazon packages section", () => {
+  it("renders Amazon packages section", async () => {
     renderPricingPage();
+    await switchToAmazon();
     expect(
       screen.getByRole("heading", { name: /amazon packages/i })
     ).toBeInTheDocument();
@@ -60,6 +71,7 @@ describe("Pricing Page", () => {
 
   it("renders Etsy packages section", () => {
     renderPricingPage();
+    // Etsy is the default selected platform
     expect(
       screen.getByRole("heading", { name: /etsy packages/i })
     ).toBeInTheDocument();
@@ -84,23 +96,27 @@ describe("Pricing Page", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders consultation CTA linking to contact", () => {
+  it("renders consultation CTA opening the booking dialog", () => {
     renderPricingPage();
+    // The bottom consultation CTA now opens a booking dialog (button trigger)
+    // rather than linking directly to /contact.
     expect(
-      screen.getByRole("link", { name: /book free consultation/i })
-    ).toHaveAttribute("href", "/contact");
+      screen.getByRole("button", { name: /book free consultation/i })
+    ).toBeInTheDocument();
   });
 
-  it("highlights popular packages with badges", () => {
+  it("highlights the popular package with a badge", () => {
     renderPricingPage();
+    // Only the active platform's packages render at a time (Etsy by default),
+    // so a single "Most Popular" badge is shown for the Growth tier.
     const popularBadges = screen.getAllByText(/most popular/i);
-    // One for Amazon Growth, one for Etsy Growth
-    expect(popularBadges.length).toBeGreaterThanOrEqual(2);
+    expect(popularBadges.length).toBeGreaterThanOrEqual(1);
   });
 
-  it("renders Amazon pricing packages from content", () => {
+  it("renders Amazon pricing packages from content", async () => {
     renderPricingPage();
-    // Check for Amazon package tiers
+    await switchToAmazon();
+    // Amazon Starter tier is $299
     const starterPrices = screen.getAllByText("$299");
     expect(starterPrices.length).toBeGreaterThanOrEqual(1);
   });
@@ -116,9 +132,9 @@ describe("Pricing Page", () => {
     renderPricingPage();
     // h1 for page title
     expect(screen.getByRole("heading", { level: 1 })).toBeInTheDocument();
-    // h2 for sections
+    // h2 for sections (active platform packages + bottom CTA)
     const h2Headings = screen.getAllByRole("heading", { level: 2 });
-    expect(h2Headings.length).toBeGreaterThanOrEqual(3);
+    expect(h2Headings.length).toBeGreaterThanOrEqual(2);
   });
 
   it("all package CTAs link to contact", () => {

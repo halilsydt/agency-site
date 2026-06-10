@@ -1,4 +1,22 @@
+"use client";
+
+import {
+  CalendarCheck,
+  ClipboardList,
+  Rocket,
+  type LucideIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+
+/**
+ * Icon mapping for step icons.
+ * Maps icon names to Lucide React components.
+ */
+const iconMap: Record<string, LucideIcon> = {
+  "calendar-check": CalendarCheck,
+  "clipboard-list": ClipboardList,
+  rocket: Rocket,
+};
 
 /**
  * Props for the StepCard component.
@@ -10,7 +28,7 @@ export interface StepCardProps {
   title: string;
   /** Brief description of what happens in this step */
   description: string;
-  /** Optional icon for visual enhancement */
+  /** Optional icon name that maps to a Lucide icon */
   icon?: string;
   /** Additional CSS classes */
   className?: string;
@@ -24,7 +42,7 @@ export interface StepCardProps {
  * @param props.stepNumber - The step number displayed in a circular badge
  * @param props.title - Step title displayed as h3
  * @param props.description - Brief description of this step
- * @param props.icon - Optional emoji or icon character
+ * @param props.icon - Optional icon name (calendar-check, clipboard-list, rocket)
  * @param props.className - Additional CSS classes
  *
  * @example
@@ -33,7 +51,7 @@ export interface StepCardProps {
  *   stepNumber={1}
  *   title="Book Consultation"
  *   description="Schedule a free discovery call."
- *   icon="📅"
+ *   icon="calendar-check"
  * />
  * ```
  */
@@ -44,6 +62,8 @@ export function StepCard({
   icon,
   className,
 }: StepCardProps): React.ReactElement {
+  const IconComponent = icon ? iconMap[icon] : null;
+
   return (
     <div
       className={cn(
@@ -56,10 +76,10 @@ export function StepCard({
         {stepNumber}
       </div>
 
-      {/* Optional Icon */}
-      {icon && (
-        <div className="mb-3 text-3xl" aria-hidden="true">
-          {icon}
+      {/* Icon */}
+      {IconComponent && (
+        <div className="mb-4 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+          <IconComponent className="w-8 h-8 text-primary" aria-hidden="true" />
         </div>
       )}
 

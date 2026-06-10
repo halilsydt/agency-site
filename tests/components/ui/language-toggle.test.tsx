@@ -63,55 +63,64 @@ describe("LanguageToggle", () => {
     expect(button).toBeInTheDocument();
   });
 
-  it("displays EN when in English locale", () => {
+  it("shows both EN and TR indicators in the pill", () => {
     renderToggle("en");
     const button = screen.getByRole("button");
     expect(button).toHaveTextContent("EN");
+    expect(button).toHaveTextContent("TR");
   });
 
-  it("displays TR when in Turkish locale", () => {
+  it("marks EN active (bold ink) when in English locale", () => {
+    renderToggle("en");
+    const en = screen.getByText("EN");
+    const tr = screen.getByText("TR");
+    expect(en).toHaveClass("text-ink");
+    expect(en).toHaveClass("font-bold");
+    expect(tr).toHaveClass("text-soft-2");
+  });
+
+  it("marks TR active (bold ink) when in Turkish locale", () => {
     renderToggle("tr");
-    const button = screen.getByRole("button");
-    expect(button).toHaveTextContent("TR");
+    const en = screen.getByText("EN");
+    const tr = screen.getByText("TR");
+    expect(tr).toHaveClass("text-ink");
+    expect(tr).toHaveClass("font-bold");
+    expect(en).toHaveClass("text-soft-2");
   });
 
   it("toggles locale when clicked", () => {
     renderToggle("en");
 
-    // Initially in English
-    let button = screen.getByRole("button");
-    expect(button).toHaveTextContent("EN");
+    // Initially English active
+    expect(screen.getByText("EN")).toHaveClass("text-ink");
 
     // Click to toggle to Turkish
-    fireEvent.click(button);
+    fireEvent.click(screen.getByRole("button"));
 
-    // Should now show TR
-    button = screen.getByRole("button");
-    expect(button).toHaveTextContent("TR");
+    // Now Turkish active
+    expect(screen.getByText("TR")).toHaveClass("text-ink");
   });
 
   it("toggles from Turkish to English when clicked", () => {
     renderToggle("tr");
 
-    let button = screen.getByRole("button");
-    expect(button).toHaveTextContent("TR");
+    expect(screen.getByText("TR")).toHaveClass("text-ink");
 
-    fireEvent.click(button);
+    fireEvent.click(screen.getByRole("button"));
 
-    button = screen.getByRole("button");
-    expect(button).toHaveTextContent("EN");
+    expect(screen.getByText("EN")).toHaveClass("text-ink");
   });
 
-  it("has ghost variant styling", () => {
+  it("renders the Atlas pill styling (bordered rounded pill)", () => {
     renderToggle();
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("hover:bg-accent");
+    expect(button).toHaveClass("border", "border-line", "font-disp");
   });
 
-  it("has sm size styling", () => {
+  it("changes border to ink on hover", () => {
     renderToggle();
     const button = screen.getByRole("button");
-    expect(button).toHaveClass("h-8");
+    expect(button).toHaveClass("hover:border-ink");
   });
 
   it("is keyboard accessible", () => {

@@ -31,7 +31,7 @@ export function PricingHero({
   subheadline,
 }: PricingHeroProps): React.ReactElement {
   return (
-    <section className="py-16 md:py-24 bg-gradient-to-b from-muted/50 to-transparent">
+    <section className="pt-16 md:pt-24 pb-8 md:pb-10 bg-gradient-to-b from-muted/50 to-transparent">
       <Container>
         <div className="text-center max-w-3xl mx-auto">
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-foreground">

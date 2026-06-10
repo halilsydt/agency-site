@@ -1,27 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { Container } from "@/components/layout/container";
-import { PricingPreviewCard } from "@/components/cards/pricing-preview-card";
-import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getTranslations } from "@/lib/translations";
-
-/**
- * A pricing package preview for the homepage.
- */
-export interface PricingPreview {
-  /** Unique identifier */
-  id: string;
-  /** Platform name (Amazon or Etsy) */
-  platform: "amazon" | "etsy";
-  /** Package display title */
-  title: string;
-  /** Starting price (monthly) */
-  startingPrice: number;
-  /** 3-4 key feature highlights */
-  features: string[];
-}
 
 /**
  * Props for the PricingPreviewSection component.
@@ -33,24 +15,43 @@ export interface PricingPreviewSectionProps {
   subheadline?: string;
 }
 
+/** Check-mark bullet icon. */
+function CheckIcon(): React.ReactElement {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2.4} className="size-[18px] flex-none" aria-hidden="true">
+      <path d="M20 6L9 17l-5-5" />
+    </svg>
+  );
+}
+
+/** Amazon house/box title icon. */
+function AmazonIcon(): React.ReactElement {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="size-[22px] text-green" aria-hidden="true">
+      <path d="M3 9l9-6 9 6v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+    </svg>
+  );
+}
+
+/** Etsy storefront title icon. */
+function EtsyIcon(): React.ReactElement {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={1.8} className="size-[22px] text-clay" aria-hidden="true">
+      <path d="M6 2h12l1 6a4 4 0 0 1-8 0 4 4 0 0 1-8 0z" />
+      <path d="M5 9v11h14V9" />
+    </svg>
+  );
+}
+
 /**
- * Homepage pricing preview section displaying transparent pricing teasers.
- * Features pricing cards for Amazon and Etsy, a bundle discount highlight,
- * and a CTA to the full pricing page.
- * Responsive layout: 1 column mobile, 2 columns tablet and desktop.
- * Supports internationalization through the language context.
+ * Homepage Atlas pricing preview (atlas.css:238–257). A centered section head,
+ * two hover-lift `.pcard` cards (Amazon + Etsy, both $999/mo per the confirmed
+ * decision), each with an icon title, a big price, a "starting at" line, a
+ * feature checklist, and a full-width "View Full Pricing" button linking to
+ * `/pricing`. Below the cards is the green `.bundle` highlight bar with an ink
+ * "Get Bundle Quote" button to `/contact`.
  *
- * @param props - Component props
- * @param props.headline - Section headline displayed as h2
- * @param props.subheadline - Optional supporting text below headline
- *
- * @example
- * ```tsx
- * <PricingPreviewSection
- *   headline="Transparent Pricing"
- *   subheadline="No hidden costs. No surprises."
- * />
- * ```
+ * @param props - {@link PricingPreviewSectionProps}
  */
 export function PricingPreviewSection({
   headline,
@@ -58,77 +59,99 @@ export function PricingPreviewSection({
 }: PricingPreviewSectionProps): React.ReactElement {
   const { locale } = useLanguage();
   const t = getTranslations(locale);
+  const p = t.pricingPreview;
 
-  const pricingPreviews: PricingPreview[] = [
+  const cards = [
     {
-      id: "amazon-preview",
-      platform: "amazon",
-      title: t.pricingPreview.amazonTitle,
-      startingPrice: 499,
-      features: [
-        t.pricingPreview.amazonFeature1,
-        t.pricingPreview.amazonFeature2,
-        t.pricingPreview.amazonFeature3,
-        t.pricingPreview.amazonFeature4,
-      ],
+      platform: "amazon" as const,
+      title: p.amazonTitle,
+      price: 999,
+      features: [p.amazonFeature1, p.amazonFeature2, p.amazonFeature3, p.amazonFeature4],
+      icon: <AmazonIcon />,
+      checkClass: "text-green",
+      buttonClass:
+        "bg-green text-white shadow-[0_10px_24px_-10px_rgba(14,140,90,.6)] hover:-translate-y-0.5 hover:bg-green-d hover:text-white hover:shadow-[0_16px_30px_-10px_rgba(14,140,90,.65)]",
     },
     {
-      id: "etsy-preview",
-      platform: "etsy",
-      title: t.pricingPreview.etsyTitle,
-      startingPrice: 399,
-      features: [
-        t.pricingPreview.etsyFeature1,
-        t.pricingPreview.etsyFeature2,
-        t.pricingPreview.etsyFeature3,
-        t.pricingPreview.etsyFeature4,
-      ],
+      platform: "etsy" as const,
+      title: p.etsyTitle,
+      price: 999,
+      features: [p.etsyFeature1, p.etsyFeature2, p.etsyFeature3, p.etsyFeature4],
+      icon: <EtsyIcon />,
+      checkClass: "text-clay",
+      buttonClass:
+        "border-line bg-transparent text-ink hover:border-ink hover:bg-surface hover:text-ink",
     },
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-muted/30">
-      <Container>
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+    <section className="bg-bg-2 py-[92px]">
+      <div className="wrap">
+        {/* Centered section head */}
+        <Reveal className="mx-auto mb-12 max-w-[680px] text-center">
+          <span className="eyebrow cc">{p.eyebrow}</span>
+          <h2 className="mt-5 font-disp text-[clamp(34px,4.4vw,52px)] font-bold leading-[1.02] tracking-[-.03em]">
             {headline}
           </h2>
           {subheadline && (
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              {subheadline}
-            </p>
+            <p className="mx-auto mt-[18px] text-[18px] text-soft">{subheadline}</p>
           )}
-        </div>
+        </Reveal>
 
-        {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 max-w-4xl mx-auto">
-          {pricingPreviews.map((preview) => (
-            <PricingPreviewCard
-              key={preview.id}
-              platform={preview.platform}
-              title={preview.title}
-              startingPrice={preview.startingPrice}
-              features={preview.features}
-            />
+        {/* Pricing cards */}
+        <div className="mx-auto grid max-w-[880px] grid-cols-1 gap-6 min-[821px]:grid-cols-2">
+          {cards.map((card, i) => (
+            <Reveal
+              key={card.platform}
+              pop
+              as="div"
+              delay={(i || undefined) as 1 | undefined}
+              className="rounded-[24px] border border-line bg-surface p-9 transition-all duration-300 hover:-translate-y-[5px] hover:shadow-sh-md"
+            >
+              <h3 className="flex items-center gap-[11px] font-disp text-[21px] font-bold">
+                {card.icon}
+                {card.title}
+              </h3>
+              <div className="mt-[22px] font-disp text-[48px] font-bold leading-none tracking-[-.02em] tnum">
+                ${card.price}
+                <span className="font-sans text-[16px] font-medium text-soft"> {t.common.perMonth}</span>
+              </div>
+              <div className="mt-[14px] text-[13px] text-soft-2">{p.fromLine}</div>
+              <ul className="my-6 mb-7 flex flex-col gap-3">
+                {card.features.map((f) => (
+                  <li key={f} className={`flex items-center gap-[10px] text-[14.5px] ${card.checkClass}`}>
+                    <CheckIcon />
+                    <span className="text-ink">{f}</span>
+                  </li>
+                ))}
+              </ul>
+              <Link
+                href="/pricing"
+                className={`inline-flex w-full items-center justify-center gap-[9px] whitespace-nowrap rounded-[12px] border-[1.5px] border-transparent px-6 py-[14px] font-disp text-[15px] font-semibold no-underline transition-all duration-200 [transition-timing-function:cubic-bezier(.2,.7,.3,1)] hover:no-underline ${card.buttonClass}`}
+              >
+                {p.viewFullPricing}
+              </Link>
+            </Reveal>
           ))}
         </div>
 
-        {/* Bundle Discount Highlight */}
-        <div className="mt-8 text-center">
-          <div className="inline-flex items-center gap-2 bg-orange-100 text-orange-800 px-4 py-2 rounded-full text-sm font-medium dark:bg-orange-950 dark:text-orange-200">
-            <span aria-hidden="true">🎁</span>
-            {t.bundle.saveText}
+        {/* Bundle bar */}
+        <Reveal
+          as="div"
+          className="mx-auto mt-[22px] flex max-w-[880px] items-center justify-between gap-5 rounded-[20px] border border-[#CBE5D6] bg-green-soft px-8 py-6 max-[820px]:flex-col max-[820px]:items-start"
+        >
+          <div>
+            <h4 className="font-disp text-[20px] font-bold text-green-d">{t.bundle.title}</h4>
+            <p className="text-[14.5px] text-green-d opacity-80">{t.bundle.description}</p>
           </div>
-        </div>
-
-        {/* CTA Button */}
-        <div className="mt-8 text-center">
-          <Button asChild size="lg">
-            <Link href="/pricing">{t.pricingPreview.viewFullPricing}</Link>
-          </Button>
-        </div>
-      </Container>
+          <Link
+            href="/contact"
+            className="inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[12px] border-[1.5px] border-transparent bg-ink px-6 py-[14px] font-disp text-[15px] font-semibold text-white no-underline transition-all duration-200 [transition-timing-function:cubic-bezier(.2,.7,.3,1)] hover:-translate-y-0.5 hover:bg-ink-2 hover:text-white hover:no-underline"
+          >
+            {t.bundle.cta}
+          </Link>
+        </Reveal>
+      </div>
     </section>
   );
 }

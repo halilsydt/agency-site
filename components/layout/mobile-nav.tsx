@@ -18,7 +18,6 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import type { NavItem } from "@/components/layout/header";
-import { ThemeToggle } from "@/components/ui/theme-toggle";
 import { LanguageToggle } from "@/components/ui/language-toggle";
 
 /**
@@ -32,9 +31,9 @@ export interface MobileNavProps {
 }
 
 /**
- * Mobile navigation drawer component using Sheet.
- * Displays a hamburger menu button that opens a slide-out navigation panel.
- * Automatically closes when a navigation link is clicked.
+ * Mobile navigation drawer (Atlas-styled). Shows a hamburger toggle below the
+ * Atlas 860px breakpoint that opens a slide-out panel listing the nav links
+ * plus a "Book a Call" CTA. Closes automatically on route change.
  *
  * @param props - Component props
  * @param props.items - Navigation items to display
@@ -42,10 +41,7 @@ export interface MobileNavProps {
  *
  * @example
  * ```tsx
- * <MobileNav
- *   items={navItems}
- *   isActive={(href) => pathname === href}
- * />
+ * <MobileNav items={navItems} isActive={isActive} />
  * ```
  */
 export function MobileNav({ items, isActive }: MobileNavProps): React.ReactElement {
@@ -59,84 +55,68 @@ export function MobileNav({ items, isActive }: MobileNavProps): React.ReactEleme
     setOpen(false);
   }, [pathname]);
 
+  /** Render a single flat nav link in the drawer. */
+  const renderLink = (item: NavItem) => (
+    <Link
+      href={item.href}
+      className={cn(
+        "block border-b border-line py-3 font-disp text-base font-medium transition-colors",
+        isActive(item.href) ? "text-green-d" : "text-ink hover:text-green-d"
+      )}
+      onClick={() => setOpen(false)}
+      aria-current={isActive(item.href) ? "page" : undefined}
+    >
+      {item.label}
+    </Link>
+  );
+
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <Button
-          variant="ghost"
-          size="icon"
-          className="md:hidden"
-          aria-label="Open menu"
-        >
+        <Button variant="ghost" size="icon" className="min-[861px]:hidden" aria-label="Open menu">
           <Menu className="h-5 w-5" />
         </Button>
       </SheetTrigger>
       <SheetContent side="right" className="w-72">
         <SheetHeader>
           <SheetTitle>{t.mobileNav.navigation}</SheetTitle>
-          <SheetDescription className="sr-only">
-            Site navigation menu
-          </SheetDescription>
+          <SheetDescription className="sr-only">Site navigation menu</SheetDescription>
         </SheetHeader>
         <nav className="mt-6" aria-label="Mobile navigation">
-          <ul className="flex flex-col space-y-1">
+          <ul className="flex flex-col">
             {items.map((item) => (
-              <li key={item.label}>
+              <li key={item.href}>
                 {item.children ? (
                   <>
-                    <span className="block px-3 py-2 text-sm font-medium text-muted-foreground">
-                      {item.label}
-                    </span>
-                    <ul className="ml-4 flex flex-col space-y-1">
+                    {renderLink(item)}
+                    <ul className="ml-4 flex flex-col">
                       {item.children.map((child) => (
-                        <li key={child.href}>
-                          <Link
-                            href={child.href}
-                            className={cn(
-                              "block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground",
-                              isActive(child.href)
-                                ? "bg-accent text-accent-foreground font-medium"
-                                : "text-foreground"
-                            )}
-                            onClick={() => setOpen(false)}
-                          >
-                            {child.label}
-                          </Link>
-                        </li>
+                        <li key={child.href}>{renderLink(child)}</li>
                       ))}
                     </ul>
                   </>
                 ) : (
-                  <Link
-                    href={item.href}
-                    className={cn(
-                      "block rounded-md px-3 py-2 text-sm transition-colors hover:bg-accent hover:text-accent-foreground",
-                      isActive(item.href)
-                        ? "bg-accent text-accent-foreground font-medium"
-                        : "text-foreground"
-                    )}
-                    onClick={() => setOpen(false)}
-                  >
-                    {item.label}
-                  </Link>
+                  renderLink(item)
                 )}
               </li>
             ))}
+            {/* Book a Call CTA (Atlas: last mobile link is green, weight 600) */}
+            <li>
+              <Link
+                href="/contact"
+                className="block py-3 font-disp text-base font-semibold text-green-d transition-colors hover:text-green"
+                onClick={() => setOpen(false)}
+              >
+                {t.nav.bookCall}
+              </Link>
+            </li>
           </ul>
         </nav>
 
-        {/* Theme Toggle */}
-        <div className="mt-6 border-t pt-6">
-          <div className="flex items-center justify-between px-3">
-            <span className="text-sm text-muted-foreground">{t.mobileNav.theme}</span>
-            <ThemeToggle />
-          </div>
-        </div>
-
         {/* Language Toggle */}
-        <div className="mt-4">
-          <div className="flex items-center justify-between px-3">
-            <span className="text-sm text-muted-foreground">{t.mobileNav.language}</span>
+        <div className="mt-6 border-t border-line pt-6">
+          <div className="flex items-center justify-between px-1">
+            <span className="text-sm text-soft">{t.mobileNav.language}</span>
             <LanguageToggle />
           </div>
         </div>

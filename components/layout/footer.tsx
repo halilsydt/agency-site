@@ -3,253 +3,119 @@
 import * as React from "react";
 import Link from "next/link";
 
-import { cn } from "@/lib/utils";
 import { getTranslations } from "@/lib/translations";
 import { useLanguage } from "@/components/providers/language-provider";
-import { Container } from "@/components/layout/container";
+import { LogoMark } from "@/components/layout/logo-mark";
 
 /**
- * Represents a social media link with platform identifier.
+ * Represents a footer navigation link.
  */
-interface SocialLink {
-  /** Social media platform name */
-  platform: "instagram" | "linkedin" | "twitter";
-  /** URL to the social media profile */
-  url: string;
-  /** Accessible label for the link */
-  label: string;
-}
-
-/**
- * Represents a quick navigation link.
- */
-interface QuickLink {
+interface FooterLink {
   /** Display label for the link */
   label: string;
-  /** URL path for the link */
+  /** URL path for the link (internal route or mailto:) */
   href: string;
 }
 
-/**
- * Social media links configuration.
- * Currently empty - to be populated when social profiles are created.
- */
-const socialLinks: SocialLink[] = [];
-
+/** Shared classes for footer column links (Atlas `.foot a`). */
+const FOOT_LINK = "block text-[14.5px] text-white/[0.66] transition-colors hover:text-white";
 
 /**
- * Instagram icon SVG component.
- */
-function InstagramIcon({ className }: { className?: string }): React.ReactElement {
-  return (
-    <svg
-      className={className}
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path
-        fillRule="evenodd"
-        d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z"
-        clipRule="evenodd"
-      />
-    </svg>
-  );
-}
-
-/**
- * LinkedIn icon SVG component.
- */
-function LinkedInIcon({ className }: { className?: string }): React.ReactElement {
-  return (
-    <svg
-      className={className}
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-    </svg>
-  );
-}
-
-/**
- * Twitter/X icon SVG component.
- */
-function TwitterIcon({ className }: { className?: string }): React.ReactElement {
-  return (
-    <svg
-      className={className}
-      fill="currentColor"
-      viewBox="0 0 24 24"
-      aria-hidden="true"
-    >
-      <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-    </svg>
-  );
-}
-
-/**
- * Map of social platform to icon component.
- */
-const socialIcons: Record<SocialLink["platform"], React.ComponentType<{ className?: string }>> = {
-  instagram: InstagramIcon,
-  linkedin: LinkedInIcon,
-  twitter: TwitterIcon,
-};
-
-/**
- * Site footer component with contact info, social links, quick links,
- * email signup placeholder, and legal links.
- * Responsive layout: stacked on mobile, 4-column grid on desktop.
+ * Atlas ink footer: deep green-black background, white text, a 4-column grid
+ * (brand+tagline, Quick Links, Services, Contact) collapsing to 2 columns below
+ * 760px, mint uppercase section headings, an on-dark logo, and a `foot-bot`
+ * bottom bar with the copyright + tagline. Ports `atlas.js:61–79`.
  *
  * @example
  * ```tsx
  * // In app/layout.tsx
- * import { Footer } from "@/components/layout/footer";
- *
- * export default function RootLayout({ children }) {
- *   return (
- *     <html>
- *       <body>
- *         <Header />
- *         {children}
- *         <Footer />
- *       </body>
- *     </html>
- *   );
- * }
+ * <Footer />
  * ```
  */
 export function Footer(): React.ReactElement {
   const { locale } = useLanguage();
   const t = getTranslations(locale);
 
-  /**
-   * Localized quick navigation links for the footer.
-   */
-  const quickLinks: QuickLink[] = [
-    { label: t.nav.amazonServices, href: "/services/amazon" },
-    { label: t.nav.etsyServices, href: "/services/etsy" },
+  const quickLinks: FooterLink[] = [
+    { label: t.nav.home, href: "/" },
     { label: t.nav.pricing, href: "/pricing" },
     { label: t.nav.about, href: "/about" },
-    { label: t.nav.contact, href: "/contact" },
+    { label: t.nav.faq, href: "/faq" },
   ];
 
+  const serviceLinks: FooterLink[] = [
+    { label: t.nav.amazonServices, href: "/services/amazon" },
+    { label: t.nav.etsyServices, href: "/services/etsy" },
+    { label: t.nav.bookCall, href: "/contact" },
+  ];
+
+  const headingClass =
+    "mb-[18px] font-disp text-[12.5px] font-semibold uppercase tracking-[0.1em] text-[#6FD3A4]";
+
   return (
-    <footer className="bg-muted mt-auto">
-      <Container>
-        <div className="py-12 md:py-16">
-          {/* Main Footer Grid */}
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
-            {/* Logo and Tagline Section */}
-            <div className="space-y-4">
-              <Link
-                href="/"
-                className="flex items-center space-x-2 font-bold text-xl"
-              >
-                <span className="text-primary">Scalenty</span>
-              </Link>
-              <p className="text-foreground/70 text-sm">
-                {t.footer.tagline}
-              </p>
-            </div>
-
-            {/* Quick Links Section */}
-            <div className="space-y-4">
-              <h3 className="font-semibold text-sm uppercase tracking-wider">
-                {t.footer.quickLinks}
-              </h3>
-              <nav aria-label="Footer quick links">
-                <ul className="space-y-2">
-                  {quickLinks.map((link) => (
-                    <li key={link.href}>
-                      <Link
-                        href={link.href}
-                        className={cn(
-                          "text-sm text-foreground/70 transition-colors",
-                          "hover:text-primary"
-                        )}
-                      >
-                        {link.label}
-                      </Link>
-                    </li>
-                  ))}
-                </ul>
-              </nav>
-            </div>
-
-            {/* Contact and Social Section */}
-            <div className="space-y-4">
-              <h3 className="font-semibold text-sm uppercase tracking-wider">
-                {t.footer.contact}
-              </h3>
-              <address className="not-italic">
-                <a
-                  href="mailto:admin@scalenty.net"
-                  className={cn(
-                    "text-sm text-foreground/70 transition-colors",
-                    "hover:text-primary"
-                  )}
-                >
-                  admin@scalenty.net
-                </a>
-              </address>
-
-              {socialLinks.length > 0 && (
-                <>
-                  <h3 className="font-semibold text-sm uppercase tracking-wider pt-4">
-                    {t.footer.followUs}
-                  </h3>
-                  <div className="flex space-x-4">
-                    {socialLinks.map((link) => {
-                      const Icon = socialIcons[link.platform];
-                      return (
-                        <a
-                          key={link.platform}
-                          href={link.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          aria-label={link.label}
-                          className={cn(
-                            "text-foreground/70 transition-colors",
-                            "hover:text-primary"
-                          )}
-                        >
-                          <Icon className="h-5 w-5" />
-                        </a>
-                      );
-                    })}
-                  </div>
-                </>
-              )}
-            </div>
+    <footer className="mt-auto bg-ink text-white">
+      <div className="mx-auto max-w-wrap px-9 pb-10 pt-20">
+        {/* Main Footer Grid (Atlas 1.7fr 1fr 1fr 1fr → 2-col ≤760px) */}
+        <div className="mb-[50px] grid grid-cols-[1.7fr_1fr_1fr_1fr] gap-9 max-[760px]:grid-cols-2 max-[760px]:gap-[30px]">
+          {/* Brand + tagline */}
+          <div>
+            <Link
+              href="/"
+              aria-label="Scalenty"
+              className="inline-flex items-center gap-2.5 text-white no-underline hover:text-white"
+            >
+              <LogoMark onDark className="h-6 w-auto" />
+              <span className="font-disp text-[33px] font-bold leading-none tracking-[-0.025em] text-white">
+                Scalenty
+              </span>
+            </Link>
+            <p className="mt-4 max-w-[24em] text-[14.5px] text-white/60">{t.footer.tagline}</p>
           </div>
+
+          {/* Quick Links */}
+          <nav aria-label="Footer quick links">
+            <h5 className={headingClass}>{t.footer.quickLinks}</h5>
+            {quickLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={FOOT_LINK}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Services */}
+          <nav aria-label="Footer services">
+            <h5 className={headingClass}>{t.nav.services}</h5>
+            {serviceLinks.map((link) => (
+              <Link key={link.href} href={link.href} className={FOOT_LINK}>
+                {link.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Contact */}
+          <nav aria-label="Footer contact">
+            <h5 className={headingClass}>{t.footer.contact}</h5>
+            <Link href="/contact" className={FOOT_LINK}>
+              {t.common.contactUs}
+            </Link>
+            <a href="mailto:admin@scalenty.net" className={FOOT_LINK}>
+              admin@scalenty.net
+            </a>
+            <Link href="/privacy" className={FOOT_LINK}>
+              {t.footer.privacyPolicy}
+            </Link>
+            <Link href="/terms" className={FOOT_LINK}>
+              {t.footer.termsOfService}
+            </Link>
+          </nav>
         </div>
 
-        {/* Bottom Bar with Legal Links and Copyright */}
-        <div className="border-t py-6">
-          <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-            <div className="flex gap-4 text-sm text-foreground/70">
-              <Link
-                href="/privacy"
-                className="transition-colors hover:text-primary"
-              >
-                {t.footer.privacyPolicy}
-              </Link>
-              <Link
-                href="/terms"
-                className="transition-colors hover:text-primary"
-              >
-                {t.footer.termsOfService}
-              </Link>
-            </div>
-            <p className="text-sm text-foreground/70">
-              {t.footer.copyright.replace('{year}', new Date().getFullYear().toString())}
-            </p>
-          </div>
+        {/* Bottom bar */}
+        <div className="flex flex-wrap justify-between gap-2.5 border-t border-white/[0.13] pt-7 text-[13.5px] text-white/50">
+          <span>{t.footer.copyright.replace("{year}", new Date().getFullYear().toString())}</span>
+          <span>{t.footer.tagline}</span>
         </div>
-      </Container>
+      </div>
     </footer>
   );
 }

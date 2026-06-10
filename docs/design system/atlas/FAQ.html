@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Scalenty</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="atlas.css?v=14">
+</head>
+<body data-page="faq">
+
+<section class="phero cc">
+  <div class="wrap">
+    <span class="eyebrow cc">FAQ</span>
+    <h1>Frequently asked <span class="mark">questions</span>.</h1>
+    <p>Find answers to common questions about our services, pricing, and how we work with clients.</p>
+  </div>
+</section>
+
+<section style="padding-top:24px">
+  <div class="wrap">
+    <div class="faq-cats">
+      <button class="faq-cat active" data-cat="all">All</button>
+      <button class="faq-cat" data-cat="general">General</button>
+      <button class="faq-cat" data-cat="amazon">Amazon</button>
+      <button class="faq-cat" data-cat="etsy">Etsy</button>
+      <button class="faq-cat" data-cat="pricing">Pricing</button>
+    </div>
+    <div class="faq-list" id="faqList"></div>
+  </div>
+</section>
+
+<section id="cta">
+  <div class="wrap">
+    <div class="cta reveal">
+      <h2>Still have questions?</h2>
+      <p>We're here to help. Reach out and we'll get back to you promptly.</p>
+      <div class="hero-cta">
+        <a class="btn btn-green" href="Contact.html">Contact Us
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a class="btn btn-ghost" href="Pricing.html">View Pricing</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="i18n.js?v=14"></script>
+<script src="atlas.js?v=14"></script>
+<script>
+  const faqs=[
+    {c:'general',q:'What platforms do you support?',a:"We specialize in Amazon and Etsy marketplace consulting. Whether you're selling on one platform or both, we can help optimize your presence and grow your sales."},
+    {c:'general',q:'How does the consultation process work?',a:'We start with a free discovery call to understand your business and goals. From there, we create a custom strategy tailored to your specific needs and provide ongoing support throughout implementation.'},
+    {c:'general',q:'How long before I see results?',a:'Results vary depending on your starting point and goals, but most clients see measurable improvements within 30–60 days. We focus on sustainable growth, not quick fixes.'},
+    {c:'amazon',q:'Can you help with Amazon PPC advertising?',a:'Yes! Our Amazon advertising services include campaign setup, keyword research, bid optimization, and ongoing performance monitoring to maximize your ROI.'},
+    {c:'amazon',q:'Do you help with Amazon account suspensions?',a:'Absolutely. We have experience helping sellers navigate account health issues, including suspension appeals and compliance guidance to prevent future problems.'},
+    {c:'etsy',q:'How can you improve my Etsy SEO?',a:"We optimize your shop and listings for Etsy's search algorithm, including title optimization, tag research, category selection, and attribute usage to improve visibility."},
+    {c:'etsy',q:'Do you offer Etsy shop setup assistance?',a:'Yes, we help new sellers set up their Etsy shops properly from the start, including shop branding, policy creation, and listing optimization best practices.'},
+    {c:'pricing',q:'Are there any hidden fees?',a:"No hidden fees, ever. We believe in transparent pricing. What you see on our pricing page is what you pay. We'll always discuss any costs upfront before starting work."},
+    {c:'pricing',q:'Do you offer refunds or guarantees?',a:"We stand behind our work. While marketplace success depends on many factors, we offer a satisfaction guarantee on our consulting services. If you're not happy with our recommendations, we'll work with you to make it right."},
+    {c:'pricing',q:'Is there a discount for using both Amazon and Etsy services?',a:'Yes! We offer a bundle discount for clients who use our services for both platforms. Check our pricing page for details on our multi-platform packages.'}
+  ];
+  const list=document.getElementById('faqList');
+  function render(cat){
+    const items=faqs.filter(f=>cat==='all'||f.c===cat);
+    list.innerHTML=items.map((f,i)=>`<details class="q" ${i===0?'open':''}><summary>${f.q}<span class="pl"></span></summary><p>${f.a}</p></details>`).join('');
+  }
+  render('all');
+  document.querySelectorAll('.faq-cat').forEach(b=>{
+    b.addEventListener('click',()=>{
+      document.querySelectorAll('.faq-cat').forEach(x=>x.classList.remove('active'));
+      b.classList.add('active');
+      render(b.dataset.cat);
+    });
+  });
+</script>
+</body>
+</html>

@@ -1,4 +1,13 @@
 import {
+  UserPlus,
+  FileText,
+  TrendingUp,
+  Store,
+  ShieldCheck,
+  Package,
+  type LucideIcon,
+} from "lucide-react";
+import {
   Card,
   CardContent,
   CardDescription,
@@ -17,14 +26,14 @@ export interface ServiceCardProps {
 
 /**
  * Icon mapping for service icons.
- * Maps icon names to emoji representations.
+ * Maps icon names to Lucide React components.
  */
-const iconMap: Record<string, string> = {
-  "user-plus": "👤",
-  "file-text": "📄",
-  "trending-up": "📈",
-  store: "🏪",
-  "shield-check": "🛡️",
+const iconMap: Record<string, LucideIcon> = {
+  "user-plus": UserPlus,
+  "file-text": FileText,
+  "trending-up": TrendingUp,
+  store: Store,
+  "shield-check": ShieldCheck,
 };
 
 /**
@@ -40,7 +49,7 @@ const iconMap: Record<string, string> = {
  * ```
  */
 export function ServiceCard({ service }: ServiceCardProps): React.ReactElement {
-  const iconEmoji = iconMap[service.icon] || "📦";
+  const IconComponent = iconMap[service.icon] || Package;
 
   return (
     <Card className="h-full flex flex-col">
@@ -50,7 +59,7 @@ export function ServiceCard({ service }: ServiceCardProps): React.ReactElement {
           data-testid="service-icon"
           className="mb-4 w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center"
         >
-          <span className="text-2xl">{iconEmoji}</span>
+          <IconComponent className="w-6 h-6 text-primary" aria-hidden="true" />
         </div>
         <CardTitle className="text-xl font-semibold">{service.title}</CardTitle>
       </CardHeader>

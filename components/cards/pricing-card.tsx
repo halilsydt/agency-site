@@ -10,6 +10,7 @@ import {
   CardFooter,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import type { PricingPackage } from "@/lib/types";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -43,14 +44,14 @@ export function PricingCard({ package: pkg }: PricingCardProps): React.ReactElem
     <Card
       className={cn(
         "relative h-full flex flex-col",
-        pkg.isPopular && "border-primary ring-2 ring-primary"
+        pkg.isPopular && "border-green ring-2 ring-green"
       )}
     >
       {pkg.isPopular && (
         <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <span className="bg-primary text-primary-foreground px-3 py-1 text-sm font-medium rounded-full">
+          <Badge variant="default" className="px-3 py-1">
             {t.common.mostPopular}
-          </span>
+          </Badge>
         </div>
       )}
       <CardHeader className={cn(pkg.isPopular && "pt-8")}>

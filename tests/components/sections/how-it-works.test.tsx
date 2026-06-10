@@ -46,18 +46,18 @@ describe("HowItWorks", () => {
     );
   });
 
-  it("renders all default step cards", () => {
+  it("renders all default step titles", () => {
     renderHowItWorks({ headline: "How It Works" });
-    expect(screen.getByText("Book Consultation")).toBeInTheDocument();
+    expect(screen.getByText("Book a consultation")).toBeInTheDocument();
     expect(screen.getByText("Get Custom Strategy")).toBeInTheDocument();
     expect(screen.getByText("Implement & Grow")).toBeInTheDocument();
   });
 
-  it("renders step numbers", () => {
+  it("renders Atlas STEP 0X labels", () => {
     renderHowItWorks({ headline: "How It Works" });
-    expect(screen.getByText("1")).toBeInTheDocument();
-    expect(screen.getByText("2")).toBeInTheDocument();
-    expect(screen.getByText("3")).toBeInTheDocument();
+    expect(screen.getByText(/STEP 01/i)).toBeInTheDocument();
+    expect(screen.getByText(/STEP 02/i)).toBeInTheDocument();
+    expect(screen.getByText(/STEP 03/i)).toBeInTheDocument();
   });
 
   it("renders step descriptions", () => {
@@ -67,6 +67,11 @@ describe("HowItWorks", () => {
     expect(
       screen.getByText(/watch your business thrive/i)
     ).toBeInTheDocument();
+  });
+
+  it("renders the section eyebrow", () => {
+    renderHowItWorks({ headline: "How It Works" });
+    expect(screen.getByText("How it works")).toBeInTheDocument();
   });
 
   it("renders subheadline when provided", () => {
@@ -82,11 +87,10 @@ describe("HowItWorks", () => {
     expect(screen.queryByText("Our simple process")).not.toBeInTheDocument();
   });
 
-  it("renders 3 step cards", () => {
+  it("renders 3 steps", () => {
     renderHowItWorks({ headline: "Process" });
-    // Each step card has a step number - verify we have 3 steps
-    expect(screen.getByText("1")).toBeInTheDocument();
-    expect(screen.getByText("2")).toBeInTheDocument();
-    expect(screen.getByText("3")).toBeInTheDocument();
+    expect(screen.getByText(/STEP 01/i)).toBeInTheDocument();
+    expect(screen.getByText(/STEP 02/i)).toBeInTheDocument();
+    expect(screen.getByText(/STEP 03/i)).toBeInTheDocument();
   });
 });

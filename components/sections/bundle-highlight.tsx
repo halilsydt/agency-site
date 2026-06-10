@@ -22,7 +22,7 @@ export function BundleHighlight(): React.ReactElement {
   const t = getTranslations(locale);
 
   return (
-    <section className="py-12 bg-accent/10">
+    <section className="py-16 md:py-20 bg-accent/10">
       <Container>
         <div className="flex flex-col md:flex-row items-center justify-center gap-6 md:gap-8 text-center md:text-left">
           <div className="flex items-center gap-3">

@@ -3,15 +3,16 @@ import { describe, it, expect } from "vitest";
 import { DifferentiatorCard } from "@/components/cards/differentiator-card";
 
 const defaultProps = {
-  icon: "🤝",
+  icon: "handshake",
   title: "Honest Approach",
   description: "No hype, no empty promises.",
 };
 
 describe("DifferentiatorCard", () => {
   it("renders the icon", () => {
-    render(<DifferentiatorCard {...defaultProps} />);
-    expect(screen.getByText("🤝")).toBeInTheDocument();
+    const { container } = render(<DifferentiatorCard {...defaultProps} />);
+    // Icon now renders as a Lucide SVG (aria-hidden) rather than an emoji
+    expect(container.querySelector("svg")).toBeInTheDocument();
   });
 
   it("renders the title", () => {

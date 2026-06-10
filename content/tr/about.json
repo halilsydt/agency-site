@@ -1,19 +1,19 @@
 {
   "hero": {
     "headline": "Hakkımızda",
-    "subheadline": "Amazon ve Etsy satıcılarının işletmelerini dürüst, sonuç odaklı stratejilerle büyütmelerine yardımcı olmaya adanmış pazar yeri uzmanlarıyız."
+    "subheadline": "Amazon ve Etsy satıcılarının işlerini dürüst, sonuç odaklı stratejilerle büyütmelerine yardımcı olmaya kendimizi adadık."
   },
   "mission": {
     "headline": "Misyonumuz",
-    "text": "Amazon ve Etsy satıcılarının dürüst, sonuç odaklı danışmanlıkla başarılı olmalarına yardımcı olmaya adanmış durumdayız. Abartı yok, boş vaatler yok—sadece işe yarayan gerçek stratejiler. Her satıcının ölçülebilir sonuçlar sunan uzman rehberliğine erişmeyi hak ettiğine inanıyoruz."
+    "text": "Amazon ve Etsy satıcılarının dürüst, sonuç odaklı danışmanlıkla başarıya ulaşmasına kendimizi adadık. Abartı yok, boş vaat yok — yalnızca işe yarayan gerçek stratejiler. Her satıcının ölçülebilir sonuçlar sunan uzman rehberliğe erişmeyi hak ettiğine inanıyoruz."
   },
   "approach": {
     "headline": "Yaklaşımımız",
-    "description": "Farklı bir danışmanlık anlayışına inanıyoruz. Şeffaflık, veriye dayalı kararlar ve müşterilerimizle gerçek ortaklık üzerine kurulu bir anlayış.",
+    "description": "Şeffaflık, veriye dayalı kararlar ve müşterilerimizle gerçek bir ortaklık üzerine kurulu.",
     "points": [
       "Mevcut durumunuzun dürüst değerlendirmesi",
-      "Hedeflerinize özel veriye dayalı stratejiler",
-      "Gizli ücretsiz şeffaf fiyatlandırma",
+      "Hedeflerinize göre uyarlanmış veri odaklı stratejiler",
+      "Gizli ücret içermeyen şeffaf fiyatlandırma",
       "Ölçebileceğiniz ve takip edebileceğiniz gerçek sonuçlar"
     ]
   },
@@ -22,25 +22,25 @@
       "id": "founder-1",
       "name": "Mehmet Ali Sabaz",
       "role": "Kurucu Ortak",
-      "bio": "Amazon ve Etsy'de satıcılara yardım etme konusunda kapsamlı deneyime sahip olan Mehmet, neyin işe yaradığını neyin yaramadığını gördü. Misyonu bu bilgiyi paylaşmak ve işletmenizi büyütmenize yardımcı olmaktır."
+      "bio": "Amazon ve Etsy'de satıcılara yardım etme konusunda geniş deneyime sahip olan Mehmet, neyin işe yarayıp yaramadığını gördü. Misyonu bu bilgiyi paylaşmak ve işinizi büyütmenize yardımcı olmaktır."
     },
     {
       "id": "founder-2",
       "name": "Halil Saydut",
       "role": "Kurucu Ortak",
-      "bio": "Halil, Amazon ve Etsy satıcılarının başarılı olmasına yardımcı olmak için derin pazar yeri uzmanlığı getiriyor. Gerçek bir fark yaratan sonuç odaklı stratejiler sunma konusunda tutkulu."
+      "bio": "Halil, Amazon ve Etsy satıcılarının başarıya ulaşması için derin pazaryeri uzmanlığı sunar. Gerçek fark yaratan sonuç odaklı stratejiler sunmaya tutkuyla bağlıdır."
     }
   ],
   "highlights": [
     {
       "id": "years",
-      "label": "Yıllık Deneyim",
+      "label": "Yıl Deneyim",
       "value": "5+",
       "icon": "calendar"
     },
     {
       "id": "clients",
-      "label": "Yardım Edilen Müşteri",
+      "label": "Desteklenen Müşteri",
       "value": "100+",
       "icon": "users"
     },

@@ -105,7 +105,8 @@ describe("PricingCard", () => {
 
   it("applies highlight styling for popular package", () => {
     const { container } = renderPricingCard(mockPackage);
-    const card = container.querySelector('[class*="ring-primary"]');
+    // Atlas: popular tier highlighted with emerald ring
+    const card = container.querySelector('[class*="ring-green"]');
     expect(card).toBeInTheDocument();
   });
 

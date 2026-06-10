@@ -3,7 +3,6 @@ import userEvent from "@testing-library/user-event";
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { MobileNav } from "@/components/layout/mobile-nav";
 import type { NavItem } from "@/components/layout/header";
-import { ThemeProvider } from "@/components/providers/theme-provider";
 import { LanguageProvider } from "@/components/providers/language-provider";
 
 // Mock next/navigation
@@ -13,28 +12,20 @@ vi.mock("next/navigation", () => ({
 }));
 
 /**
- * Render component wrapped with ThemeProvider and LanguageProvider
+ * Render component wrapped with LanguageProvider
  */
 function renderWithProvider(ui: React.ReactElement) {
-  return render(
-    <LanguageProvider>
-      <ThemeProvider>{ui}</ThemeProvider>
-    </LanguageProvider>
-  );
+  return render(<LanguageProvider>{ui}</LanguageProvider>);
 }
 
+// Atlas flat nav set (matches the header)
 const mockNavItems: NavItem[] = [
-  {
-    label: "Services",
-    href: "/services",
-    children: [
-      { label: "Amazon Services", href: "/services/amazon" },
-      { label: "Etsy Services", href: "/services/etsy" },
-    ],
-  },
+  { label: "Home", href: "/" },
+  { label: "Amazon", href: "/services/amazon" },
+  { label: "Etsy", href: "/services/etsy" },
   { label: "Pricing", href: "/pricing" },
   { label: "About", href: "/about" },
-  { label: "Contact", href: "/contact" },
+  { label: "FAQ", href: "/faq" },
 ];
 
 const mockIsActive = vi.fn((href: string) => href === mockPathname());
@@ -75,10 +66,10 @@ describe("MobileNav", () => {
     expect(button).toBeInTheDocument();
   });
 
-  it("hamburger button is hidden on md screens and above", () => {
+  it("hamburger button is hidden above the Atlas 860px breakpoint", () => {
     renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
     const button = screen.getByRole("button", { name: "Open menu" });
-    expect(button).toHaveClass("md:hidden");
+    expect(button).toHaveClass("min-[861px]:hidden");
   });
 
   it("opens sheet when hamburger is clicked", async () => {
@@ -98,26 +89,35 @@ describe("MobileNav", () => {
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
-    expect(screen.getByText("Services")).toBeInTheDocument();
-    expect(screen.getByText("Amazon Services")).toBeInTheDocument();
-    expect(screen.getByText("Etsy Services")).toBeInTheDocument();
-    expect(screen.getByText("Pricing")).toBeInTheDocument();
-    expect(screen.getByText("About")).toBeInTheDocument();
-    expect(screen.getByText("Contact")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Home" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Amazon" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Etsy" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "Pricing" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "About" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "FAQ" })).toBeInTheDocument();
   });
 
-  it("displays Services children as sub-items", async () => {
+  it("includes a Book a Call CTA linking to contact", async () => {
     const user = userEvent.setup();
     renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
-    // Amazon and Etsy should be links
-    const amazonLink = screen.getByRole("link", { name: "Amazon Services" });
-    const etsyLink = screen.getByRole("link", { name: "Etsy Services" });
+    const cta = screen.getByRole("link", { name: "Book a Call" });
+    expect(cta).toHaveAttribute("href", "/contact");
+  });
 
-    expect(amazonLink).toHaveAttribute("href", "/services/amazon");
-    expect(etsyLink).toHaveAttribute("href", "/services/etsy");
+  it("renders Amazon and Etsy as top-level service links", async () => {
+    const user = userEvent.setup();
+    renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
+
+    await user.click(screen.getByRole("button", { name: "Open menu" }));
+
+    expect(screen.getByRole("link", { name: "Amazon" })).toHaveAttribute(
+      "href",
+      "/services/amazon"
+    );
+    expect(screen.getByRole("link", { name: "Etsy" })).toHaveAttribute("href", "/services/etsy");
   });
 
   it("sheet can be closed via close button", async () => {
@@ -146,24 +146,21 @@ describe("MobileNav", () => {
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
     const pricingLink = screen.getByRole("link", { name: "Pricing" });
-    expect(pricingLink).toHaveClass("bg-accent");
-    expect(pricingLink).toHaveClass("font-medium");
+    expect(pricingLink).toHaveClass("text-green-d");
+    expect(pricingLink).toHaveAttribute("aria-current", "page");
   });
 
-  it("applies active styling to nested routes", async () => {
+  it("applies active styling to a top-level service route", async () => {
     mockPathname.mockReturnValue("/services/amazon");
-    mockIsActive.mockImplementation(
-      (href: string) =>
-        href === "/services/amazon" || href === "/services"
-    );
+    mockIsActive.mockImplementation((href: string) => href === "/services/amazon");
 
     const user = userEvent.setup();
     renderWithProvider(<MobileNav items={mockNavItems} isActive={mockIsActive} />);
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
-    const amazonLink = screen.getByRole("link", { name: "Amazon Services" });
-    expect(amazonLink).toHaveClass("bg-accent");
+    const amazonLink = screen.getByRole("link", { name: "Amazon" });
+    expect(amazonLink).toHaveClass("text-green-d");
   });
 
   it("has mobile navigation landmark", async () => {
@@ -182,17 +179,8 @@ describe("MobileNav", () => {
 
     await user.click(screen.getByRole("button", { name: "Open menu" }));
 
-    expect(screen.getByRole("link", { name: "Pricing" })).toHaveAttribute(
-      "href",
-      "/pricing"
-    );
-    expect(screen.getByRole("link", { name: "About" })).toHaveAttribute(
-      "href",
-      "/about"
-    );
-    expect(screen.getByRole("link", { name: "Contact" })).toHaveAttribute(
-      "href",
-      "/contact"
-    );
+    expect(screen.getByRole("link", { name: "Pricing" })).toHaveAttribute("href", "/pricing");
+    expect(screen.getByRole("link", { name: "About" })).toHaveAttribute("href", "/about");
+    expect(screen.getByRole("link", { name: "FAQ" })).toHaveAttribute("href", "/faq");
   });
 });

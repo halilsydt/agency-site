@@ -7,7 +7,7 @@ import { ContactPageClient } from "./contact-page-client";
 export const metadata: Metadata = {
   title: "Contact Us | Scalenty",
   description:
-    "Get in touch with our team. Ask questions about Amazon or Etsy consulting services, or book a free consultation.",
+    "Get in touch with our team. Ask questions about Etsy or Amazon consulting services, or book a free consultation.",
   openGraph: {
     title: "Contact Us | Scalenty",
     description:

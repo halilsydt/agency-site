@@ -7,7 +7,7 @@
       "name": "Başlangıç",
       "price": 299,
       "priceUnit": "/ay",
-      "description": "Yeni başlayan Amazon satıcıları için mükemmel",
+      "description": "Yeni başlayan Amazon satıcıları için ideal",
       "features": [
         "Hesap denetimi ve kurulum incelemesi",
         "Temel liste optimizasyonu (5 liste)",
@@ -25,7 +25,7 @@
       "name": "Büyüme",
       "price": 499,
       "priceUnit": "/ay",
-      "description": "Ölçeklemeye hazır büyüyen satıcılar için ideal",
+      "description": "Ölçeklenmeye hazır, büyüyen satıcılar için ideal",
       "features": [
         "Başlangıç'taki her şey",
         "PPC kampanya yönetimi",
@@ -67,7 +67,7 @@
       "name": "Başlangıç",
       "price": 199,
       "priceUnit": "/ay",
-      "description": "Yeni başlayan Etsy satıcıları için mükemmel",
+      "description": "Yeni başlayan Etsy satıcıları için ideal",
       "features": [
         "Mağaza denetimi ve kurulum incelemesi",
         "Temel SEO optimizasyonu (10 liste)",
@@ -85,7 +85,7 @@
       "name": "Büyüme",
       "price": 399,
       "priceUnit": "/ay",
-      "description": "Ölçeklemeye hazır büyüyen mağazalar için ideal",
+      "description": "Ölçeklenmeye hazır, büyüyen mağazalar için ideal",
       "features": [
         "Başlangıç'taki her şey",
         "Pazarlama stratejisi geliştirme",

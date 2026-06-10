@@ -5,7 +5,7 @@ import { ResultCard } from "@/components/cards/result-card";
 const defaultProps = {
   imageSrc: "/images/results/amazon-year.png",
   imageAlt: "Test dashboard screenshot",
-  caption: "Seller: Full year sales growth",
+  metric: "Full year sales growth",
   platform: "amazon" as const,
 };
 
@@ -17,7 +17,7 @@ describe("ResultCard", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders the caption", () => {
+  it("renders the metric", () => {
     render(<ResultCard {...defaultProps} />);
     expect(screen.getByText(/Full year sales growth/i)).toBeInTheDocument();
   });
@@ -28,14 +28,9 @@ describe("ResultCard", () => {
     expect(screen.getByText("amazon")).toBeInTheDocument();
   });
 
-  it("renders optional metric when provided", () => {
+  it("renders the provided metric text", () => {
     render(<ResultCard {...defaultProps} metric="3x growth" />);
     expect(screen.getByText("3x growth")).toBeInTheDocument();
-  });
-
-  it("does not render metric when not provided", () => {
-    render(<ResultCard {...defaultProps} />);
-    expect(screen.queryByText("3x growth")).not.toBeInTheDocument();
   });
 
   it("renders etsy platform badge correctly", () => {

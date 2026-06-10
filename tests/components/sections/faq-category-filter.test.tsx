@@ -65,9 +65,9 @@ describe("FAQCategoryFilter", () => {
     const amazonButton = screen.getByRole("button", { name: "Amazon" });
     const allButton = screen.getByRole("button", { name: "All" });
 
-    // Active button (default variant) has bg-primary, outline has border-primary
-    expect(amazonButton.className).toContain("bg-primary");
-    expect(allButton.className).toContain("border-primary");
+    // Active button (default variant) is Atlas .btn-green; outline is .btn-ghost (line border)
+    expect(amazonButton.className).toContain("bg-green");
+    expect(allButton.className).toContain("border-line");
   });
 
   it("calls onCategoryChange when button clicked", async () => {

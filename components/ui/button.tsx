@@ -9,27 +9,37 @@ import { cn } from "@/lib/utils";
  * Defines all available button variants and sizes for the design system.
  */
 const buttonVariants = cva(
-  "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-semibold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0",
+  // Atlas .btn base (atlas.css:35–43): display font, semibold, 9px gap, 12px radius,
+  // 1.5px transparent border, Atlas easing, 17px icons with hover nudge on green.
+  "inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[12px] font-disp text-[15px] font-semibold border-[1.5px] border-transparent transition-all duration-200 ease-[cubic-bezier(.2,.7,.3,1)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-[17px] [&_svg]:shrink-0 [&_svg]:transition-transform [&_svg]:duration-200",
   {
     variants: {
       variant: {
+        // .btn-green: emerald + soft glow, hover darker + lift + stronger glow + icon nudge
         default:
-          "bg-primary text-primary-foreground shadow hover:bg-primary-700",
+          "bg-green text-white shadow-[0_10px_24px_-10px_rgba(14,140,90,.6)] hover:bg-green-d hover:text-white hover:-translate-y-0.5 hover:shadow-[0_16px_30px_-10px_rgba(14,140,90,.65)] hover:[&_svg]:translate-x-[3px] no-underline hover:no-underline",
+        // .btn-ink: ink, hover darker + lift
         secondary:
-          "bg-secondary text-secondary-foreground shadow-sm hover:bg-secondary/80",
+          "bg-ink text-white hover:bg-ink-2 hover:text-white hover:-translate-y-0.5 no-underline hover:no-underline",
+        // .btn-ghost: transparent, ink text, line border; hover → ink border + surface
         outline:
-          "border-2 border-primary bg-transparent text-primary hover:bg-primary hover:text-primary-foreground",
-        ghost: "hover:bg-accent hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 hover:underline",
+          "bg-transparent text-ink border-line hover:border-ink hover:bg-surface hover:text-ink no-underline hover:no-underline",
+        // .btn-ghost (borderless variant) — same ghost family, no resting border color
+        ghost:
+          "bg-transparent text-ink hover:border-ink hover:bg-surface hover:text-ink no-underline hover:no-underline",
+        // text link: emerald, underline on hover
+        link: "border-transparent text-green underline-offset-4 hover:underline hover:text-green-d",
+        // clay CTA treatment
         accent:
-          "bg-accent text-accent-foreground shadow hover:bg-accent-600",
+          "bg-clay text-white shadow-[0_10px_24px_-10px_rgba(180,90,55,.5)] hover:bg-clay/90 hover:text-white hover:-translate-y-0.5 no-underline hover:no-underline",
         destructive:
-          "bg-destructive text-destructive-foreground shadow-sm hover:bg-destructive/90",
+          "bg-destructive text-white shadow-sm hover:bg-destructive/90 hover:text-white no-underline hover:no-underline",
       },
       size: {
-        default: "h-10 px-5 py-2",
-        sm: "h-8 rounded-lg px-3 text-xs",
-        lg: "h-12 rounded-xl px-8 text-base",
+        // Atlas default padding ≈ 14px 24px; heights kept distinguishable for size tests.
+        default: "h-11 px-6 py-[14px]",
+        sm: "h-9 px-4 text-[13.5px]",
+        lg: "h-12 px-8 text-base",
         icon: "h-10 w-10",
       },
     },

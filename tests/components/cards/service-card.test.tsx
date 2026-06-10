@@ -33,8 +33,10 @@ describe("ServiceCard", () => {
 
   it("applies correct styling with card structure", () => {
     const { container } = render(<ServiceCard service={mockService} />);
-    const card = container.querySelector('[class*="rounded-xl"]');
+    // Atlas base Card surface uses a ~24px radius (rounded-[24px])
+    const card = container.firstElementChild as HTMLElement;
     expect(card).toBeInTheDocument();
+    expect(card.className).toContain("rounded-[24px]");
   });
 
   it("renders different service correctly", () => {

@@ -1,23 +1,8 @@
 "use client";
 
-import { Container } from "@/components/layout/container";
-import { StepCard } from "@/components/cards/step-card";
+import { Reveal } from "@/components/ui/reveal";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getTranslations } from "@/lib/translations";
-
-/**
- * A single step in the "How It Works" process.
- */
-export interface Step {
-  /** Step number (1, 2, 3, etc.) */
-  stepNumber: number;
-  /** Step title */
-  title: string;
-  /** Brief description of this step */
-  description: string;
-  /** Optional icon identifier */
-  icon?: string;
-}
 
 /**
  * Props for the HowItWorks component.
@@ -30,22 +15,15 @@ export interface HowItWorksProps {
 }
 
 /**
- * Homepage "How It Works" section displaying the consulting process as a step-by-step flow.
- * Features numbered steps with icons, titles, and descriptions connected by visual flow lines.
- * Responsive layout: horizontal on desktop, vertical stack on mobile.
- * Supports internationalization through the language context.
+ * Homepage Atlas process section (atlas.css:228–236). A centered section head
+ * plus a three-column `.proc` layout with vertical divider rules between steps
+ * (switching to bottom borders when stacked below 820px). Each step shows a
+ * green "STEP 0X" label, a title, and a description.
  *
- * @param props - Component props
- * @param props.headline - Section headline displayed as h2
- * @param props.subheadline - Optional supporting text below headline
+ * The "STEP" word comes from i18n; the zero-padded number is derived from the
+ * index so it stays locale-safe.
  *
- * @example
- * ```tsx
- * <HowItWorks
- *   headline="How It Works"
- *   subheadline="Our simple process to help you succeed"
- * />
- * ```
+ * @param props - {@link HowItWorksProps}
  */
 export function HowItWorks({
   headline,
@@ -54,73 +32,44 @@ export function HowItWorks({
   const { locale } = useLanguage();
   const t = getTranslations(locale);
 
-  const steps: Step[] = [
-    {
-      stepNumber: 1,
-      title: t.howItWorks.step1Title,
-      description: t.howItWorks.step1Description,
-      icon: "📅",
-    },
-    {
-      stepNumber: 2,
-      title: t.howItWorks.step2Title,
-      description: t.howItWorks.step2Description,
-      icon: "📋",
-    },
-    {
-      stepNumber: 3,
-      title: t.howItWorks.step3Title,
-      description: t.howItWorks.step3Description,
-      icon: "🚀",
-    },
+  const steps = [
+    { title: t.howItWorks.step1Title, description: t.howItWorks.step1Description },
+    { title: t.howItWorks.step2Title, description: t.howItWorks.step2Description },
+    { title: t.howItWorks.step3Title, description: t.howItWorks.step3Description },
   ];
 
   return (
-    <section className="py-16 md:py-24 bg-muted/30">
-      <Container>
-        {/* Section Header */}
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground">
+    <section className="py-[92px]">
+      <div className="wrap">
+        {/* Centered section head */}
+        <Reveal className="mx-auto mb-12 max-w-[680px] text-center">
+          <span className="eyebrow cc">{t.howItWorks.eyebrow}</span>
+          <h2 className="mt-5 font-disp text-[clamp(34px,4.4vw,52px)] font-bold leading-[1.02] tracking-[-.03em]">
             {headline}
           </h2>
-          {subheadline && (
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
-              {subheadline}
-            </p>
-          )}
-        </div>
+          {subheadline && <p className="mt-[18px] text-[18px] text-soft">{subheadline}</p>}
+        </Reveal>
 
-        {/* Steps Grid with Visual Connectors */}
-        <div className="relative">
-          {/* Horizontal connector line - desktop only */}
-          <div
-            className="hidden md:block absolute top-6 left-1/2 -translate-x-1/2 h-0.5 bg-border"
-            style={{ width: "60%" }}
-            aria-hidden="true"
-          />
-
-          {/* Steps */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-6 lg:gap-8">
-            {steps.map((step, index) => (
-              <div key={step.stepNumber} className="relative">
-                {/* Vertical connector line - mobile only (between steps) */}
-                {index < steps.length - 1 && (
-                  <div
-                    className="md:hidden absolute left-1/2 -translate-x-1/2 top-full h-8 w-0.5 bg-border"
-                    aria-hidden="true"
-                  />
-                )}
-                <StepCard
-                  stepNumber={step.stepNumber}
-                  title={step.title}
-                  description={step.description}
-                  icon={step.icon}
-                />
+        {/* Process steps */}
+        <div className="grid grid-cols-1 min-[821px]:grid-cols-3">
+          {steps.map((step, index) => (
+            <Reveal
+              key={step.title}
+              as="div"
+              delay={(index || undefined) as 1 | 2 | undefined}
+              className="relative px-[34px] max-[820px]:px-0 max-[820px]:pb-[30px] [&:first-child]:pl-0 min-[821px]:[&:not(:last-child)]:border-r min-[821px]:[&:not(:last-child)]:border-line max-[820px]:[&:not(:last-child)]:border-b max-[820px]:[&:not(:last-child)]:border-line"
+            >
+              <div className="font-disp text-[15px] font-bold text-green tnum">
+                {t.howItWorks.stepPrefix} {String(index + 1).padStart(2, "0")}
               </div>
-            ))}
-          </div>
+              <h3 className="mb-[10px] mt-[22px] font-disp text-[23px] font-bold tracking-[-.01em]">
+                {step.title}
+              </h3>
+              <p className="text-[15.5px] text-soft">{step.description}</p>
+            </Reveal>
+          ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

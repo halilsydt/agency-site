@@ -19,7 +19,9 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between whitespace-nowrap rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm ring-offset-background data-[placeholder]:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
+      // Atlas .field select (atlas.css:324–326): warm paper bg, line border, 12px radius,
+      // focus → green border + surface bg + soft emerald glow ring.
+      "flex w-full items-center justify-between whitespace-nowrap rounded-[12px] border border-line bg-bg px-[15px] py-[13px] font-sans text-[15px] text-ink transition-all duration-150 data-[placeholder]:text-soft focus:border-green focus:bg-surface focus:outline-none focus:ring-4 focus:ring-green/10 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1",
       className
     )}
     {...props}
@@ -118,7 +120,7 @@ const SelectItem = React.forwardRef<
   <SelectPrimitive.Item
     ref={ref}
     className={cn(
-      "relative flex w-full cursor-default select-none items-center rounded-sm py-1.5 pl-2 pr-8 text-sm outline-none focus:bg-accent focus:text-accent-foreground data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
+      "relative flex w-full cursor-default select-none items-center rounded-[8px] py-1.5 pl-2 pr-8 text-sm text-ink outline-none focus:bg-green-soft focus:text-green-d data-[disabled]:pointer-events-none data-[disabled]:opacity-50",
       className
     )}
     {...props}

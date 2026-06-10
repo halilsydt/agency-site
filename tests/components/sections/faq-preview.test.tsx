@@ -87,7 +87,7 @@ describe("FAQPreviewSection", () => {
     await user.click(trigger);
 
     expect(
-      screen.getByText(/We specialize in Amazon and Etsy/i)
+      screen.getByText(/We specialize in Etsy and Amazon/i)
     ).toBeVisible();
   });
 

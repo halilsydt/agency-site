@@ -55,11 +55,9 @@ describe("WhyChooseUs", () => {
   });
 
   it("renders differentiator icons", () => {
-    renderWhyChooseUs({ headline: "Why Choose Us" });
-    expect(screen.getByText("🤝")).toBeInTheDocument();
-    expect(screen.getByText("📈")).toBeInTheDocument();
-    expect(screen.getByText("💰")).toBeInTheDocument();
-    expect(screen.getByText("🎯")).toBeInTheDocument();
+    const { container } = renderWhyChooseUs({ headline: "Why Choose Us" });
+    // Icons now render as Lucide SVGs (one per differentiator card)
+    expect(container.querySelectorAll("svg").length).toBeGreaterThanOrEqual(4);
   });
 
   it("renders differentiator descriptions", () => {

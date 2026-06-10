@@ -7,7 +7,7 @@ import { FAQPageClient } from "./faq-page-client";
 export const metadata: Metadata = {
   title: "FAQ | Scalenty",
   description:
-    "Find answers to common questions about our Amazon and Etsy consulting services, pricing, and how we work with clients.",
+    "Find answers to common questions about our Etsy and Amazon consulting services, pricing, and how we work with clients.",
   openGraph: {
     title: "FAQ | Scalenty",
     description:

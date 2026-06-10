@@ -26,7 +26,8 @@ export function AmazonServicesPageClient(): React.ReactElement {
         platform="amazon"
         primaryCtaText={t.common.bookFreeConsultation}
         secondaryCtaText={t.common.viewPricing}
-        illustrationPlaceholder={t.common.illustrationPlaceholder}
+        imageUrl="/images/illustrations/hero-amazon.svg"
+        imageAlt="Amazon seller services illustration"
       />
 
       <ServiceListSection

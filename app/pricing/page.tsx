@@ -8,7 +8,7 @@ import { PricingPageClient } from "./pricing-page-client";
 export const metadata: Metadata = {
   title: "Pricing | E-commerce Agency",
   description:
-    "Transparent pricing for Amazon and Etsy seller consulting. No hidden costs. Choose from Starter, Growth, or Premium packages tailored to your business needs.",
+    "Transparent pricing for Etsy and Amazon seller consulting. No hidden costs. Choose from Starter, Growth, or Premium packages tailored to your business needs.",
   openGraph: {
     title: "Pricing | E-commerce Agency",
     description:

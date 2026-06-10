@@ -1,10 +1,28 @@
+import {
+  Handshake,
+  TrendingUp,
+  DollarSign,
+  Target,
+  type LucideIcon,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
+
+/**
+ * Icon mapping for differentiator icons.
+ * Maps icon names to Lucide React components.
+ */
+const iconMap: Record<string, LucideIcon> = {
+  handshake: Handshake,
+  "trending-up": TrendingUp,
+  "dollar-sign": DollarSign,
+  target: Target,
+};
 
 /**
  * Props for the DifferentiatorCard component.
  */
 export interface DifferentiatorCardProps {
-  /** Icon for visual enhancement (emoji or icon character) */
+  /** Icon name that maps to a Lucide icon */
   icon: string;
   /** Differentiator title */
   title: string;
@@ -19,7 +37,7 @@ export interface DifferentiatorCardProps {
  * Used within the WhyChooseUs section to highlight agency values.
  *
  * @param props - Component props
- * @param props.icon - Emoji or icon character displayed at top
+ * @param props.icon - Icon name (handshake, trending-up, dollar-sign, target)
  * @param props.title - Differentiator title displayed as h3
  * @param props.description - Brief description text
  * @param props.className - Additional CSS classes
@@ -27,7 +45,7 @@ export interface DifferentiatorCardProps {
  * @example
  * ```tsx
  * <DifferentiatorCard
- *   icon="🤝"
+ *   icon="handshake"
  *   title="Honest Approach"
  *   description="No hype, no empty promises."
  * />
@@ -39,13 +57,15 @@ export function DifferentiatorCard({
   description,
   className,
 }: DifferentiatorCardProps): React.ReactElement {
+  const IconComponent = iconMap[icon] || Target;
+
   return (
     <div
       className={cn("flex flex-col items-center text-center", className)}
     >
       {/* Icon */}
-      <div className="mb-4 text-4xl" aria-hidden="true">
-        {icon}
+      <div className="mb-4 w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center">
+        <IconComponent className="w-8 h-8 text-primary" aria-hidden="true" />
       </div>
 
       {/* Title */}

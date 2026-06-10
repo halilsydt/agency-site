@@ -27,6 +27,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useToast } from "@/hooks/use-toast";
 import type { ContactFormStatus } from "@/lib/types";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getTranslations } from "@/lib/translations";
@@ -44,6 +45,7 @@ import { getTranslations } from "@/lib/translations";
 export function ContactForm(): React.ReactElement {
   const { locale } = useLanguage();
   const t = getTranslations(locale);
+  const { toast } = useToast();
 
   const [status, setStatus] = useState<ContactFormStatus>("idle");
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -68,19 +70,28 @@ export function ContactForm(): React.ReactElement {
       setStatus("success");
       form.reset();
       trackEvent("contact_form_submit", { platform: data.platform });
+      toast({
+        title: t.contactForm.successTitle,
+        description: t.contactForm.successMessage,
+      });
     } else {
       setStatus("error");
       setErrorMessage(result.error || t.contactForm.errorMessage);
+      toast({
+        title: t.contactForm.errorTitle || "Error",
+        description: result.error || t.contactForm.errorMessage,
+        variant: "destructive",
+      });
     }
   }
 
   if (status === "success") {
     return (
-      <div className="text-center p-8 bg-green-50 dark:bg-green-950 rounded-lg border border-green-200 dark:border-green-800">
-        <h3 className="text-xl font-semibold text-green-800 dark:text-green-200">
+      <div className="text-center p-8 bg-green-50 rounded-lg border border-green-200">
+        <h3 className="text-xl font-semibold text-green-800">
           {t.contactForm.successTitle}
         </h3>
-        <p className="mt-2 text-green-700 dark:text-green-300">
+        <p className="mt-2 text-green-700">
           {t.contactForm.successMessage}
         </p>
       </div>
@@ -92,10 +103,10 @@ export function ContactForm(): React.ReactElement {
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
         {status === "error" && (
           <div
-            className="p-4 bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-800 rounded-lg"
+            className="p-4 bg-red-50 border border-red-200 rounded-lg"
             role="alert"
           >
-            <p className="text-red-700 dark:text-red-300">{errorMessage}</p>
+            <p className="text-red-700">{errorMessage}</p>
           </div>
         )}
 

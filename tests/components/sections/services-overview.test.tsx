@@ -43,20 +43,24 @@ describe("ServicesOverview", () => {
   });
 
   it("renders the section headline", () => {
-    renderServicesOverview({ headline: "Services for Amazon & Etsy Sellers" });
+    renderServicesOverview({ headline: "Services for Etsy & Amazon Sellers" });
     expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent(
-      "Services for Amazon & Etsy Sellers"
+      "Services for Etsy & Amazon Sellers"
     );
   });
 
-  it("renders Amazon platform card", () => {
+  it("renders the Amazon panel title", () => {
     renderServicesOverview({ headline: "Services" });
-    expect(screen.getByText("Amazon Services")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Amazon Services" })
+    ).toBeInTheDocument();
   });
 
-  it("renders Etsy platform card", () => {
+  it("renders the Etsy panel title", () => {
     renderServicesOverview({ headline: "Services" });
-    expect(screen.getByText("Etsy Services")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Etsy Services" })
+    ).toBeInTheDocument();
   });
 
   it("renders CTA links with correct hrefs", () => {
@@ -69,18 +73,25 @@ describe("ServicesOverview", () => {
     ).toHaveAttribute("href", "/services/etsy");
   });
 
-  it("renders subheadline when provided", () => {
-    renderServicesOverview({
-      headline: "Services",
-      subheadline: "Choose your marketplace",
-    });
-    expect(screen.getByText("Choose your marketplace")).toBeInTheDocument();
+  it("renders the panel checklist bullets", () => {
+    renderServicesOverview({ headline: "Services" });
+    // Amazon bullets
+    expect(screen.getByText("PPC management")).toBeInTheDocument();
+    expect(screen.getByText("Performance reports")).toBeInTheDocument();
+    // Etsy bullets
+    expect(screen.getByText("SEO & search")).toBeInTheDocument();
+    expect(screen.getByText("Marketing strategy")).toBeInTheDocument();
   });
 
-  it("does not render subheadline when not provided", () => {
+  it("renders the section eyebrow", () => {
+    renderServicesOverview({ headline: "Services" });
+    expect(screen.getByText("What we do")).toBeInTheDocument();
+  });
+
+  it("falls back to the i18n supporting text when no subheadline is provided", () => {
     renderServicesOverview({ headline: "Services" });
     expect(
-      screen.queryByText("Choose your marketplace")
-    ).not.toBeInTheDocument();
+      screen.getByText(/Hands-on support across both ecosystems/i)
+    ).toBeInTheDocument();
   });
 });

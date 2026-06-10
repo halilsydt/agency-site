@@ -25,13 +25,16 @@ describe("StepCard", () => {
   });
 
   it("renders optional icon when provided", () => {
-    render(<StepCard {...defaultProps} icon="📅" />);
-    expect(screen.getByText("📅")).toBeInTheDocument();
+    const { container } = render(
+      <StepCard {...defaultProps} icon="calendar-check" />
+    );
+    // Icon now renders as a Lucide SVG (aria-hidden) rather than an emoji
+    expect(container.querySelector("svg")).toBeInTheDocument();
   });
 
   it("does not render icon when not provided", () => {
-    render(<StepCard {...defaultProps} />);
-    expect(screen.queryByText("📅")).not.toBeInTheDocument();
+    const { container } = render(<StepCard {...defaultProps} />);
+    expect(container.querySelector("svg")).not.toBeInTheDocument();
   });
 
   it("renders title as h3 heading", () => {

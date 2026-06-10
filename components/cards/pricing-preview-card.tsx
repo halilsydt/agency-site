@@ -24,8 +24,8 @@ export interface PricingPreviewCardProps {
  * Platform-specific header styling.
  */
 const platformStyles: Record<"amazon" | "etsy", string> = {
-  amazon: "bg-orange-100 text-orange-800 dark:bg-orange-950 dark:text-orange-200",
-  etsy: "bg-orange-50 text-orange-700 dark:bg-orange-900 dark:text-orange-300",
+  amazon: "bg-orange-100 text-orange-800",
+  etsy: "bg-orange-50 text-orange-700",
 };
 
 /**

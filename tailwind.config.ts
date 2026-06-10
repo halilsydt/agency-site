@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
-    darkMode: ["class"],
     content: [
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -10,6 +9,29 @@ const config: Config = {
   theme: {
   	extend: {
   		colors: {
+  			// ── Atlas named tokens (source: docs/design system/atlas/atlas.css :root) ──
+  			bg: 'var(--bg)',
+  			'bg-2': 'var(--bg-2)',
+  			surface: 'var(--surface)',
+  			ink: {
+  				DEFAULT: 'var(--ink)',
+  				2: 'var(--ink-2)'
+  			},
+  			soft: {
+  				DEFAULT: 'var(--soft)',
+  				2: 'var(--soft-2)'
+  			},
+  			line: 'var(--line)',
+  			green: {
+  				DEFAULT: 'var(--green)',
+  				d: 'var(--green-d)',
+  				soft: 'var(--green-soft)'
+  			},
+  			clay: {
+  				DEFAULT: 'var(--clay)',
+  				soft: 'var(--clay-soft)'
+  			},
+  			// ── Existing shadcn semantic tokens (remapped to Atlas in globals.css) ──
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
   			primary: {
@@ -85,11 +107,32 @@ const config: Config = {
   				'3': 'hsl(var(--chart-3))',
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
+  			},
+  			success: {
+  				DEFAULT: 'hsl(var(--success))',
+  				foreground: 'hsl(var(--success-foreground))'
+  			},
+  			badge: {
+  				amazon: {
+  					bg: 'hsl(var(--badge-amazon-bg))',
+  					text: 'hsl(var(--badge-amazon-text))'
+  				},
+  				etsy: {
+  					bg: 'hsl(var(--badge-etsy-bg))',
+  					text: 'hsl(var(--badge-etsy-text))'
+  				}
   			}
   		},
   		fontFamily: {
+  			// Atlas text font (Hanken Grotesk)
   			sans: [
-  				'var(--font-nunito)',
+  				'var(--font-sans)',
+  				'system-ui',
+  				'sans-serif'
+  			],
+  			// Atlas display font (Space Grotesk) — headings, buttons, eyebrows
+  			disp: [
+  				'var(--font-display)',
   				'system-ui',
   				'sans-serif'
   			]
@@ -101,6 +144,16 @@ const config: Config = {
   			'2xl': '1.5rem',
   			md: 'calc(var(--radius) - 2px)',
   			sm: 'calc(var(--radius) - 4px)'
+  		},
+  		// Atlas elevation tokens
+  		boxShadow: {
+  			'sh-sm': 'var(--sh-sm)',
+  			'sh-md': 'var(--sh-md)',
+  			'sh-lg': 'var(--sh-lg)'
+  		},
+  		// Atlas container width
+  		maxWidth: {
+  			wrap: 'var(--maxw)'
   		},
   		keyframes: {
   			'accordion-down': {
@@ -118,11 +171,19 @@ const config: Config = {
   				to: {
   					height: '0'
   				}
+  			},
+  			// Atlas marquee scroll (atlas.css:129) — translate the duplicated
+  			// track by -50% so the seamless loop point aligns.
+  			scrollx: {
+  				to: {
+  					transform: 'translateX(-50%)'
+  				}
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			marquee: 'scrollx 32s linear infinite'
   		}
   	}
   },

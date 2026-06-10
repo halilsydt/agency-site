@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { PlatformBadge } from "@/components/ui/platform-badge";
 
 /**
  * Props for the TestimonialCard component.
@@ -14,14 +14,6 @@ export interface TestimonialCardProps {
   /** Platform where client operates */
   platform: "amazon" | "etsy";
 }
-
-/**
- * Platform badge styling.
- */
-const platformStyles: Record<"amazon" | "etsy", string> = {
-  amazon: "bg-orange-100 text-orange-800",
-  etsy: "bg-orange-50 text-orange-700",
-};
 
 /**
  * Displays a client testimonial in a card format with quote, attribution,
@@ -66,14 +58,7 @@ export function TestimonialCard({
           </cite>
 
           {/* Platform Badge */}
-          <span
-            className={cn(
-              "inline-block mt-2 px-2 py-0.5 text-xs font-medium rounded-full capitalize",
-              platformStyles[platform]
-            )}
-          >
-            {platform}
-          </span>
+          <PlatformBadge platform={platform} className="mt-2" />
         </footer>
       </CardContent>
     </Card>

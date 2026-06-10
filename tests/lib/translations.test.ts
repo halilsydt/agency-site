@@ -17,7 +17,7 @@ describe("translations", () => {
       const t = getTranslations("tr");
 
       expect(t.nav.services).toBe("Hizmetler");
-      expect(t.nav.pricing).toBe("Fiyatlandırma");
+      expect(t.nav.pricing).toBe("Fiyatlar");
       expect(t.nav.about).toBe("Hakkımızda");
       expect(t.nav.contact).toBe("İletişim");
     });
@@ -40,7 +40,7 @@ describe("translations", () => {
       expect(t.footer.contact).toBe("İletişim");
       expect(t.footer.followUs).toBe("Bizi Takip Edin");
       expect(t.footer.privacyPolicy).toBe("Gizlilik Politikası");
-      expect(t.footer.termsOfService).toBe("Kullanım Şartları");
+      expect(t.footer.termsOfService).toBe("Hizmet Şartları");
       expect(t.footer.copyright).toContain("{year}");
     });
 
@@ -74,7 +74,7 @@ describe("translations", () => {
     it("includes common UI translations for Turkish", () => {
       const t = getTranslations("tr");
 
-      expect(t.common.faqCtaHeadline).toBe("Hâlâ Sorularınız mı Var?");
+      expect(t.common.faqCtaHeadline).toBe("Hâlâ sorularınız mı var?");
       expect(t.common.contactUs).toBe("Bize Ulaşın");
       expect(t.common.mostPopular).toBe("En Popüler");
       expect(t.common.phone).toBe("Telefon");

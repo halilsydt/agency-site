@@ -1,11 +1,12 @@
 "use client";
 
-import Link from "next/link";
+import { useState } from "react";
 import { PricingHero } from "@/components/sections/pricing-hero";
 import { PricingSection } from "@/components/sections/pricing-section";
 import { BundleHighlight } from "@/components/sections/bundle-highlight";
 import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
+import { PillToggle } from "@/components/ui/pill-toggle";
+import { BookingDialog } from "@/components/forms/booking-dialog";
 import { PricingPageTracker } from "@/components/analytics/pricing-page-tracker";
 import {
   getAmazonPricingPackages,
@@ -20,9 +21,15 @@ import { getTranslations } from "@/lib/translations";
  */
 export function PricingPageClient(): React.ReactElement {
   const { locale } = useLanguage();
+  const [platform, setPlatform] = useState<"etsy" | "amazon">("etsy");
   const amazonPackages = getAmazonPricingPackages(locale);
   const etsyPackages = getEtsyPricingPackages(locale);
   const t = getTranslations(locale);
+
+  const platformOptions = [
+    { value: "etsy", label: "Etsy" },
+    { value: "amazon", label: "Amazon" },
+  ];
 
   return (
     <main>
@@ -32,19 +39,33 @@ export function PricingPageClient(): React.ReactElement {
         subheadline={t.pricingPage.heroSubheadline}
       />
 
-      <PricingSection
-        headline={t.pricingPage.amazonPackagesHeadline}
-        packages={amazonPackages}
-        platform="amazon"
-      />
+      <Container>
+        <div className="flex justify-center py-8 md:py-10">
+          <PillToggle
+            options={platformOptions}
+            value={platform}
+            onChange={(val) => setPlatform(val as "etsy" | "amazon")}
+          />
+        </div>
+
+        <div className="transition-opacity duration-300">
+          {platform === "etsy" ? (
+            <PricingSection
+              headline={t.pricingPage.etsyPackagesHeadline}
+              packages={etsyPackages}
+              platform="etsy"
+            />
+          ) : (
+            <PricingSection
+              headline={t.pricingPage.amazonPackagesHeadline}
+              packages={amazonPackages}
+              platform="amazon"
+            />
+          )}
+        </div>
+      </Container>
 
       <BundleHighlight />
-
-      <PricingSection
-        headline={t.pricingPage.etsyPackagesHeadline}
-        packages={etsyPackages}
-        platform="etsy"
-      />
 
       {/* Bottom CTA Section */}
       <section className="py-16 bg-muted/50">
@@ -57,9 +78,7 @@ export function PricingPageClient(): React.ReactElement {
               {t.pricingPage.ctaDescription}
             </p>
             <div className="mt-8">
-              <Button asChild size="lg">
-                <Link href="/contact">{t.common.bookFreeConsultation}</Link>
-              </Button>
+              <BookingDialog size="lg" />
             </div>
           </div>
         </Container>

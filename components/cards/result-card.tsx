@@ -1,6 +1,5 @@
 import Image from "next/image";
-import { Card, CardContent } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { PlatformBadge } from "@/components/ui/platform-badge";
 
 /**
  * Props for the ResultCard component.
@@ -10,25 +9,16 @@ export interface ResultCardProps {
   imageSrc: string;
   /** Alt text for the image (accessibility) */
   imageAlt: string;
-  /** Brief caption describing the result */
-  caption: string;
   /** Platform where result was achieved */
   platform: "amazon" | "etsy";
-  /** Key metric or highlight (optional) */
-  metric?: string;
+  /** Key metric or highlight (e.g., "2025 Results") */
+  metric: string;
 }
 
 /**
- * Platform badge styling.
- */
-const platformStyles: Record<"amazon" | "etsy", string> = {
-  amazon: "bg-orange-100 text-orange-800",
-  etsy: "bg-orange-50 text-orange-700",
-};
-
-/**
- * Displays a client result proof in a card format with screenshot,
- * caption, and platform indicator.
+ * Displays a client result proof with glass morphism design.
+ * Features a full-bleed screenshot with a frosted glass overlay
+ * showing platform, metric, and caption.
  * Used in the ResultsGallery section to showcase anonymized client success stories.
  *
  * @param props - Component props
@@ -36,30 +26,31 @@ const platformStyles: Record<"amazon" | "etsy", string> = {
  * @param props.imageAlt - Accessible alt text for the image
  * @param props.caption - Brief description of the result achieved
  * @param props.platform - Platform indicator (amazon or etsy)
- * @param props.metric - Optional highlighted metric (e.g., "3x growth")
+ * @param props.metric - Highlighted metric (e.g., "+$180k", "3x growth")
+ * @param props.metricLabel - Optional label for the metric (e.g., "Revenue Growth")
  *
  * @example
  * ```tsx
  * <ResultCard
- *   imageSrc="/images/results/placeholder-1.svg"
+ *   imageSrc="/images/results/amazon-dashboard.png"
  *   imageAlt="Amazon seller dashboard showing sales growth"
- *   caption="Amazon seller: 3x sales in 6 months"
+ *   caption="From $0 to six figures in 14 months"
  *   platform="amazon"
- *   metric="3x growth"
+ *   metric="+$180k"
+ *   metricLabel="Revenue Growth"
  * />
  * ```
  */
 export function ResultCard({
   imageSrc,
   imageAlt,
-  caption,
   platform,
   metric,
 }: ResultCardProps): React.ReactElement {
   return (
-    <Card className="overflow-hidden">
-      {/* Image Container with 16:10 aspect ratio */}
-      <div className="relative aspect-[16/10] bg-muted">
+    <div className="group relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-[1.02]">
+      {/* Full-bleed Image */}
+      <div className="relative aspect-[16/6] bg-muted">
         <Image
           src={imageSrc}
           alt={imageAlt}
@@ -67,27 +58,19 @@ export function ResultCard({
           className="object-cover"
           sizes="(max-width: 768px) 100vw, 50vw"
         />
+
+        {/* Floating Chip - Platform + Metric */}
+        <div className="absolute bottom-4 left-4 flex items-center gap-2 rounded-full backdrop-blur-md bg-white/80 border border-white/20 pl-1 pr-4 py-1 shadow-lg transition-all duration-300 group-hover:bg-white/90">
+          <PlatformBadge
+            platform={platform}
+            size="sm"
+            className={platform === "amazon" ? "!bg-blue-500/20 !text-blue-600" : ""}
+          />
+          <span className="text-sm font-medium text-foreground">
+            {metric}
+          </span>
+        </div>
       </div>
-
-      <CardContent className="p-4">
-        {/* Platform Badge */}
-        <span
-          className={cn(
-            "inline-block px-2 py-0.5 text-xs font-medium rounded-full capitalize mb-2",
-            platformStyles[platform]
-          )}
-        >
-          {platform}
-        </span>
-
-        {/* Caption */}
-        <p className="text-muted-foreground text-sm">{caption}</p>
-
-        {/* Optional Metric Highlight */}
-        {metric && (
-          <p className="mt-2 text-foreground font-semibold">{metric}</p>
-        )}
-      </CardContent>
-    </Card>
+    </div>
   );
 }

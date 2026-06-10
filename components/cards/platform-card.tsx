@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { Package, ShoppingBag } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -72,14 +73,19 @@ export function PlatformCard({
       )}
     >
       <CardHeader className="text-center">
-        {/* Platform Icon Placeholder */}
+        {/* Platform Icon */}
         <div
           data-testid="platform-icon"
-          className="mx-auto mb-4 w-16 h-16 rounded-full bg-muted flex items-center justify-center"
+          className={cn(
+            "mx-auto mb-4 w-16 h-16 rounded-full flex items-center justify-center",
+            platform === "amazon" ? "bg-primary/10" : "bg-accent/10"
+          )}
         >
-          <span className="text-2xl text-muted-foreground">
-            {platform === "amazon" ? "📦" : "🛍️"}
-          </span>
+          {platform === "amazon" ? (
+            <Package className="w-8 h-8 text-primary" aria-hidden="true" />
+          ) : (
+            <ShoppingBag className="w-8 h-8 text-accent" aria-hidden="true" />
+          )}
         </div>
         <CardTitle className="text-xl font-semibold">{title}</CardTitle>
       </CardHeader>

@@ -7,7 +7,7 @@ import { AboutPageClient } from "./about-page-client";
 export const metadata: Metadata = {
   title: "About Us | Scalenty",
   description:
-    "Learn about our team and our honest, results-driven approach to Amazon and Etsy seller consulting. 5+ years of experience helping 100+ clients succeed.",
+    "Learn about our team and our honest, results-driven approach to Etsy and Amazon seller consulting. 5+ years of experience helping 100+ clients succeed.",
   openGraph: {
     title: "About Us | Scalenty",
     description:

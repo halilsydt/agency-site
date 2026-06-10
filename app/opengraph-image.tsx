@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 
 export const runtime = "edge";
 
-export const alt = "Scalenty - E-commerce Consulting for Amazon & Etsy Sellers";
+export const alt = "Scalenty - E-commerce Consulting for Etsy & Amazon Sellers";
 export const size = {
   width: 1200,
   height: 630,
@@ -73,7 +73,7 @@ export default async function Image() {
             lineHeight: 1.4,
           }}
         >
-          E-commerce Consulting for Amazon & Etsy Sellers
+          E-commerce Consulting for Etsy & Amazon Sellers
         </div>
         <div
           style={{

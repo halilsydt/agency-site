@@ -64,40 +64,39 @@ describe("PricingPreviewSection", () => {
 
   it("renders both pricing preview cards", () => {
     renderPricingPreview({ headline: "Transparent Pricing" });
-    expect(screen.getByText("Amazon Services")).toBeInTheDocument();
-    expect(screen.getByText("Etsy Services")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Amazon Services" })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: "Etsy Services" })
+    ).toBeInTheDocument();
   });
 
-  it("renders Amazon starting price", () => {
+  it("renders $999 for both cards (confirmed decision)", () => {
     renderPricingPreview({ headline: "Transparent Pricing" });
-    expect(screen.getByText(/\$499/)).toBeInTheDocument();
+    const prices = screen.getAllByText(/\$999/);
+    expect(prices.length).toBe(2);
   });
 
-  it("renders Etsy starting price", () => {
+  it("renders the Atlas bundle bar", () => {
     renderPricingPreview({ headline: "Transparent Pricing" });
-    expect(screen.getByText(/\$399/)).toBeInTheDocument();
+    expect(screen.getByText(/Bundle & Save 15%/i)).toBeInTheDocument();
+    const bundleLink = screen.getByRole("link", { name: /Get Bundle Quote/i });
+    expect(bundleLink).toHaveAttribute("href", "/contact");
   });
 
-  it("renders the bundle discount message", () => {
+  it("renders the View Full Pricing buttons linking to the pricing page", () => {
     renderPricingPreview({ headline: "Transparent Pricing" });
-    expect(screen.getByText(/Bundle & Save/i)).toBeInTheDocument();
+    const links = screen.getAllByRole("link", { name: /View Full Pricing/i });
+    expect(links.length).toBe(2);
+    links.forEach((link) => expect(link).toHaveAttribute("href", "/pricing"));
   });
 
-  it("renders the CTA button with link to pricing page", () => {
+  it("renders the section eyebrow and from line", () => {
     renderPricingPreview({ headline: "Transparent Pricing" });
-    const link = screen.getByRole("link", { name: /View Full Pricing/i });
-    expect(link).toHaveAttribute("href", "/pricing");
-  });
-
-  it("renders platform badges for both cards", () => {
-    renderPricingPreview({ headline: "Transparent Pricing" });
-    expect(screen.getByText("amazon")).toBeInTheDocument();
-    expect(screen.getByText("etsy")).toBeInTheDocument();
-  });
-
-  it("renders 2 pricing cards", () => {
-    renderPricingPreview({ headline: "Pricing" });
-    expect(screen.getByText("Amazon Services")).toBeInTheDocument();
-    expect(screen.getByText("Etsy Services")).toBeInTheDocument();
+    expect(screen.getByText("Transparent pricing")).toBeInTheDocument();
+    expect(
+      screen.getAllByText(/Starting at · cancel anytime/i).length
+    ).toBe(2);
   });
 });

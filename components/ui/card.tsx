@@ -9,7 +9,9 @@ const Card = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border bg-card text-card-foreground shadow",
+      // Atlas card surface (atlas.css:160,267,289,319): warm surface, line border, ~24px radius.
+      // Base primitive stays calm — per-page stories (6.5+) own hover-lift on their card wrappers.
+      "rounded-[24px] border border-line bg-surface text-ink",
       className
     )}
     {...props}
@@ -35,7 +37,7 @@ const CardTitle = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("font-semibold leading-none tracking-tight", className)}
+    className={cn("font-disp font-semibold leading-none tracking-tight", className)}
     {...props}
   />
 ))

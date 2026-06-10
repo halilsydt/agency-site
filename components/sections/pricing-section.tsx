@@ -38,7 +38,7 @@ export function PricingSection({
   platform,
 }: PricingSectionProps): React.ReactElement {
   return (
-    <section className="py-16" data-platform={platform}>
+    <section className="pt-8 md:pt-10 pb-16 md:pb-24" data-platform={platform}>
       <Container>
         <h2 className="text-3xl md:text-4xl font-bold text-center mb-12">
           {headline}

@@ -40,7 +40,7 @@ export function ContactInfo({
   const t = getTranslations(locale);
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       <h2 className="text-2xl font-semibold text-foreground">
         {t.common.orReachUsDirectly}
       </h2>
@@ -48,7 +48,7 @@ export function ContactInfo({
       <div className="space-y-4">
         <a
           href={`mailto:${email}`}
-          className="flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-3 text-muted-foreground hover:text-foreground transition-colors"
           aria-label={`Email us at ${email}`}
         >
           <Mail className="h-5 w-5" />

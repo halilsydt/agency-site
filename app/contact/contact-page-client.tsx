@@ -4,7 +4,7 @@ import { getContactContent } from "@/lib/content";
 import { ContactHero } from "@/components/sections/contact-hero";
 import { ContactInfo } from "@/components/sections/contact-info";
 import { ContactForm } from "@/components/forms/contact-form";
-import { BookingSection } from "@/components/sections/booking-section";
+import { CalendarEmbed } from "@/components/forms/calendar-embed";
 import { Container } from "@/components/layout/container";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getTranslations } from "@/lib/translations";
@@ -27,24 +27,36 @@ export function ContactPageClient(): React.ReactElement {
 
       <section className="py-16 md:py-20">
         <Container>
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-16">
-            <div className="lg:col-span-2">
+          {/* Two-column layout: Contact Form (left) and Booking Calendar (right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
+            {/* Left: Send us a message */}
+            <div>
               <h2 className="text-2xl font-semibold text-foreground mb-6">
                 {t.contactPage.sendMessage}
               </h2>
               <ContactForm />
             </div>
+
+            {/* Right: Book Your Free Consultation */}
             <div>
-              <ContactInfo email={contact.contactInfo.email} />
+              <h2 className="text-2xl font-semibold text-foreground mb-2">
+                {contact.booking.headline}
+              </h2>
+              <p className="text-muted-foreground mb-6">
+                {contact.booking.subheadline}
+              </p>
+              <div className="min-h-[500px]">
+                <CalendarEmbed />
+              </div>
             </div>
+          </div>
+
+          {/* Centered: Or reach us directly */}
+          <div className="mt-16 text-center">
+            <ContactInfo email={contact.contactInfo.email} />
           </div>
         </Container>
       </section>
-
-      <BookingSection
-        headline={contact.booking.headline}
-        subheadline={contact.booking.subheadline}
-      />
     </main>
   );
 }

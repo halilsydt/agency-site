@@ -1,11 +1,11 @@
 {
   "hero": {
     "headline": "About Us",
-    "subheadline": "We're marketplace experts dedicated to helping Amazon and Etsy sellers grow their businesses with honest, results-driven strategies."
+    "subheadline": "We're marketplace experts dedicated to helping Etsy and Amazon sellers grow their businesses with honest, results-driven strategies."
   },
   "mission": {
     "headline": "Our Mission",
-    "text": "We're dedicated to helping Amazon and Etsy sellers succeed through honest, results-driven consulting. No hype, no empty promises—just real strategies that work. We believe every seller deserves access to expert guidance that delivers measurable results."
+    "text": "We're dedicated to helping Etsy and Amazon sellers succeed through honest, results-driven consulting. No hype, no empty promises—just real strategies that work. We believe every seller deserves access to expert guidance that delivers measurable results."
   },
   "approach": {
     "headline": "Our Approach",
@@ -22,13 +22,13 @@
       "id": "founder-1",
       "name": "Mehmet Ali Sabaz",
       "role": "Co-Founder",
-      "bio": "With extensive experience helping sellers on Amazon and Etsy, Mehmet has seen what works and what doesn't. His mission is to share that knowledge and help you grow your business."
+      "bio": "With extensive experience helping sellers on Etsy and Amazon, Mehmet has seen what works and what doesn't. His mission is to share that knowledge and help you grow your business."
     },
     {
       "id": "founder-2",
       "name": "Halil Saydut",
       "role": "Co-Founder",
-      "bio": "Halil brings deep marketplace expertise to help Amazon and Etsy sellers succeed. He's passionate about delivering results-driven strategies that make a real difference."
+      "bio": "Halil brings deep marketplace expertise to help Etsy and Amazon sellers succeed. He's passionate about delivering results-driven strategies that make a real difference."
     }
   ],
   "highlights": [

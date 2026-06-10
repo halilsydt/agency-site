@@ -26,7 +26,8 @@ export function EtsyServicesPageClient(): React.ReactElement {
         platform="etsy"
         primaryCtaText={t.common.bookFreeConsultation}
         secondaryCtaText={t.common.viewPricing}
-        illustrationPlaceholder={t.common.illustrationPlaceholder}
+        imageUrl="/images/illustrations/hero-etsy.svg"
+        imageAlt="Etsy seller services illustration"
       />
 
       <ServiceListSection

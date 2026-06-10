@@ -28,7 +28,7 @@ export function BookingSection({
   subheadline,
 }: BookingSectionProps): React.ReactElement {
   return (
-    <section className="py-16 md:py-20 bg-muted/30">
+    <section className="py-16 md:py-24 bg-muted/30">
       <Container>
         <div className="text-center max-w-2xl mx-auto mb-10">
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">

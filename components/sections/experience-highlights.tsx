@@ -40,7 +40,7 @@ export function ExperienceHighlights({
   highlights,
 }: ExperienceHighlightsProps): React.ReactElement {
   return (
-    <section className="py-16 md:py-20 bg-muted/30">
+    <section className="py-16 md:py-24 bg-muted/30">
       <Container>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-6 lg:gap-8">
           {highlights.map((highlight) => {

@@ -55,22 +55,22 @@ export function WhyChooseUs({
 
   const differentiators: Differentiator[] = [
     {
-      icon: "🤝",
+      icon: "handshake",
       title: t.whyChooseUs.honestTitle,
       description: t.whyChooseUs.honestDescription,
     },
     {
-      icon: "📈",
+      icon: "trending-up",
       title: t.whyChooseUs.resultsTitle,
       description: t.whyChooseUs.resultsDescription,
     },
     {
-      icon: "💰",
+      icon: "dollar-sign",
       title: t.whyChooseUs.pricingTitle,
       description: t.whyChooseUs.pricingDescription,
     },
     {
-      icon: "🎯",
+      icon: "target",
       title: t.whyChooseUs.expertiseTitle,
       description: t.whyChooseUs.expertiseDescription,
     },
