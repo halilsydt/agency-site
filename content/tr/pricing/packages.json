@@ -5,7 +5,7 @@
       "platform": "amazon",
       "tier": "starter",
       "name": "Başlangıç",
-      "price": 299,
+      "price": 799,
       "priceUnit": "/ay",
       "description": "Yeni başlayan Amazon satıcıları için ideal",
       "features": [
@@ -23,7 +23,7 @@
       "platform": "amazon",
       "tier": "growth",
       "name": "Büyüme",
-      "price": 499,
+      "price": 999,
       "priceUnit": "/ay",
       "description": "Ölçeklenmeye hazır, büyüyen satıcılar için ideal",
       "features": [
@@ -43,7 +43,7 @@
       "platform": "amazon",
       "tier": "premium",
       "name": "Premium",
-      "price": 799,
+      "price": 1999,
       "priceUnit": "/ay",
       "description": "Ciddi satıcılar için eksiksiz çözüm",
       "features": [
@@ -65,7 +65,7 @@
       "platform": "etsy",
       "tier": "starter",
       "name": "Başlangıç",
-      "price": 199,
+      "price": 799,
       "priceUnit": "/ay",
       "description": "Yeni başlayan Etsy satıcıları için ideal",
       "features": [
@@ -83,7 +83,7 @@
       "platform": "etsy",
       "tier": "growth",
       "name": "Büyüme",
-      "price": 399,
+      "price": 999,
       "priceUnit": "/ay",
       "description": "Ölçeklenmeye hazır, büyüyen mağazalar için ideal",
       "features": [
@@ -103,7 +103,7 @@
       "platform": "etsy",
       "tier": "premium",
       "name": "Premium",
-      "price": 599,
+      "price": 1999,
       "priceUnit": "/ay",
       "description": "Ciddi satıcılar için eksiksiz çözüm",
       "features": [

@@ -5,7 +5,7 @@
       "platform": "amazon",
       "tier": "starter",
       "name": "Starter",
-      "price": 299,
+      "price": 799,
       "priceUnit": "/month",
       "description": "Perfect for new Amazon sellers getting started",
       "features": [
@@ -23,7 +23,7 @@
       "platform": "amazon",
       "tier": "growth",
       "name": "Growth",
-      "price": 499,
+      "price": 999,
       "priceUnit": "/month",
       "description": "Ideal for growing sellers ready to scale",
       "features": [
@@ -43,7 +43,7 @@
       "platform": "amazon",
       "tier": "premium",
       "name": "Premium",
-      "price": 799,
+      "price": 1999,
       "priceUnit": "/month",
       "description": "Complete solution for serious sellers",
       "features": [
@@ -65,7 +65,7 @@
       "platform": "etsy",
       "tier": "starter",
       "name": "Starter",
-      "price": 199,
+      "price": 799,
       "priceUnit": "/month",
       "description": "Perfect for new Etsy sellers getting started",
       "features": [
@@ -83,7 +83,7 @@
       "platform": "etsy",
       "tier": "growth",
       "name": "Growth",
-      "price": 399,
+      "price": 999,
       "priceUnit": "/month",
       "description": "Ideal for growing shops ready to scale",
       "features": [
@@ -103,7 +103,7 @@
       "platform": "etsy",
       "tier": "premium",
       "name": "Premium",
-      "price": 599,
+      "price": 1999,
       "priceUnit": "/month",
       "description": "Complete solution for serious sellers",
       "features": [
