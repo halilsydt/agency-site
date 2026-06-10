@@ -58,7 +58,9 @@ describe("Pricing Page", () => {
 
   it("renders transparent pricing message in hero", () => {
     renderPricingPage();
-    expect(screen.getByText(/no hidden fees/i)).toBeInTheDocument();
+    // "No hidden fees" also appears in the FAQ answer, so scope to the hero
+    // subheadline's unique "No surprise charges" phrasing.
+    expect(screen.getByText(/no surprise charges/i)).toBeInTheDocument();
   });
 
   it("renders Amazon packages section", async () => {

@@ -3,17 +3,25 @@ import { describe, it, expect } from "vitest";
 import { ServiceHero } from "@/components/sections/service-hero";
 
 const defaultProps = {
-  headline: "Amazon Services",
+  eyebrow: "Amazon Services",
+  title: { pre: "Make Amazon your ", mark: "growth engine", post: "." },
   subheadline: "Expert consulting for Amazon sellers",
   platform: "amazon" as const,
+  primaryCtaText: "Book Free Consultation",
+  secondaryCtaText: "View Pricing",
 };
 
 describe("ServiceHero", () => {
-  it("renders headline as h1", () => {
+  it("renders the Atlas headline as h1 (with the marked phrase)", () => {
     render(<ServiceHero {...defaultProps} />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Amazon Services"
+      "Make Amazon your growth engine."
     );
+  });
+
+  it("renders the eyebrow label", () => {
+    render(<ServiceHero {...defaultProps} />);
+    expect(screen.getByText("Amazon Services")).toBeInTheDocument();
   });
 
   it("renders subheadline", () => {
@@ -32,42 +40,21 @@ describe("ServiceHero", () => {
     );
   });
 
-  it("renders illustration placeholder", () => {
+  it("colors the marked phrase green for Amazon", () => {
     render(<ServiceHero {...defaultProps} />);
-    expect(
-      screen.getByTestId("service-hero-illustration")
-    ).toBeInTheDocument();
+    expect(screen.getByText("growth engine").className).toContain("text-green");
   });
 
-  it("renders placeholder text when no imageUrl provided", () => {
-    render(<ServiceHero {...defaultProps} />);
-    expect(screen.getByText("Illustration Placeholder")).toBeInTheDocument();
-  });
-
-  it("renders image when imageUrl is provided", () => {
+  it("uses the clay eyebrow + clay mark for Etsy", () => {
     render(
       <ServiceHero
         {...defaultProps}
-        imageUrl="/test-image.png"
-        imageAlt="Test alt"
+        eyebrow="Etsy Services"
+        title={{ pre: "Help your Etsy shop ", mark: "get found", post: "." }}
+        platform="etsy"
       />
     );
-    const img = screen.getByRole("img", { name: "Test alt" });
-    expect(img).toBeInTheDocument();
-    expect(img.getAttribute("src")).toContain("test-image.png");
-  });
-
-  it("applies platform-specific styling for amazon", () => {
-    const { container } = render(<ServiceHero {...defaultProps} />);
-    const section = container.querySelector("section");
-    expect(section?.className).toContain("from-primary");
-  });
-
-  it("applies platform-specific styling for etsy", () => {
-    const { container } = render(
-      <ServiceHero {...defaultProps} platform="etsy" />
-    );
-    const section = container.querySelector("section");
-    expect(section?.className).toContain("from-accent");
+    expect(screen.getByText("Etsy Services").className).toContain("clay");
+    expect(screen.getByText("get found").className).toContain("text-clay");
   });
 });

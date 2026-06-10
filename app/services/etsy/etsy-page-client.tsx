@@ -3,11 +3,26 @@
 import Link from "next/link";
 import { ServiceHero } from "@/components/sections/service-hero";
 import { ServiceListSection } from "@/components/sections/service-list";
-import { Container } from "@/components/layout/container";
-import { Button } from "@/components/ui/button";
+import { Reveal } from "@/components/ui/reveal";
 import { getEtsyServices } from "@/lib/content";
 import { useLanguage } from "@/components/providers/language-provider";
 import { getTranslations } from "@/lib/translations";
+
+/** Right-arrow icon that nudges on primary-CTA hover. */
+function ArrowIcon(): React.ReactElement {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.2}
+      className="size-[17px] transition-transform duration-200 group-hover/cta:translate-x-[3px]"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14M13 6l6 6-6 6" />
+    </svg>
+  );
+}
 
 /**
  * Client component for the Etsy Services page.
@@ -21,41 +36,49 @@ export function EtsyServicesPageClient(): React.ReactElement {
   return (
     <main>
       <ServiceHero
-        headline={t.etsyPage.heroHeadline}
+        eyebrow={t.etsyPage.heroHeadline}
+        title={t.etsyPage.heroTitle}
         subheadline={t.etsyPage.heroSubheadline}
         platform="etsy"
         primaryCtaText={t.common.bookFreeConsultation}
         secondaryCtaText={t.common.viewPricing}
-        imageUrl="/images/illustrations/hero-etsy.svg"
-        imageAlt="Etsy seller services illustration"
       />
 
       <ServiceListSection
+        eyebrow={t.etsyPage.servicesHeadline}
         headline={t.etsyPage.servicesHeadline}
         subheadline={t.etsyPage.servicesSubheadline}
         services={services}
+        platform="etsy"
       />
 
-      {/* Bottom CTA Section */}
-      <section className="py-16 bg-muted/50">
-        <Container>
-          <div className="text-center">
-            <h2 className="text-2xl md:text-3xl font-bold text-foreground">
+      {/* Bottom CTA section (Atlas `.cta`) */}
+      <section className="pb-[92px]">
+        <div className="wrap">
+          <Reveal className="mx-auto max-w-[760px] text-center">
+            <h2 className="font-disp text-[clamp(38px,5vw,60px)] font-bold leading-[1.02] tracking-[-.03em]">
               {t.etsyPage.ctaHeadline}
             </h2>
-            <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="mx-auto mt-[18px] max-w-[44em] text-[18px] text-soft">
               {t.etsyPage.ctaDescription}
             </p>
-            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center">
-              <Button asChild size="lg">
-                <Link href="/contact">{t.common.bookFreeConsultation}</Link>
-              </Button>
-              <Button asChild variant="outline" size="lg">
-                <Link href="/pricing">{t.common.viewPricing}</Link>
-              </Button>
+            <div className="mt-8 flex flex-wrap justify-center gap-[14px]">
+              <Link
+                href="/contact"
+                className="group/cta inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[12px] border-[1.5px] border-transparent bg-green px-8 py-[14px] font-disp text-base font-semibold text-white shadow-[0_10px_24px_-10px_rgba(14,140,90,.6)] transition-all duration-200 [transition-timing-function:cubic-bezier(.2,.7,.3,1)] hover:-translate-y-0.5 hover:bg-green-d hover:text-white hover:no-underline hover:shadow-[0_16px_30px_-10px_rgba(14,140,90,.65)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-2"
+              >
+                {t.common.bookFreeConsultation}
+                <ArrowIcon />
+              </Link>
+              <Link
+                href="/pricing"
+                className="inline-flex items-center justify-center gap-[9px] whitespace-nowrap rounded-[12px] border-[1.5px] border-line bg-transparent px-8 py-[14px] font-disp text-base font-semibold text-ink no-underline transition-all duration-200 [transition-timing-function:cubic-bezier(.2,.7,.3,1)] hover:border-ink hover:bg-surface hover:text-ink hover:no-underline"
+              >
+                {t.common.viewPricing}
+              </Link>
             </div>
-          </div>
-        </Container>
+          </Reveal>
+        </div>
       </section>
     </main>
   );

@@ -90,21 +90,16 @@
     letter-spacing: -0.02em;
   }
 
-  /* Default link styles - exclude button links which use inline-flex */
-  a:not([class*="inline-flex"]) {
-    @apply text-primary-600 transition-colors hover:text-primary-700 hover:underline;
+  /* Default link styles (Atlas). Anchors inherit their colour so component
+     links (header nav, footer, cards) own their own styling; only bare content
+     links that don't set a colour fall back to the Atlas green. No forced
+     underline — components opt into Atlas's green hover bar themselves. */
+  a {
+    @apply text-inherit no-underline transition-colors;
   }
 
-  a:not([class*="inline-flex"]):focus-visible {
-    @apply rounded-sm outline-none ring-2 ring-primary ring-offset-2;
-  }
-
-  .nav-link {
-    @apply text-neutral-700 no-underline transition-colors hover:text-primary-600 hover:no-underline;
-  }
-
-  .nav-link:focus-visible {
-    @apply rounded-sm outline-none ring-2 ring-primary ring-offset-2;
+  a:focus-visible {
+    @apply rounded-sm outline-none ring-2 ring-green ring-offset-2;
   }
 }
 

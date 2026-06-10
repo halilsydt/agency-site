@@ -26,20 +26,47 @@ describe("ServiceCard", () => {
     ).toBeInTheDocument();
   });
 
-  it("renders icon placeholder", () => {
+  it("renders the icon tile", () => {
     render(<ServiceCard service={mockService} />);
     expect(screen.getByTestId("service-icon")).toBeInTheDocument();
   });
 
-  it("applies correct styling with card structure", () => {
-    const { container } = render(<ServiceCard service={mockService} />);
-    // Atlas base Card surface uses a ~24px radius (rounded-[24px])
-    const card = container.firstElementChild as HTMLElement;
-    expect(card).toBeInTheDocument();
-    expect(card.className).toContain("rounded-[24px]");
+  it("renders the feature bullets", () => {
+    render(<ServiceCard service={mockService} />);
+    expect(screen.getByText("Account verification")).toBeInTheDocument();
+    expect(screen.getByText("Initial settings")).toBeInTheDocument();
+    expect(screen.getByText("Tax setup")).toBeInTheDocument();
   });
 
-  it("renders different service correctly", () => {
+  it("uses the Atlas .sd card surface (22px radius)", () => {
+    const { container } = render(<ServiceCard service={mockService} />);
+    const card = container.firstElementChild as HTMLElement;
+    expect(card).toBeInTheDocument();
+    expect(card.className).toContain("rounded-[22px]");
+  });
+
+  it("applies the green accent for Amazon services", () => {
+    render(<ServiceCard service={mockService} />);
+    expect(screen.getByTestId("service-icon").className).toContain(
+      "bg-green-soft"
+    );
+  });
+
+  it("applies the clay accent for Etsy services", () => {
+    const etsyService: Service = {
+      ...mockService,
+      id: "shop-setup",
+      platform: "etsy",
+      title: "Shop Setup & Configuration",
+      icon: "store",
+    };
+    render(<ServiceCard service={etsyService} />);
+    expect(screen.getByTestId("service-icon").className).toContain(
+      "bg-clay-soft"
+    );
+  });
+
+  it("renders a different service correctly", () => {
     const ppcService: Service = {
       id: "ppc-advertising",
       platform: "amazon",

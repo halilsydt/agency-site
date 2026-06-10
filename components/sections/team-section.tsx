@@ -1,4 +1,4 @@
-import { Container } from "@/components/layout/container";
+import { Reveal } from "@/components/ui/reveal";
 import { TeamCard } from "@/components/cards/team-card";
 import type { TeamMember } from "@/lib/types";
 import { cn } from "@/lib/utils";
@@ -7,55 +7,66 @@ import { cn } from "@/lib/utils";
  * Props for the TeamSection component.
  */
 export interface TeamSectionProps {
-  /** Section headline */
+  /** Centered green eyebrow above the headline (Atlas `.eyebrow.cc`). */
+  eyebrow?: string;
+  /** Section headline (Atlas `h2`). */
   headline: string;
   /** Array of team members to display */
   team: TeamMember[];
 }
 
 /**
- * Displays team members in a responsive grid layout.
- * Handles single founder scenario with centered layout.
+ * Atlas team block (About.html:85–111). A centered `.sec-head.cc` (eyebrow +
+ * h2) above a `.team-grid` of `.member` cards (gradient initials avatars),
+ * collapsing to a single column at 820px. A single member is centered.
  *
- * @param props - TeamSection component props
- * @param props.headline - Section headline (e.g., "Meet Our Team")
+ * @param props - {@link TeamSectionProps}
+ * @param props.eyebrow - Centered eyebrow above the headline
+ * @param props.headline - Section headline
  * @param props.team - Array of team members to display
  *
  * @example
  * ```tsx
  * <TeamSection
- *   headline="Meet Our Team"
+ *   eyebrow="Meet the founders"
+ *   headline="The people behind Scalenty"
  *   team={[{ id: "1", name: "Jane", role: "CEO", bio: "..." }]}
  * />
  * ```
  */
 export function TeamSection({
+  eyebrow,
   headline,
   team,
 }: TeamSectionProps): React.ReactElement {
   const isSingleMember = team.length === 1;
 
   return (
-    <section className="py-16 md:py-24">
-      <Container>
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
+    <section className="pt-5">
+      <div className="wrap">
+        <Reveal className="sec-head cc text-center">
+          {eyebrow ? <span className="eyebrow cc">{eyebrow}</span> : null}
+          <h2 className="mt-4 font-disp text-[clamp(30px,3.6vw,42px)] font-bold leading-[1.05] tracking-[-.025em]">
             {headline}
           </h2>
-        </div>
+        </Reveal>
         <div
           className={cn(
-            "grid gap-6 lg:gap-8",
+            "team-grid mt-[42px] grid gap-6",
             isSingleMember
-              ? "max-w-md mx-auto"
-              : "grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+              ? "max-w-md mx-auto grid-cols-1"
+              : "grid-cols-1 min-[821px]:grid-cols-2"
           )}
         >
-          {team.map((member) => (
-            <TeamCard key={member.id} member={member} />
+          {team.map((member, index) => (
+            <TeamCard
+              key={member.id}
+              member={member}
+              delay={index > 0 ? ((index % 3) as 1 | 2 | 3) : undefined}
+            />
           ))}
         </div>
-      </Container>
+      </div>
     </section>
   );
 }

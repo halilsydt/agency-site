@@ -7,6 +7,12 @@ import { cn } from "@/lib/utils";
 interface PillToggleOption {
   value: string;
   label: string;
+  /**
+   * Optional leading glyph (Atlas `.seg button svg`, 18×18). Rendered before
+   * the label as decoration — it must be `aria-hidden` so the button's
+   * accessible name stays the text label.
+   */
+  icon?: React.ReactNode;
 }
 
 interface PillToggleProps {
@@ -67,12 +73,14 @@ export function PillToggle({
           type="button"
           onClick={() => onChange(option.value)}
           className={cn(
-            "relative z-10 flex items-center justify-center rounded-[10px] px-[26px] py-[11px] font-disp text-[15px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-1",
+            // Atlas .seg button: gap-8px between glyph + label.
+            "relative z-10 flex items-center justify-center gap-2 rounded-[10px] px-[26px] py-[11px] font-disp text-[15px] font-semibold transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-green focus-visible:ring-offset-1",
             value === option.value
               ? "text-white"
               : "text-soft hover:text-ink"
           )}
         >
+          {option.icon}
           {option.label}
         </button>
       ))}

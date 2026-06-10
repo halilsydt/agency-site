@@ -41,6 +41,7 @@ vi.mock("@/lib/translations", () => ({
       faqCtaHeadline: "Still Have Questions?",
       faqCtaDescription: "We're here to help.",
       contactUs: "Contact Us",
+      viewPricing: "View Pricing",
     },
     faqCategories: {
       all: "All",
@@ -48,6 +49,11 @@ vi.mock("@/lib/translations", () => ({
       amazon: "Amazon",
       etsy: "Etsy",
       pricing: "Pricing",
+    },
+    faqPage: {
+      heroEyebrow: "FAQ",
+      heroTitle: { pre: "Frequently asked ", mark: "questions", post: "." },
+      heroSubheadline: "Find answers to common questions.",
     },
   }),
 }));
@@ -92,8 +98,9 @@ describe("FAQPage", () => {
 
   it("renders page headline", () => {
     renderFAQPage();
+    // Atlas sentence-case h1 composed from the heroTitle { pre, mark, post } triple
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(
-      "Frequently Asked Questions"
+      "Frequently asked questions."
     );
   });
 
@@ -125,6 +132,10 @@ describe("FAQPage", () => {
     expect(screen.getByRole("link", { name: /Contact Us/i })).toHaveAttribute(
       "href",
       "/contact"
+    );
+    expect(screen.getByRole("link", { name: /View Pricing/i })).toHaveAttribute(
+      "href",
+      "/pricing"
     );
   });
 

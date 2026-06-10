@@ -87,6 +87,8 @@ interface CommonTranslations {
   orReachUsDirectly: string;
   /** Most popular badge label */
   mostPopular: string;
+  /** Read the FAQ link label */
+  readTheFaq: string;
   /** Phone label */
   phone: string;
   /** Address label */
@@ -112,11 +114,90 @@ interface FAQCategoriesTranslations {
 }
 
 /**
+ * FAQ page translation strings (Atlas `.phero.cc` hero copy).
+ */
+interface FAQPageTranslations {
+  /** Hero eyebrow label (Atlas `.eyebrow.cc`). */
+  heroEyebrow: string;
+  /** Atlas hero `h1` sentence with an emphasized green `.mark` segment. */
+  heroTitle: HeroTitle;
+  /** Hero subheadline (lead paragraph). */
+  heroSubheadline: string;
+}
+
+/**
+ * Legal pages translation strings (Atlas left `.phero` hero + `.legal` body
+ * chrome). Shared by both the Privacy Policy and Terms of Service pages; the
+ * legal body copy itself comes from `content/{en,tr}/legal/*.json`, not here.
+ */
+interface LegalPagesTranslations {
+  /** Hero eyebrow label, shared by both legal pages (Atlas `.eyebrow`). */
+  heroEyebrow: string;
+  /** Label prefix for the `.upd` "last updated" line; the ISO date is appended from JSON. */
+  lastUpdatedLabel: string;
+  /** Privacy Policy hero chrome + optional summary callout. */
+  privacy: {
+    /** Atlas hero `h1` sentence with a green `.mark` segment. */
+    heroTitle: HeroTitle;
+    /** Hero subheadline (lead paragraph). */
+    heroSubheadline: string;
+    /** Optional green-soft `.callout` plain-language summary above the intro. */
+    summary?: string;
+  };
+  /** Terms of Service hero chrome + optional summary callout. */
+  terms: {
+    /** Atlas hero `h1` sentence with a green `.mark` segment. */
+    heroTitle: HeroTitle;
+    /** Hero subheadline (lead paragraph). */
+    heroSubheadline: string;
+    /** Optional green-soft `.callout` plain-language summary above the intro. */
+    summary?: string;
+  };
+}
+
+/**
  * About page translation strings.
  */
 interface AboutPageTranslations {
-  /** Meet the Founder section headline */
+  /** Hero eyebrow label (Atlas `.eyebrow`). */
+  heroEyebrow: string;
+  /** Atlas hero `h1` sentence with an emphasized green `.mark` segment. */
+  heroTitle: HeroTitle;
+  /** Mission row eyebrow (Atlas `.eyebrow`). */
+  missionEyebrow: string;
+  /** Mission row headline (Atlas `h2` — the "no hype" sentence). */
+  missionHeadline: string;
+  /** Approach row eyebrow (Atlas `.eyebrow.clay`). */
+  approachEyebrow: string;
+  /** Approach row headline (Atlas `h2`). */
+  approachHeadline: string;
+  /** Mission `.viz-card` metric labels. */
+  vizCard: {
+    /** Card header label (e.g. "Revenue generated for clients"). */
+    revenueLabel: string;
+    /** Green growth pill text (includes the ▲ glyph). */
+    pill: string;
+    /** Big headline value (e.g. "$1M+"). */
+    bigValue: string;
+    /** First cell value (green). */
+    clientsValue: string;
+    /** First cell label. */
+    clientsLabel: string;
+    /** Second cell value. */
+    yearsValue: string;
+    /** Second cell label. */
+    yearsLabel: string;
+    /** Third cell value. */
+    platformsValue: string;
+    /** Third cell label. */
+    platformsLabel: string;
+  };
+  /** Approach `.ph-img` glass-pill photo placeholder label. */
+  photoLabel: string;
+  /** Meet the Founder section eyebrow (Atlas `.eyebrow.cc`). */
   meetTheFounder: string;
+  /** Team section headline (Atlas `h2`). */
+  teamHeadline: string;
   /** CTA headline */
   ctaHeadline: string;
   /** CTA description */
@@ -124,11 +205,27 @@ interface AboutPageTranslations {
 }
 
 /**
+ * Atlas hero headline split into segments around an emphasized `.mark` word.
+ * Stored as a triple so the marked phrase can sit anywhere in the sentence
+ * (locale word-order differs) without fragile string-splitting.
+ */
+export interface HeroTitle {
+  /** Text before the marked phrase. */
+  pre: string;
+  /** The emphasized (platform-colored) phrase. */
+  mark: string;
+  /** Text after the marked phrase. */
+  post: string;
+}
+
+/**
  * Amazon services page translation strings.
  */
 interface AmazonPageTranslations {
-  /** Hero headline */
+  /** Eyebrow label above the hero headline (Atlas `.eyebrow`). */
   heroHeadline: string;
+  /** Atlas hero `h1` sentence with an emphasized `.mark` segment. */
+  heroTitle: HeroTitle;
   /** Hero subheadline */
   heroSubheadline: string;
   /** Services list headline */
@@ -145,8 +242,10 @@ interface AmazonPageTranslations {
  * Etsy services page translation strings.
  */
 interface EtsyPageTranslations {
-  /** Hero headline */
+  /** Eyebrow label above the hero headline (Atlas `.eyebrow.clay`). */
   heroHeadline: string;
+  /** Atlas hero `h1` sentence with an emphasized `.mark` segment. */
+  heroTitle: HeroTitle;
   /** Hero subheadline */
   heroSubheadline: string;
   /** Services list headline */
@@ -160,10 +259,24 @@ interface EtsyPageTranslations {
 }
 
 /**
+ * A single pricing-page FAQ entry (question + answer).
+ */
+interface PricingFaq {
+  /** The question (accordion trigger). */
+  question: string;
+  /** The answer (accordion content). */
+  answer: string;
+}
+
+/**
  * Pricing page translation strings.
  */
 interface PricingPageTranslations {
-  /** Hero headline */
+  /** Hero eyebrow label (Atlas `.eyebrow.cc`). */
+  heroEyebrow: string;
+  /** Atlas hero `h1` sentence with an emphasized green `.mark` segment. */
+  heroTitle: HeroTitle;
+  /** Hero headline (legacy; kept for any non-Atlas consumers). */
   heroHeadline: string;
   /** Hero subheadline */
   heroSubheadline: string;
@@ -171,6 +284,12 @@ interface PricingPageTranslations {
   amazonPackagesHeadline: string;
   /** Etsy packages headline */
   etsyPackagesHeadline: string;
+  /** FAQ section eyebrow (Atlas `.eyebrow.cc`). */
+  faqEyebrow: string;
+  /** FAQ section headline. */
+  faqHeadline: string;
+  /** Inline FAQ entries (Atlas `details.q`). */
+  faqs: PricingFaq[];
   /** CTA headline */
   ctaHeadline: string;
   /** CTA description */
@@ -178,11 +297,41 @@ interface PricingPageTranslations {
 }
 
 /**
+ * A single Atlas `.ci` contact-info row (label + body line).
+ */
+interface ContactInfoRow {
+  /** Row label (Atlas `.ci h4`, e.g. "Email"). */
+  label: string;
+  /** Row body line (Atlas `.ci p`, e.g. the supporting copy). */
+  value: string;
+}
+
+/**
  * Contact page translation strings.
  */
 interface ContactPageTranslations {
-  /** Send us a message section headline */
+  /** Hero eyebrow label (Atlas `.eyebrow`). */
+  heroEyebrow: string;
+  /** Atlas hero `h1` sentence with an emphasized green `.mark` segment. */
+  heroTitle: HeroTitle;
+  /** Hero lead paragraph. */
+  heroSubheadline: string;
+  /** Send us a message section headline (Atlas `.form-card h2`). */
   sendMessage: string;
+  /** Supporting line under the form-card heading (Atlas `.form-card .sub`). */
+  formCardSub: string;
+  /** Ink call-card heading (Atlas `.call-card h4`). */
+  callHeadline: string;
+  /** Ink call-card body blurb (Atlas `.call-card p`). */
+  callBody: string;
+  /** Email `.ci` row (label + body — the body is unused; email is literal). */
+  emailLabel: string;
+  /** Phone `.ci` row. */
+  phoneRow: ContactInfoRow;
+  /** "Working remotely" `.ci` row. */
+  remoteRow: ContactInfoRow;
+  /** "Response time" `.ci` row. */
+  responseRow: ContactInfoRow;
 }
 
 /**
@@ -569,6 +718,10 @@ export interface Translations {
   contactForm: ContactFormTranslations;
   /** FAQ category filter labels */
   faqCategories: FAQCategoriesTranslations;
+  /** FAQ page hero strings */
+  faqPage: FAQPageTranslations;
+  /** Legal pages (Privacy/Terms) hero + callout chrome */
+  legalPages: LegalPagesTranslations;
 }
 
 /**
@@ -613,17 +766,38 @@ const translations: Record<Locale, Translations> = {
       perMonth: '/month',
       orReachUsDirectly: 'Or reach us directly',
       mostPopular: 'Most Popular',
+      readTheFaq: 'Read the FAQ',
       phone: 'Phone',
       address: 'Address',
       illustrationPlaceholder: 'Illustration Placeholder',
     },
     aboutPage: {
-      meetTheFounder: 'Meet the Founder',
-      ctaHeadline: 'Ready to Grow Your Business?',
-      ctaDescription: "Let's discuss how we can help you achieve your marketplace goals.",
+      heroEyebrow: 'About Us',
+      heroTitle: { pre: 'Marketplace experts who keep it ', mark: 'honest', post: '.' },
+      missionEyebrow: 'Our Mission',
+      missionHeadline: 'No hype, no empty promises — just real strategies that work.',
+      approachEyebrow: 'Our Approach',
+      approachHeadline: 'A different kind of consulting.',
+      vizCard: {
+        revenueLabel: 'Revenue generated for clients',
+        pill: '▲ Growing',
+        bigValue: '$1M+',
+        clientsValue: '100+',
+        clientsLabel: 'Clients',
+        yearsValue: '5+',
+        yearsLabel: 'Years',
+        platformsValue: '2',
+        platformsLabel: 'Platforms',
+      },
+      photoLabel: 'Team / workspace photo',
+      meetTheFounder: 'Meet the founders',
+      teamHeadline: 'The people behind Scalenty',
+      ctaHeadline: "Let's grow your business.",
+      ctaDescription: "Let's discuss how we can help you achieve your marketplace goals — no pressure, no obligation.",
     },
     amazonPage: {
       heroHeadline: 'Amazon Services',
+      heroTitle: { pre: 'Make Amazon your ', mark: 'growth engine', post: '.' },
       heroSubheadline: "Expert consulting and management services to help your Amazon business thrive. From account setup to advertising optimization, we've got you covered.",
       servicesHeadline: 'Our Amazon Services',
       servicesSubheadline: 'Comprehensive solutions for every aspect of your Amazon selling journey',
@@ -632,6 +806,7 @@ const translations: Record<Locale, Translations> = {
     },
     etsyPage: {
       heroHeadline: 'Etsy Services',
+      heroTitle: { pre: 'Help your Etsy shop ', mark: 'get found', post: '.' },
       heroSubheadline: "Expert consulting and management services to help your Etsy shop thrive. From shop setup to growth strategies, we've got you covered.",
       servicesHeadline: 'Our Etsy Services',
       servicesSubheadline: 'Comprehensive solutions for every aspect of your Etsy selling journey',
@@ -639,15 +814,62 @@ const translations: Record<Locale, Translations> = {
       ctaDescription: 'Schedule a free consultation to discuss how we can help you achieve your Etsy selling goals.',
     },
     pricingPage: {
+      heroEyebrow: 'Pricing',
+      heroTitle: { pre: 'Simple, ', mark: 'transparent', post: ' pricing.' },
       heroHeadline: 'Simple, Transparent Pricing',
       heroSubheadline: 'No hidden fees. No surprise charges. Choose the package that fits your business needs and budget.',
       amazonPackagesHeadline: 'Amazon Packages',
       etsyPackagesHeadline: 'Etsy Packages',
+      faqEyebrow: 'Good to know',
+      faqHeadline: 'Pricing questions, answered',
+      faqs: [
+        {
+          question: 'Are there any hidden fees?',
+          answer: "No hidden fees, ever. We believe in transparent pricing. What you see here is what you pay. We'll always discuss any costs upfront before starting work.",
+        },
+        {
+          question: 'Is there a discount for using both platforms?',
+          answer: 'Yes! We offer a 15% bundle discount for clients who use our services for both Amazon and Etsy. Reach out for a custom multi-platform quote.',
+        },
+        {
+          question: 'Can I change or cancel my plan?',
+          answer: "Absolutely. Plans are month-to-month and you can upgrade, downgrade, or cancel at any time. We'll always be transparent about what changes mean for your account.",
+        },
+        {
+          question: 'Do you offer refunds or guarantees?',
+          answer: "We stand behind our work. While marketplace success depends on many factors, we offer a satisfaction guarantee on our consulting services. If you're not happy, we'll work with you to make it right.",
+        },
+      ],
       ctaHeadline: 'Not Sure Which Package Is Right For You?',
       ctaDescription: "Schedule a free consultation and we'll help you find the perfect fit for your business goals.",
     },
     contactPage: {
+      heroEyebrow: 'Contact',
+      heroTitle: {
+        pre: "Let's talk about your ",
+        mark: 'growth',
+        post: '.',
+      },
+      heroSubheadline:
+        "Book a free consultation or send us a message — we'll get back to you promptly. No pressure, no obligation.",
       sendMessage: 'Send us a message',
+      formCardSub: "Tell us about your business and we'll be in touch.",
+      callHeadline: 'Prefer to book a call?',
+      callBody:
+        "Grab a free 30-minute discovery call at a time that works for you. We'll discuss your goals and how we can help.",
+      emailLabel: 'Email',
+      phoneRow: {
+        label: 'Phone',
+        value: 'Available on request after your first call',
+      },
+      remoteRow: {
+        label: 'Working remotely',
+        value: 'We work with sellers worldwide, across time zones.',
+      },
+      responseRow: {
+        label: 'Response time',
+        value: 'We typically reply within one business day.',
+      },
     },
     homePage: {
       heroEyebrow: 'Amazon & Etsy Consulting',
@@ -876,6 +1098,30 @@ const translations: Record<Locale, Translations> = {
       etsy: 'Etsy',
       pricing: 'Pricing',
     },
+    faqPage: {
+      heroEyebrow: 'FAQ',
+      heroTitle: { pre: 'Frequently asked ', mark: 'questions', post: '.' },
+      heroSubheadline:
+        'Find answers to common questions about our services, pricing, and how we work with clients.',
+    },
+    legalPages: {
+      heroEyebrow: 'Legal',
+      lastUpdatedLabel: 'Last updated:',
+      privacy: {
+        heroTitle: { pre: 'Privacy ', mark: 'Policy', post: '' },
+        heroSubheadline:
+          'How we collect, use, and protect your information when you work with Scalenty.',
+        summary:
+          'Plain-language summary: we only collect what we need to respond to you and deliver our services, we never sell your data, and you can ask us to delete it at any time.',
+      },
+      terms: {
+        heroTitle: { pre: 'Terms of ', mark: 'Service', post: '' },
+        heroSubheadline:
+          'The terms that apply when you use our website and engage our consulting services.',
+        summary:
+          "In short: we'll do honest, professional work for you under a clear scope and transparent pricing. Marketplace results depend on many factors, so we can't guarantee specific outcomes — but we stand behind the quality of our work.",
+      },
+    },
   },
   tr: {
     nav: {
@@ -915,17 +1161,38 @@ const translations: Record<Locale, Translations> = {
       perMonth: '/ay',
       orReachUsDirectly: 'Veya doğrudan bize ulaşın',
       mostPopular: 'En Popüler',
+      readTheFaq: 'SSS\'yi okuyun',
       phone: 'Telefon',
       address: 'Adres',
       illustrationPlaceholder: 'Görsel Yer Tutucu',
     },
     aboutPage: {
+      heroEyebrow: 'Hakkımızda',
+      heroTitle: { pre: 'İşini ', mark: 'dürüst', post: ' tutan pazaryeri uzmanları.' },
+      missionEyebrow: 'Misyonumuz',
+      missionHeadline: 'Abartı yok, boş vaat yok — yalnızca işe yarayan gerçek stratejiler.',
+      approachEyebrow: 'Yaklaşımımız',
+      approachHeadline: 'Farklı bir danışmanlık anlayışı.',
+      vizCard: {
+        revenueLabel: 'Müşteriler için oluşturulan gelir',
+        pill: '▲ Yükseliyor',
+        bigValue: '$1M+',
+        clientsValue: '100+',
+        clientsLabel: 'Müşteri',
+        yearsValue: '5+',
+        yearsLabel: 'Yıl',
+        platformsValue: '2',
+        platformsLabel: 'Platform',
+      },
+      photoLabel: 'Ekip / çalışma alanı fotoğrafı',
       meetTheFounder: 'Kurucularla tanışın',
-      ctaHeadline: 'İşinizi büyütmeye hazır mısınız?',
-      ctaDescription: 'Pazaryeri hedeflerinize ulaşmanıza nasıl yardımcı olabileceğimizi konuşalım.',
+      teamHeadline: "Scalenty'nin arkasındaki ekip",
+      ctaHeadline: 'İşinizi büyütelim.',
+      ctaDescription: 'Pazaryeri hedeflerinize ulaşmanıza nasıl yardımcı olabileceğimizi konuşalım — baskı yok, yükümlülük yok.',
     },
     amazonPage: {
       heroHeadline: 'Amazon Hizmetleri',
+      heroTitle: { pre: "Amazon'u ", mark: 'büyüme motorunuz', post: ' yapın.' },
       heroSubheadline: 'Amazon işinizin gelişmesine yardımcı olan uzman danışmanlık ve yönetim — hesap kurulumundan reklam optimizasyonuna kadar her şey bizden.',
       servicesHeadline: 'Amazon hizmetlerimiz',
       servicesSubheadline: 'İster yeni başlıyor olun ister hızla büyüyün, Amazon satış yolculuğunuzun her yönünü ele alıyoruz.',
@@ -934,6 +1201,7 @@ const translations: Record<Locale, Translations> = {
     },
     etsyPage: {
       heroHeadline: 'Etsy Hizmetleri',
+      heroTitle: { pre: 'Etsy mağazanızın ', mark: 'keşfedilmesini', post: ' sağlayın.' },
       heroSubheadline: 'Etsy mağazanızın gelişmesine yardımcı olan uzman danışmanlık ve yönetim — mağaza kurulumundan büyüme stratejilerine kadar her şey bizden.',
       servicesHeadline: 'Etsy hizmetlerimiz',
       servicesSubheadline: 'İster yeni bir mağaza açın ister mevcut birini büyütün, Etsy satış yolculuğunuzun her yönünü ele alıyoruz.',
@@ -941,15 +1209,62 @@ const translations: Record<Locale, Translations> = {
       ctaDescription: 'Etsy satış hedeflerinize ulaşmanıza nasıl yardımcı olabileceğimizi konuşmak için ücretsiz bir görüşme ayarlayın.',
     },
     pricingPage: {
+      heroEyebrow: 'Fiyatlandırma',
+      heroTitle: { pre: 'Basit, ', mark: 'şeffaf', post: ' fiyatlandırma.' },
       heroHeadline: 'Basit, şeffaf fiyatlandırma.',
       heroSubheadline: 'Gizli ücret yok. Sürpriz masraf yok. İşinizin ihtiyaçlarına ve bütçenize uyan paketi seçin.',
       amazonPackagesHeadline: 'Amazon Paketleri',
       etsyPackagesHeadline: 'Etsy Paketleri',
+      faqEyebrow: 'Bilmekte fayda var',
+      faqHeadline: 'Fiyatlandırma sorularınızın yanıtları',
+      faqs: [
+        {
+          question: 'Gizli ücret var mı?',
+          answer: 'Asla gizli ücret yok. Şeffaf fiyatlandırmaya inanıyoruz. Burada gördüğünüz, ödeyeceğiniz tutardır. Çalışmaya başlamadan önce her türlü maliyeti her zaman önceden konuşuruz.',
+        },
+        {
+          question: 'Her iki platformu birlikte kullanmak için indirim var mı?',
+          answer: 'Evet! Hem Amazon hem Etsy hizmetlerimizden yararlanan müşterilere %15 paket indirimi sunuyoruz. Özel bir çok platformlu teklif için bize ulaşın.',
+        },
+        {
+          question: 'Planımı değiştirebilir veya iptal edebilir miyim?',
+          answer: 'Kesinlikle. Planlar aylıktır; istediğiniz zaman yükseltebilir, düşürebilir veya iptal edebilirsiniz. Değişikliklerin hesabınız için ne anlama geldiği konusunda her zaman şeffaf oluruz.',
+        },
+        {
+          question: 'İade veya garanti sunuyor musunuz?',
+          answer: 'İşimizin arkasındayız. Pazaryeri başarısı birçok faktöre bağlı olsa da, danışmanlık hizmetlerimizde memnuniyet garantisi sunuyoruz. Memnun kalmazsanız, doğru çözümü bulmak için sizinle birlikte çalışırız.',
+        },
+      ],
       ctaHeadline: 'Hangisinin uygun olduğundan emin değil misiniz?',
       ctaDescription: 'Ücretsiz bir görüşme ayarlayın, hedeflerinize en uygun paketi bulmanıza yardımcı olalım — baskı yok, yükümlülük yok.',
     },
     contactPage: {
+      heroEyebrow: 'İletişim',
+      heroTitle: {
+        pre: 'Hadi ',
+        mark: 'büyümenizi',
+        post: ' konuşalım.',
+      },
+      heroSubheadline:
+        'Ücretsiz bir görüşme ayarlayın ya da bize bir mesaj gönderin — kısa sürede dönüş yaparız. Baskı yok, yükümlülük yok.',
       sendMessage: 'Bize mesaj gönderin',
+      formCardSub: 'İşinizden bahsedin, en kısa sürede sizinle iletişime geçelim.',
+      callHeadline: 'Görüşme yapmayı mı tercih edersiniz?',
+      callBody:
+        'Size uygun bir zamanda ücretsiz 30 dakikalık bir tanışma görüşmesi ayarlayın. Hedeflerinizi ve nasıl yardımcı olabileceğimizi konuşalım.',
+      emailLabel: 'E-posta',
+      phoneRow: {
+        label: 'Telefon',
+        value: 'İlk görüşmenizden sonra talep üzerine paylaşılır',
+      },
+      remoteRow: {
+        label: 'Uzaktan çalışıyoruz',
+        value: 'Dünyanın her yerinden satıcılarla, tüm zaman dilimlerinde çalışıyoruz.',
+      },
+      responseRow: {
+        label: 'Yanıt süresi',
+        value: 'Genellikle bir iş günü içinde yanıt veriyoruz.',
+      },
     },
     homePage: {
       heroEyebrow: 'Amazon & Etsy Danışmanlığı',
@@ -1177,6 +1492,30 @@ const translations: Record<Locale, Translations> = {
       amazon: 'Amazon',
       etsy: 'Etsy',
       pricing: 'Fiyatlandırma',
+    },
+    faqPage: {
+      heroEyebrow: 'SSS',
+      heroTitle: { pre: 'Sıkça sorulan ', mark: 'sorular', post: '.' },
+      heroSubheadline:
+        'Hizmetlerimiz, fiyatlandırmamız ve müşterilerle nasıl çalıştığımız hakkında sık sorulan soruların yanıtlarını bulun.',
+    },
+    legalPages: {
+      heroEyebrow: 'Yasal',
+      lastUpdatedLabel: 'Son güncelleme:',
+      privacy: {
+        heroTitle: { pre: 'Gizlilik ', mark: 'Politikası', post: '' },
+        heroSubheadline:
+          'Scalenty ile çalışırken bilgilerinizi nasıl topladığımız, kullandığımız ve koruduğumuz.',
+        summary:
+          'Sade bir özet: yalnızca size yanıt vermek ve hizmetlerimizi sunmak için ihtiyaç duyduğumuz bilgileri toplarız, verilerinizi asla satmayız ve dilediğiniz an silinmesini talep edebilirsiniz.',
+      },
+      terms: {
+        heroTitle: { pre: 'Hizmet ', mark: 'Şartları', post: '' },
+        heroSubheadline:
+          'Web sitemizi kullandığınızda ve danışmanlık hizmetlerimizden yararlandığınızda geçerli olan şartlar.',
+        summary:
+          'Kısacası: sizin için net bir kapsam ve şeffaf fiyatlandırma çerçevesinde dürüst ve profesyonel bir çalışma yürütürüz. Pazar yeri sonuçları pek çok etkene bağlı olduğundan belirli sonuçları garanti edemeyiz — ancak işimizin kalitesinin arkasında dururuz.',
+      },
     },
   },
 };

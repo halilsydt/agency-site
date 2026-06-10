@@ -39,11 +39,19 @@ describe("Amazon Services Page", () => {
     vi.unstubAllGlobals();
   });
 
-  it("renders ServiceHero with Amazon headline", () => {
+  it("renders ServiceHero with the Atlas Amazon headline", () => {
     renderAmazonServicesPage();
     expect(
-      screen.getByRole("heading", { level: 1, name: /amazon services/i })
+      screen.getByRole("heading", {
+        level: 1,
+        name: /make amazon your growth engine/i,
+      })
     ).toBeInTheDocument();
+  });
+
+  it("renders the Amazon hero eyebrow", () => {
+    renderAmazonServicesPage();
+    expect(screen.getByText("Amazon Services")).toBeInTheDocument();
   });
 
   it("renders ServiceHero subheadline", () => {

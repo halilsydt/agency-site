@@ -1,16 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Check } from "lucide-react";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardContent,
-  CardFooter,
-} from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Reveal } from "@/components/ui/reveal";
 import { cn } from "@/lib/utils";
 import type { PricingPackage } from "@/lib/types";
 import { useLanguage } from "@/components/providers/language-provider";
@@ -22,65 +13,104 @@ import { getTranslations } from "@/lib/translations";
 export interface PricingCardProps {
   /** The pricing package to display */
   package: PricingPackage;
+  /** Reveal stagger step (maps to Atlas `data-d`). */
+  delay?: 1 | 2 | 3;
+}
+
+/** Green check-mark bullet icon (Atlas `.tier li svg`). */
+function CheckIcon(): React.ReactElement {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2.4}
+      className="mt-px size-[18px] flex-none text-green"
+      aria-hidden="true"
+    >
+      <path d="M20 6L9 17l-5-5" />
+    </svg>
+  );
 }
 
 /**
- * Displays a pricing package in a card format with features and CTA.
- * Shows a "Most Popular" badge for recommended packages.
+ * Atlas `.tier` pricing card (atlas.css:266–278). A surface card with a hover
+ * lift; the popular tier (`isPopular`) gets a green border, a green-tinted glow,
+ * and an overlapping green `.pop-badge` reading "Most Popular". Renders the tier
+ * name, description, price (`$price` + unit), a green-checked feature list, and a
+ * full-width CTA (green for the popular tier, ghost otherwise) linking to the
+ * package's `ctaHref`.
  *
- * @param props - Component props
+ * @param props - {@link PricingCardProps}
  * @param props.package - The pricing package data to display
+ * @param props.delay - Reveal stagger step for the `.tier.reveal.pop` cards
  *
  * @example
  * ```tsx
- * <PricingCard package={amazonGrowthPackage} />
+ * <PricingCard package={amazonGrowthPackage} delay={1} />
  * ```
  */
-export function PricingCard({ package: pkg }: PricingCardProps): React.ReactElement {
+export function PricingCard({
+  package: pkg,
+  delay,
+}: PricingCardProps): React.ReactElement {
   const { locale } = useLanguage();
   const t = getTranslations(locale);
 
+  const ctaClass = pkg.isPopular
+    ? // .btn-green
+      "bg-green text-white shadow-[0_10px_24px_-10px_rgba(14,140,90,.6)] hover:-translate-y-0.5 hover:bg-green-d hover:text-white hover:shadow-[0_16px_30px_-10px_rgba(14,140,90,.65)]"
+    : // .btn-ghost
+      "border-line bg-transparent text-ink hover:border-ink hover:bg-surface hover:text-ink";
+
   return (
-    <Card
+    <Reveal
+      pop
+      delay={delay}
       className={cn(
-        "relative h-full flex flex-col",
-        pkg.isPopular && "border-green ring-2 ring-green"
+        "relative flex flex-col rounded-[24px] border border-line bg-surface p-[34px] transition-all duration-300 [transition-timing-function:cubic-bezier(.2,.7,.3,1)] hover:-translate-y-[5px] hover:shadow-sh-md",
+        pkg.isPopular &&
+          "border-green shadow-[0_24px_50px_-28px_rgba(14,140,90,.5)]"
       )}
     >
       {pkg.isPopular && (
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2">
-          <Badge variant="default" className="px-3 py-1">
-            {t.common.mostPopular}
-          </Badge>
-        </div>
+        <span className="absolute left-1/2 top-[-13px] -translate-x-1/2 whitespace-nowrap rounded-full bg-green px-[15px] py-[6px] font-disp text-[12px] font-semibold tracking-[.02em] text-white">
+          {t.common.mostPopular}
+        </span>
       )}
-      <CardHeader className={cn(pkg.isPopular && "pt-8")}>
-        <CardTitle className="text-xl">{pkg.name}</CardTitle>
-        <div className="mt-4">
-          <span className="text-4xl font-bold">${pkg.price}</span>
-          <span className="text-muted-foreground">{pkg.priceUnit}</span>
-        </div>
-        <p className="mt-2 text-muted-foreground">{pkg.description}</p>
-      </CardHeader>
-      <CardContent className="flex-grow">
-        <ul className="space-y-3">
-          {pkg.features.map((feature, index) => (
-            <li key={index} className="flex items-start gap-2">
-              <Check className="h-5 w-5 text-primary shrink-0 mt-0.5" />
-              <span className="text-sm">{feature}</span>
-            </li>
-          ))}
-        </ul>
-      </CardContent>
-      <CardFooter>
-        <Button
-          asChild
-          className="w-full"
-          variant={pkg.isPopular ? "default" : "outline"}
-        >
-          <Link href={pkg.ctaHref}>{pkg.ctaText}</Link>
-        </Button>
-      </CardFooter>
-    </Card>
+
+      <h3 className="font-disp text-[20px] font-bold">{pkg.name}</h3>
+      <p className="mt-[7px] min-h-[42px] text-[14px] text-soft">
+        {pkg.description}
+      </p>
+      <div className="mb-[4px] mt-[18px] font-disp text-[42px] font-bold leading-none tracking-[-.02em] tnum">
+        ${pkg.price}
+        <span className="font-sans text-[15px] font-medium text-soft">
+          {pkg.priceUnit}
+        </span>
+      </div>
+
+      <ul className="my-[22px] mb-[28px] flex flex-1 list-none flex-col gap-3">
+        {pkg.features.map((feature, index) => (
+          <li
+            key={index}
+            className="flex items-start gap-[10px] text-[14.5px]"
+          >
+            <CheckIcon />
+            <span>{feature}</span>
+          </li>
+        ))}
+      </ul>
+
+      <Link
+        href={pkg.ctaHref}
+        className={cn(
+          "mt-auto inline-flex w-full items-center justify-center gap-[9px] whitespace-nowrap rounded-[12px] border-[1.5px] border-transparent px-6 py-[14px] font-disp text-[15px] font-semibold no-underline transition-all duration-200 [transition-timing-function:cubic-bezier(.2,.7,.3,1)] hover:no-underline",
+          ctaClass
+        )}
+      >
+        {pkg.ctaText}
+      </Link>
+    </Reveal>
   );
 }

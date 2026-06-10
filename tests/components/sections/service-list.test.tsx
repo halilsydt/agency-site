@@ -30,14 +30,15 @@ const mockServices: Service[] = [
   },
 ];
 
+const baseProps = {
+  eyebrow: "Our Amazon services",
+  headline: "Our Amazon Services",
+  platform: "amazon" as const,
+};
+
 describe("ServiceListSection", () => {
   it("renders section headline", () => {
-    render(
-      <ServiceListSection
-        headline="Our Amazon Services"
-        services={mockServices}
-      />
-    );
+    render(<ServiceListSection {...baseProps} services={mockServices} />);
     expect(
       screen.getByRole("heading", { level: 2, name: /our amazon services/i })
     ).toBeInTheDocument();
@@ -46,7 +47,7 @@ describe("ServiceListSection", () => {
   it("renders subheadline when provided", () => {
     render(
       <ServiceListSection
-        headline="Our Amazon Services"
+        {...baseProps}
         subheadline="Everything you need to succeed"
         services={mockServices}
       />
@@ -55,43 +56,34 @@ describe("ServiceListSection", () => {
   });
 
   it("does not render subheadline when not provided", () => {
-    render(
-      <ServiceListSection
-        headline="Our Amazon Services"
-        services={mockServices}
-      />
-    );
+    render(<ServiceListSection {...baseProps} services={mockServices} />);
     expect(
       screen.queryByText(/everything you need/i)
     ).not.toBeInTheDocument();
   });
 
   it("renders all services in grid", () => {
-    render(
-      <ServiceListSection
-        headline="Our Amazon Services"
-        services={mockServices}
-      />
-    );
+    render(<ServiceListSection {...baseProps} services={mockServices} />);
     expect(screen.getByText("Account Opening & Setup")).toBeInTheDocument();
     expect(screen.getByText("Product Listing Optimization")).toBeInTheDocument();
     expect(screen.getByText("Amazon Advertising (PPC)")).toBeInTheDocument();
   });
 
-  it("renders correct number of ServiceCard components", () => {
-    render(
-      <ServiceListSection
-        headline="Our Amazon Services"
-        services={mockServices}
-      />
-    );
+  it("renders correct number of service cards", () => {
+    render(<ServiceListSection {...baseProps} services={mockServices} />);
     const serviceIcons = screen.getAllByTestId("service-icon");
     expect(serviceIcons).toHaveLength(3);
   });
 
+  it("renders the feature bullets for each service", () => {
+    render(<ServiceListSection {...baseProps} services={mockServices} />);
+    expect(screen.getByText("Account verification")).toBeInTheDocument();
+    expect(screen.getByText("Keyword research")).toBeInTheDocument();
+  });
+
   it("renders empty grid when no services provided", () => {
     render(
-      <ServiceListSection headline="Our Services" services={[]} />
+      <ServiceListSection {...baseProps} headline="Our Services" services={[]} />
     );
     expect(screen.queryByTestId("service-icon")).not.toBeInTheDocument();
   });

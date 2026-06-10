@@ -1,0 +1,117 @@
+import { ImageResponse } from "next/og";
+
+/**
+ * Shared Open Graph / Twitter share-image renderer.
+ *
+ * `app/opengraph-image.tsx` and `app/twitter-image.tsx` are byte-identical
+ * Next metadata-file routes; both re-export the constants below and call
+ * {@link renderShareImage} so the Atlas-branded markup lives in exactly one
+ * place (mirrors the 6.11 shared-`LegalPage` precedent for two identical files).
+ *
+ * Recolored from the legacy blue gradient to the Atlas ink palette: an ink
+ * `#15201B` background with the canonical "arrow + S" brand mark inlined as raw
+ * `<path>`s (Satori does not run React components, so we cannot import
+ * `LogoMark` — the path strings are copied from `components/layout/logo-mark.tsx`)
+ * in the on-dark pair (mint arrow `#6FD3A4` + off-white S `#FAF9F5`).
+ */
+
+/** Atlas palette literals (Satori has no CSS-var support — use raw hex). */
+const INK = "#15201B";
+const OFF_WHITE = "#FAF9F5";
+const MINT = "#6FD3A4";
+/** Muted off-white for secondary/tertiary copy on the ink band. */
+const SOFT = "rgba(250, 249, 245, 0.78)";
+const SOFTER = "rgba(250, 249, 245, 0.6)";
+
+/**
+ * Atlas brand-mark paths — copied verbatim from
+ * `components/layout/logo-mark.tsx` (`viewBox="31 28 353 511"`). Inlined here
+ * because `next/og` (Satori) cannot import the `LogoMark` React component.
+ */
+const S_PATH =
+  "M 262.91 259.88 L 262.91 216.56 A 1.08 1.08 0.0 0 1 263.99 215.48 Q 300.72 215.56 335.49 215.09 Q 340.46 215.03 345.49 218.81 C 350.83 222.84 351.88 227.39 352.70 234.52 Q 372.75 408.63 384.40 506.28 Q 385.68 517.04 384.63 520.23 Q 381.98 528.24 372.92 531.72 C 370.48 532.66 365.27 532.43 361.86 532.43 Q 218.10 532.54 54.96 532.38 Q 46.03 532.37 44.57 532.00 C 36.47 529.93 30.05 521.83 31.07 513.32 C 37.56 459.58 45.22 390.64 52.99 325.84 Q 57.60 287.48 62.99 238.49 Q 64.32 226.41 66.04 223.74 C 70.76 216.39 76.95 215.19 86.42 215.28 Q 93.63 215.34 153.06 215.18 A 0.64 0.64 0.0 0 1 153.70 215.82 L 153.70 259.84 A 0.68 0.68 0.0 0 1 153.02 260.52 Q 143.49 260.58 108.83 260.59 Q 104.87 260.60 104.40 264.69 C 96.17 336.61 86.12 419.74 79.05 481.12 Q 78.72 483.96 79.46 485.81 A 3.41 3.40 81.8 0 0 82.32 487.96 Q 85.04 488.22 88.00 488.21 Q 185.95 487.82 328.05 488.01 C 331.96 488.02 337.33 488.69 336.88 483.00 C 335.67 467.57 332.42 444.46 330.59 428.42 Q 321.63 349.86 316.34 304.92 C 314.56 289.81 313.47 276.03 311.90 264.42 Q 311.35 260.37 307.01 260.41 Q 279.16 260.62 263.66 260.63 A 0.75 0.75 0.0 0 1 262.91 259.88 Z";
+const ARROW_PATH =
+  "M 184.03 387.97 L 184.30 126.91 A 0.20 0.20 0.0 0 0 184.17 126.72 Q 183.95 126.64 183.49 126.98 C 178.49 130.67 171.76 138.49 167.18 142.99 Q 140.70 169.01 134.80 174.97 A 0.76 0.76 0.0 0 1 133.78 175.02 C 127.19 169.55 119.83 161.61 108.43 150.20 C 105.95 147.72 103.64 144.58 101.52 142.75 A 1.07 1.07 0.0 0 1 101.47 141.19 L 207.23 35.43 A 1.07 1.07 0.0 0 1 208.75 35.43 L 315.21 141.89 A 0.55 0.55 0.0 0 1 315.21 142.67 L 282.83 175.04 A 1.17 1.16 -46.7 0 1 281.23 175.09 Q 276.95 171.25 269.57 163.95 Q 262.31 156.78 232.82 126.59 A 0.35 0.35 0.0 0 0 232.22 126.83 Q 232.59 180.71 232.40 271.76 Q 232.24 351.71 232.53 379.01 Q 232.58 383.85 232.01 387.77 A 0.66 0.66 0.0 0 1 231.36 388.34 L 184.39 388.34 A 0.37 0.36 -90.0 0 1 184.03 387.97 Z";
+
+/** Shared Next metadata-file values — re-exported by both route files. */
+export const alt = "Scalenty - E-commerce Consulting for Etsy & Amazon Sellers";
+export const size = {
+  width: 1200,
+  height: 630,
+};
+export const contentType = "image/png";
+
+/**
+ * Renders the Atlas-branded 1200×630 share image. Both the OG and Twitter
+ * route files call this so the markup lives in one place.
+ */
+export function renderShareImage(): ImageResponse {
+  return new ImageResponse(
+    (
+      <div
+        style={{
+          background: INK,
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "60px",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginBottom: "40px",
+          }}
+        >
+          <svg
+            width="96"
+            height="96"
+            viewBox="31 28 353 511"
+            fill="none"
+            style={{ marginRight: "28px" }}
+          >
+            <path fill={OFF_WHITE} d={S_PATH} />
+            <path fill={MINT} d={ARROW_PATH} />
+          </svg>
+          <span
+            style={{
+              fontSize: "72px",
+              fontWeight: 700,
+              color: OFF_WHITE,
+            }}
+          >
+            Scalenty
+          </span>
+        </div>
+        <div
+          style={{
+            fontSize: "32px",
+            color: SOFT,
+            textAlign: "center",
+            maxWidth: "800px",
+            lineHeight: 1.4,
+          }}
+        >
+          E-commerce Consulting for Etsy & Amazon Sellers
+        </div>
+        <div
+          style={{
+            fontSize: "24px",
+            color: SOFTER,
+            marginTop: "24px",
+          }}
+        >
+          Honest advice. Real results.
+        </div>
+      </div>
+    ),
+    {
+      ...size,
+    }
+  );
+}

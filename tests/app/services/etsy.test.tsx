@@ -39,11 +39,19 @@ describe("Etsy Services Page", () => {
     vi.unstubAllGlobals();
   });
 
-  it("renders ServiceHero with Etsy headline", () => {
+  it("renders ServiceHero with the Atlas Etsy headline", () => {
     renderEtsyServicesPage();
     expect(
-      screen.getByRole("heading", { level: 1, name: /etsy services/i })
+      screen.getByRole("heading", {
+        level: 1,
+        name: /help your etsy shop get found/i,
+      })
     ).toBeInTheDocument();
+  });
+
+  it("renders the Etsy hero eyebrow", () => {
+    renderEtsyServicesPage();
+    expect(screen.getByText("Etsy Services")).toBeInTheDocument();
   });
 
   it("renders ServiceHero subheadline", () => {
@@ -103,10 +111,9 @@ describe("Etsy Services Page", () => {
     ).toBeInTheDocument();
   });
 
-  it("applies Etsy platform styling via ServiceHero", () => {
-    const { container } = renderEtsyServicesPage();
-    // Etsy platform uses accent color gradient (from-accent/10)
-    const heroSection = container.querySelector("section");
-    expect(heroSection).toHaveClass("from-accent/10");
+  it("applies the Etsy clay accent on the service cards", () => {
+    renderEtsyServicesPage();
+    const icons = screen.getAllByTestId("service-icon");
+    expect(icons[0].className).toContain("bg-clay-soft");
   });
 });

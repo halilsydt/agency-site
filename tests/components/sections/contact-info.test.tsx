@@ -6,11 +6,7 @@ import { LanguageProvider } from "@/components/providers/language-provider";
 /**
  * Render ContactInfo with LanguageProvider wrapper
  */
-function renderContactInfo(props: {
-  email: string;
-  phone?: string;
-  address?: string;
-}) {
+function renderContactInfo(props: { email: string }) {
   return render(
     <LanguageProvider>
       <ContactInfo {...props} />
@@ -49,25 +45,39 @@ describe("ContactInfo", () => {
     expect(emailLink).toHaveAttribute("href", "mailto:test@example.com");
   });
 
-  it("renders heading", () => {
+  it("renders the four .ci row labels", () => {
     renderContactInfo({ email: "test@example.com" });
     expect(
-      screen.getByRole("heading", { name: /reach us directly/i })
+      screen.getByRole("heading", { name: /email/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /phone/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /working remotely/i })
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /response time/i })
     ).toBeInTheDocument();
   });
 
-  it("renders phone when provided", () => {
-    renderContactInfo({ email: "test@example.com", phone: "555-1234" });
-    expect(screen.getByText(/555-1234/)).toBeInTheDocument();
-  });
-
-  it("renders address when provided", () => {
-    renderContactInfo({ email: "test@example.com", address: "123 Main St" });
-    expect(screen.getByText(/123 Main St/)).toBeInTheDocument();
-  });
-
-  it("does not render phone when not provided", () => {
+  it("renders the static contact-info body copy", () => {
     renderContactInfo({ email: "test@example.com" });
-    expect(screen.queryByText(/phone/i)).not.toBeInTheDocument();
+    expect(
+      screen.getByText(/available on request/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/sellers worldwide/i)
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/within one business day/i)
+    ).toBeInTheDocument();
+  });
+
+  it("does not render the legacy 'reach us directly' heading", () => {
+    renderContactInfo({ email: "test@example.com" });
+    expect(
+      screen.queryByRole("heading", { name: /reach us directly/i })
+    ).not.toBeInTheDocument();
   });
 });
